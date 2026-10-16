@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "src/active_research/daily_reflection_budget.json",
+      "bytes": 83,
+      "sha256": "1ee97de1d8637b580e7cd6720c0a42ef4f03264d812dc9cb36135fae89904d42",
+      "source": "Mini baseline active_research/daily_reflection_budget.json",
+      "keys": [
+        "max_model_turns",
+        "wall_seconds",
+        "max_estimated_cost_usd"
+      ],
+      "purpose": "Unmodified fixture/config required by legacy test helper; not a new experiment budget",
+      "sensitive_data_included": false
+    }
+  ]
+}

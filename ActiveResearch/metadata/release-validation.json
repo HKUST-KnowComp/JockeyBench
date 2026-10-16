@@ -1,0 +1,91 @@
+{
+  "scope": "Offline validation of user-owned Active-v3/Frozen publication candidate; no production launch acceptance",
+  "verdict": "PASS_OFFLINE_VALIDATION_WITH_DOCUMENTED_EXTERNAL_DEPENDENCIES",
+  "scientific_source": {
+    "original_python_files": 155,
+    "published_python_files": 128,
+    "local_history_python_files_excluded": 27,
+    "all_original_hashes_unchanged": true,
+    "required_self_owned_json_bytes": 83,
+    "required_self_owned_json_sha256": "1ee97de1d8637b580e7cd6720c0a42ef4f03264d812dc9cb36135fae89904d42",
+    "runtime_conservative_dependency_closure_files": 90
+  },
+  "full_default_offline_regression": {
+    "reference": {
+      "passed": 1284,
+      "failed": 0,
+      "skipped": 1
+    },
+    "candidate": {
+      "passed": 1195,
+      "failed": 0,
+      "skipped": 1
+    },
+    "shared_nodeids": 1196,
+    "shared_outcomes_and_execution_counts_identical": true,
+    "reference_only_historical_nodeids": 83,
+    "reference_only_historical_executions": 89,
+    "candidate_only_nodeids": 0,
+    "all_opt_in_resource_tests_executed": false,
+    "common_skip_scope": "Existing opt-in single-job native resource validation"
+  },
+  "selected_formal_tests": {
+    "files": 16,
+    "reference_passed": 239,
+    "candidate_passed": 239,
+    "failed": 0,
+    "skipped": 0
+  },
+  "synthetic_parity": {
+    "synthetic_scenarios": 19,
+    "basic_scenarios": 14,
+    "lifecycle_scenarios": 5,
+    "raw_request_data_bodies_identical": 9,
+    "packed_fake_caller_payloads_identical": 13,
+    "lifecycle_artifact_files_identical": 77,
+    "passed": true,
+    "state_serialization": "Complete captured objects as canonical JSON; not raw original disk checkpoint bytes",
+    "fields_removed": [],
+    "clocks_fixed": true,
+    "performance_equivalence_proven": false
+  },
+  "dependencies": {
+    "modeling_vendored": false,
+    "modeling_modified": false,
+    "archive_vendored": false,
+    "external_tests_vendored": false,
+    "original_dependencies_unchanged": true,
+    "external_test_resources_required": true,
+    "archive_code_hash": "d545ca9a936418de50bf6ad2d8ecf67c11226bc8744cfdffb9e82016b355c392"
+  },
+  "safety": {
+    "scientific_logic_modified": false,
+    "original_scientific_artifacts_modified": false,
+    "provider_calls": 0,
+    "api_spend_usd": 0,
+    "real_trajectory_started": false,
+    "uploaded": false,
+    "production_deployment_verified": false,
+    "new_scientific_freeze_created": false,
+    "scope_note": "Historical offline-validation observations, before the separately authorized source upload."
+  },
+  "aggregate_evidence_sha256": "6a645ad9c3ff13e3fffea6aeea48dd97ba9c39f115e6578a9f19ac62af15b9bd",
+  "publication_packaging": {
+    "files": 148,
+    "scientific_python_files_checked": 128,
+    "own_json_resources": 1,
+    "packaging_tests_passed": 13,
+    "packaging_tests_failed": 0,
+    "history_distributed": false,
+    "local_audit_distributed": false,
+    "document_links_closed": true,
+    "readme_deferred": true
+  },
+  "publication_scope": {
+    "authorized_on": "2026-10-17",
+    "repository": "HKUST-KnowComp/JockeyBench",
+    "directory": "ActiveResearch",
+    "readme_included": false,
+    "scientific_source_changes": 0
+  }
+}

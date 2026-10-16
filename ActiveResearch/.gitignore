@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.env
+.env.*
+!.env.example
+.experiment-host
+active_research_outputs/
+runs/
+checkpoints/
+private/
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.json.gz
+auth.json
+credentials*.json
+*token*.json
+logs/
+*.log
+# Local historical archive; outside the publication/install candidate.
+/history/
+# Machine-local complete audit evidence; publish only its aggregate summary.
+/metadata/validation.json
+.packaging-test-*/

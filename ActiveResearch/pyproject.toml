@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jockeybench-active-research"
+version = "0.0.0"
+description = "Local review draft of the Active Research, Active-v3 and matched Frozen extension"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+reports = ["matplotlib>=3.7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["active_research*"]
+
+[tool.setuptools.package-data]
+active_research = ["daily_reflection_budget.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/packaging"]
+addopts = "-p no:cacheprovider"
+markers = ["native: original scientific tests requiring the separately supplied experiment host"]

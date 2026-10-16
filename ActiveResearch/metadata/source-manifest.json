@@ -1,0 +1,1255 @@
+{
+  "source_scope": "User-owned active_research only; formal Active-v3/Frozen, compatibility and effective tests",
+  "source_root": "Active-v3-frozen-control-work/active_research",
+  "original_scientific_python_files": 155,
+  "packaged_scientific_python_files": 128,
+  "copied_scientific_python_files": 128,
+  "archived_scientific_python_files": 27,
+  "files": [
+    {
+      "path": "src/active_research/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/__init__.py",
+      "sha256": "5be6f7a8b87f84d2cc4f199d3e619598c8b539d3f5499dbcda0988355a10dbd7",
+      "bytes": 84,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/adaptive/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/adaptive/domains.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/domains.py",
+      "sha256": "8c1f7bfea3b2cd4ee06e18cfd631e0d34a200d142d80471fd67187ab21fb406b",
+      "bytes": 8993,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/adaptive/model.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/model.py",
+      "sha256": "a4369ef573c49e8e83302477338032fe10d9d55eef21384d5f97bbd5aff4b866",
+      "bytes": 7040,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/adaptive/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/runner.py",
+      "sha256": "b6c0dd9c5ba567b471429b5ae3c31e6f4360152cefee3791d17551b6bcc076e6",
+      "bytes": 14292,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/adaptive/test_adaptive.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/test_adaptive.py",
+      "sha256": "c50d4bef1059293410e1a9c1489bdeedf2081a798a6fe29e74e0f9f52ba94d54",
+      "bytes": 5564,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/aligned/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/__init__.py",
+      "sha256": "3252960df95c498c6bf53dc5c099d839fd3f8c089639b955c946c94cc7ac4661",
+      "bytes": 74,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/audit.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/audit.py",
+      "sha256": "d92982531961c17910592103fe3bdce22cbf63f2f5b8f53ff5df1809a8497c3f",
+      "bytes": 6251,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/delivery.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/delivery.py",
+      "sha256": "bcaf1d5a9668eed18af3cf6bad3ff747fc0b64e4294da998b6e70d47d4ec2e93",
+      "bytes": 7141,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/frame.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/frame.py",
+      "sha256": "0e820ff27838f402254dbb22861a0976c3bb24df15a2333fbf9ed100d6160a32",
+      "bytes": 2544,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/aligned/integrity.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/integrity.py",
+      "sha256": "30e611b43768f0c7f0198c2ead2b052939bbfc21c577d81ce52bf3c2844bf112",
+      "bytes": 3681,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/model.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/model.py",
+      "sha256": "29a21bba8f55f3b209dc885708262f91d2cab16bcbd8e815777032d5ea592537",
+      "bytes": 7595,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/prepare.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/prepare.py",
+      "sha256": "1272aab9baae89f05c95565f30c2afdc6f543c56ef72d6b43cdcd520d2de56a3",
+      "bytes": 2979,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/aligned/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/report.py",
+      "sha256": "6cdad3f9dfad213691da73145932b16523a457f8b1eb4eda783f10a39e2ef066",
+      "bytes": 7744,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/aligned/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/runner.py",
+      "sha256": "c6a73e3cc6c34ae6872e8f1c067f4e5ff5fc137befe6ee8a8fb0c34a1e95eab3",
+      "bytes": 13579,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/aligned/scoring.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/scoring.py",
+      "sha256": "7a1636f4e703d9f367a8cb47ef70ad926b6d341f0a04a8f9b96a0df1a7ffd944",
+      "bytes": 2664,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/specification.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/specification.py",
+      "sha256": "517e95bfbd5d9a5d4241c313074a00d4ec1fd50dcba28e973e73a2780d96d7da",
+      "bytes": 2307,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/aligned/tests/test_aligned.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/tests/test_aligned.py",
+      "sha256": "51575c56b2e816ba688d9f00ec0de0beaa44049bbf1ad95a10c38e41d417eb58",
+      "bytes": 18028,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/aligned/tests/test_graceful.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/tests/test_graceful.py",
+      "sha256": "0d6d12974f97b1799dc6102439ca1bfcdc458528ed86767870e8eb57f202451f",
+      "bytes": 19740,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/behavioral/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/behavioral/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "external_test_support"
+    },
+    {
+      "path": "src/active_research/behavioral/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/behavioral/runner.py",
+      "sha256": "849eda516de091223b47510b6f280155d015c3325d998c1fd8a0e15883eac88e",
+      "bytes": 11341,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "external_test_support"
+    },
+    {
+      "path": "src/active_research/common_scoring.py",
+      "source": "Active-v3-frozen-control-work/active_research/common_scoring.py",
+      "sha256": "c1b467d16f6c656c88676473f25e7c8a2acbf771ae0bb7eb8d19d4ffe3f724a1",
+      "bytes": 3976,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/daily.py",
+      "source": "Active-v3-frozen-control-work/active_research/daily.py",
+      "sha256": "00e258a813d326f269a776061f99eff98299fb35d8e60d1091334929bc508bff",
+      "bytes": 12350,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/daily_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/daily_report.py",
+      "sha256": "56751b26f7ae9526d4457e1916fc2937323d8100b2fcf95fa6aac96c3fa08d12",
+      "bytes": 21010,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/daily_session.py",
+      "source": "Active-v3-frozen-control-work/active_research/daily_session.py",
+      "sha256": "a4d7a60243a422650b36d476aedb3fe6550350ae3eed5af94ae8ad2853e8a98a",
+      "bytes": 8575,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/experience/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/experience/frame.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/frame.py",
+      "sha256": "6fe236be5ddfd258a4ee6be8f9dc8f8496e08abd9201934d90df721a292acafe",
+      "bytes": 14752,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/experience/model.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/model.py",
+      "sha256": "6f54d2df03aa8deab541bddd9f85959f91eaa5fae3b93c8b1733d4be36ae9359",
+      "bytes": 3202,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/experience/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/report.py",
+      "sha256": "1842866af74d1c7a460722e7fb98ee5a3a4e279e0e8f4c56e3b6e73f15df09d9",
+      "bytes": 3832,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/experience/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/runner.py",
+      "sha256": "819fcc63bdd351ca1e72118552c14b522e213178ffa1b6bdd12e04e6c83e53f7",
+      "bytes": 11215,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/experience/test_frame.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/test_frame.py",
+      "sha256": "97da6efd343228a21ed41640c819fa92b47d0d3af6ea40f7b9177f7dbda1a578",
+      "bytes": 8579,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/__init__.py",
+      "sha256": "9864e46bc43df79e50316fcaa29f6fb4801df4f26ac6fe31077f60c14395f04e",
+      "bytes": 279,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/__main__.py",
+      "sha256": "4419df22e553be1c08cdbfa0d325cc6c0dce0b7aa80019c07f1069c56561a2cf",
+      "bytes": 66,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/audit.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/audit.py",
+      "sha256": "2a979a97a4f9dd62bc352609b1d6d68e93868be98fefccab439eecc4656facd4",
+      "bytes": 5208,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/audit_live.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/audit_live.py",
+      "sha256": "9ae6d427a190bffabc51d9a29a0c8a9e04e3134c0fcac970674741c387189ba5",
+      "bytes": 3382,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/control.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/control.py",
+      "sha256": "d7e4b987522289461cf4b183c91b20965e11f2d25842f80d3a217357c51b68f9",
+      "bytes": 5445,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/domains.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/domains.py",
+      "sha256": "97d88904d45ff5da6f5b37b8a5bf0778c67ce1b79f4174edd1ebe494e88a8a91",
+      "bytes": 2403,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/frame.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frame.py",
+      "sha256": "61c218ec05a524cebb6332ccfe63a5476270302bcdaa3a323e14bdc0eba17c45",
+      "bytes": 8959,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/frozen_inputs.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frozen_inputs.py",
+      "sha256": "0dc5918993d09b9ef5f7d4d9aee9ad01ee8b2a7652bd162661359706d29aea3e",
+      "bytes": 2661,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/frozen_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frozen_report.py",
+      "sha256": "09aa407888b9f4dd2cca141f75ab4cb33602b96160db1c6f04c0a73970e4bb10",
+      "bytes": 14164,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/gate.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/gate.py",
+      "sha256": "6792499e457dd2a4cbf474646b640e4cf64d90294500f7e0c68f1e3d9bd954e6",
+      "bytes": 4864,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/lifecycle.py",
+      "sha256": "82791e1ce804218984ad71bf85e25650e9f5bac1cd54502858a0380756f161b2",
+      "bytes": 15106,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/marginal_cost.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/marginal_cost.py",
+      "sha256": "11cc790921c518359ce19f18a20cb10071e0883806d3eb79abd6589f2a63cf62",
+      "bytes": 22477,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/native_replay.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/native_replay.py",
+      "sha256": "75b1298559f6d4805a05726db6e0b2b304fe372894ad5ffbc9f8c4c37de02957",
+      "bytes": 6183,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/policy_builder.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_builder.py",
+      "sha256": "7eed83e93a5e81a698e7759fd0e514b40a870126e4fd0ea572a50a38f6e94c78",
+      "bytes": 10903,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/policy_contract.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_contract.py",
+      "sha256": "371374dfd2c4d4057565996e69f62c722447fd139e14340580948964c9959847",
+      "bytes": 18979,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/policy_cpu.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_cpu.py",
+      "sha256": "570ed988043287176e0b5b1086f3ecc0f1fee4c1ef9933b35b2133cf4490b32e",
+      "bytes": 902,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/policy_executor.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_executor.py",
+      "sha256": "e40fd805080f835e142bae6c22c11a98ccecb3fc5a88a6870060a2690a36f0eb",
+      "bytes": 9891,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/predictor.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/predictor.py",
+      "sha256": "6f5bbff850507de7a38bced73e61fe379a49abd9b3bcf1b6115d1c7acbb2e101",
+      "bytes": 104,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/prepare.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/prepare.py",
+      "sha256": "4ce29210491a56435f9f288e2c1c0da62a8ee106a65034b763b81207d1bca6b6",
+      "bytes": 3375,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/report.py",
+      "sha256": "c5aaf8156a80f373e735df6974cc6cdb8d4af8bb3368cb1eb1dc4ecf0744fce2",
+      "bytes": 5643,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/runtime.py",
+      "sha256": "5e9f29a647c2934c6461832d3cbe38334abc0e3c4538bf8a75e0b9d624790cc6",
+      "bytes": 5144,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/source_binding.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/source_binding.py",
+      "sha256": "dbedb2d29532874f8c8fe77621858220ed2be69212e6d99520ff2b8231d488c9",
+      "bytes": 5158,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/statistics.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/statistics.py",
+      "sha256": "d31013d6ce561253ce477ac3aa8c553076bd078b165990dbbaf66f1f9ea5eebd",
+      "bytes": 7676,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/supervisor.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/supervisor.py",
+      "sha256": "9cfef40b5286cdb8b73a70c5577a9e77e8a480c073eb1161887f955905e07712",
+      "bytes": 13412,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_frozen_control.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_frozen_control.py",
+      "sha256": "340d82ec188dde04ccfc05887c83f4071a0202c8b2bbe9bd6f5744e4c0d0bd21",
+      "bytes": 4275,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_integration.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_integration.py",
+      "sha256": "27de1d2da5787dd24295e26d95552042a499c2050b0e6769d857d7d14a372f97",
+      "bytes": 5637,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_marginal_cost.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_marginal_cost.py",
+      "sha256": "48a58dc142d48ec3d6d4c58d75d97009ed511cfdb295f81b5fcfe97eec412558",
+      "bytes": 18119,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_timing.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_timing.py",
+      "sha256": "5399e9b0ca8f33fcdee05eb81f3662a85ae8534d34f2a92d2419541b2e2ab28d",
+      "bytes": 5325,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_updater_context.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_updater_context.py",
+      "sha256": "15147ce058c30f9ab38e2be603567ca8eb7583c873421a82aee94001842b8e27",
+      "bytes": 8443,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_v3.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_v3.py",
+      "sha256": "283a60951101a143f8a0365b996663f10d5e8ff54a5c1c86d6ceb5c29b50b13c",
+      "bytes": 16436,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/tests/test_warmup_v3.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_warmup_v3.py",
+      "sha256": "547982ab2cd3cf70b0ddf683b7406e9c10667c25d7d8a7dc738f84c089041a6a",
+      "bytes": 4489,
+      "original_classification": "tests",
+      "classification": "active_v3_tests"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/transport.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/transport.py",
+      "sha256": "04687098a1873d58da7d2717f273d0da98f37f552fae4b1e31252c535dc39b9c",
+      "bytes": 1856,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/updater_context.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/updater_context.py",
+      "sha256": "d154a4d38aeec9c070a5b46d7f524e33c381f761b6bb2548a7e61b118a4cf09d",
+      "bytes": 15411,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/warmup.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/warmup.py",
+      "sha256": "7b399dcb24d9e063980e1f67d010a2e394558a441c6843d84ed979b5b3f1169e",
+      "bytes": 13505,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/finegrained_v3/warmup_context_fit.py",
+      "source": "Active-v3-frozen-control-work/active_research/finegrained_v3/warmup_context_fit.py",
+      "sha256": "b3b66a667c6187c8f7988baf316f0ebd7db5a17756181dcbb7f2e6ad5b7e7bfa",
+      "bytes": 3997,
+      "original_classification": "active_v3_core",
+      "classification": "active_v3_core"
+    },
+    {
+      "path": "src/active_research/llm/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/llm/__init__.py",
+      "sha256": "0ecebcce09818e188343c0c5159c6d00c406818115a73c15634d37360b75cd1a",
+      "bytes": 74,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/llm/agent.py",
+      "source": "Active-v3-frozen-control-work/active_research/llm/agent.py",
+      "sha256": "8d9fe3c88d8a7194c506a66fdb56bf0a85cb047cac1ba19c1adfd03186297a5c",
+      "bytes": 9795,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/llm/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/llm/runner.py",
+      "sha256": "b281bc738ee4c5016b8ea97657329ec6b72c051712dbf4a7bab1006d1396085f",
+      "bytes": 15632,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/mock_agent.py",
+      "source": "Active-v3-frozen-control-work/active_research/mock_agent.py",
+      "sha256": "d7720801704b61d805aa85ee406357dc47fce19a84b9637b8634706e62dcb54b",
+      "bytes": 1638,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "external_test_support"
+    },
+    {
+      "path": "src/active_research/policy_amortized/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/__init__.py",
+      "sha256": "e9ca37e063cb3291332f25b9047120176610a257fba929827e4d0fafe9324b64",
+      "bytes": 65,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/audit.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/audit.py",
+      "sha256": "7c4e66ca44fbca3fdc0a96ab09647f039ed3328d2f697686a1b8fdfe6afd16aa",
+      "bytes": 6268,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/__init__.py",
+      "sha256": "adbac783a697e6a955a9241775e9c155a64da56c52f9bd2b3f0326bccf4d0c4c",
+      "bytes": 375,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/audit.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/audit.py",
+      "sha256": "280b254fcde9dd4764ce9ae7c99394364bd920e545c311af9c49eecb2b80315f",
+      "bytes": 1161,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/expand.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/expand.py",
+      "sha256": "a136caf554cb28ffbbb1edd5d440476518edafb160b221585fd83773b872fae6",
+      "bytes": 4239,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/lifecycle.py",
+      "sha256": "bd7871080a291bd84bd0aac507432d06e004e05cf67f8dccecc63053c40cc032",
+      "bytes": 3975,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/offline.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/offline.py",
+      "sha256": "ef8731d275e8d6a3c5a08b71b15c3b32af1fd2c42e7125811981f4ed48e51756",
+      "bytes": 7091,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/project.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/project.py",
+      "sha256": "290fa01ab3362760467e6990dee22bfb4bd92ae8010b9c9de5dbdba16929d751",
+      "bytes": 5974,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/runtime.py",
+      "sha256": "62459e10f8f25837f9cb4fe6755cb723729362143751d086e4053b01f52dc449",
+      "bytes": 4526,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/schema.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/schema.py",
+      "sha256": "7b61eda78cb7c8db8c338d28711214efc1b4bc9f20d8c86d7021e6ba63b11a3c",
+      "bytes": 3789,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/smoke_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/smoke_report.py",
+      "sha256": "2cca3e64e8ab71a463ef4fcbd40504d7ea93cbf9185de09d3576f84b47087807",
+      "bytes": 3675,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/compact_evidence/tests/test_codec.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/tests/test_codec.py",
+      "sha256": "b053b30a9d7585ca82f95eb1b959978d055833b1e18a07a0db0430ea0a14b229",
+      "bytes": 8244,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/frame.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/frame.py",
+      "sha256": "9e611d398363c5e082966b5ae1eb15978f655c02733e6648220c7f3c0768c26b",
+      "bytes": 8153,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/lifecycle.py",
+      "sha256": "a148d0d376559405c100709b29df2c6840b8ab61f5b1f0d92300dcb671a24592",
+      "bytes": 9347,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/model_usage.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/model_usage.py",
+      "sha256": "3db4a14913c839020a8846bd3bc46f5a734ca05801dc6aeb867c69a6c2d6e559",
+      "bytes": 2660,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/policy_builder.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_builder.py",
+      "sha256": "b1cfd1a09e1aac23d2002172bf0568e930aa4cc79b8a19c75c476b6cb7854296",
+      "bytes": 8469,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/policy_contract.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_contract.py",
+      "sha256": "cf17cb92b669c2d36390ea0f0a91adc143a18d4eb5248f95aad720e7a145143a",
+      "bytes": 12148,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/policy_executor.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_executor.py",
+      "sha256": "ff443bb642323797d077fe09be4aa20880503e5f312ebbb7215073a023b99fb5",
+      "bytes": 4007,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/predictor.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/predictor.py",
+      "sha256": "f1c05ed1602363eef12b74bb4021801e25eed4a47ca15da0c26e72a0cd32f6a5",
+      "bytes": 5825,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/prepare.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/prepare.py",
+      "sha256": "8bcb0cb06ef91fb1c14fb1eee11b738a1fe38e3e445bfc28b1ec97b74e3656a7",
+      "bytes": 1361,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/__init__.py",
+      "sha256": "f16a35cd40674af2f643f4ffa07c5fd3761d09c04581ab144df7c6f5a5190c36",
+      "bytes": 60,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/audit.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/audit.py",
+      "sha256": "05d038cbab0cea061111a65953ef8e89908d70ed508a09c1e70f4cf55b22492a",
+      "bytes": 1017,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/codec.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/codec.py",
+      "sha256": "3ebf9e079a0787e52b99296703840ca391822f643d1f6ce8af6c5bd8129ee00d",
+      "bytes": 9030,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/lifecycle.py",
+      "sha256": "2ed6456af39f8f84e98069ce47d137e476bceb54fd9bf16d04d7acd9fecaf096",
+      "bytes": 3911,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/report.py",
+      "sha256": "2fcff7d1496e3907e8039a4a8d3fe974f37dd578d52d13b46ca7196ecc7aac80",
+      "bytes": 17421,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/runtime.py",
+      "sha256": "3f6e24e60c5ecddd9461f1a0ecad5306682aab301fb147768bacc6ea1d854dc3",
+      "bytes": 4543,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/schema.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/schema.py",
+      "sha256": "29bd206dcf3a717bccdd4eb20059ddd2b60f7ea2a64a59ace03252dd53764598",
+      "bytes": 1080,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/tests/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/__init__.py",
+      "sha256": "0867eb5f1ca7a9703b3ca030c2636852aefb9fc164e9e0a764ccdbfd661e1385",
+      "bytes": 86,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/tests/test_codec.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_codec.py",
+      "sha256": "3c82e6145739a95d1685517c0b5d6dce6203a6a24e764f6caa50900ed08d1500",
+      "bytes": 5237,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/readable_evidence/tests/test_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_report.py",
+      "sha256": "c7efebf6d48ebb5e9f893556c05e0df578677ec616d866d94c4e64ab65ff635c",
+      "bytes": 1036,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/report.py",
+      "sha256": "1ac909c749ad1924f26bf2979298848e9af03ba329b403c8700c57c26dbf49cb",
+      "bytes": 6098,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/__init__.py",
+      "sha256": "cc3779c6e3f34faabfda06ae0a59f9cfdeefaa230bf0fe807fa8b12af57da802",
+      "bytes": 81,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/gate.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/gate.py",
+      "sha256": "c3643aad099cc4fea6d4c148a4c24f0f6ad130adb69b6598fd00d45eb2dfc8cf",
+      "bytes": 6244,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/lifecycle.py",
+      "sha256": "7ab5529589858794b45d7d10046b5d4a860d5d83381e4b5d81cce414f6779afa",
+      "bytes": 10964,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/report.py",
+      "sha256": "9d69258ff782f8d32f89c106c59064eea0d443ad1dcf07b27526a6d53c902788",
+      "bytes": 14208,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/runtime.py",
+      "sha256": "da955a70e96e7a2b4b014a115db1242694819763fa9511fa9152d3425dcdf6a5",
+      "bytes": 4898,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/supervisor.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/supervisor.py",
+      "sha256": "d7b72ebc971bbb66a5bf96a747f8ba5ef6f2adf00ce6a6d3794895368fe0634e",
+      "bytes": 17505,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/test_gate.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_gate.py",
+      "sha256": "bea2df17a4f3ae1dadc60404f702be97bc84cab0d394fbcde78aa8b11dafe3bb",
+      "bytes": 6828,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/test_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_report.py",
+      "sha256": "49dbb235ba88ce07671bfc9929e29f12525348753bd3924027f13731a3ca4a6f",
+      "bytes": 1270,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/test_runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_runtime.py",
+      "sha256": "beb014ece468193a68b267ecc0e25d87009094551533917715a422017b918286",
+      "bytes": 3883,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/test_supervisor_lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_supervisor_lifecycle.py",
+      "sha256": "dcf4aa9daf906abc79603a6214e192aeba9ec7d20fec9b3dbcc9ae7b150b74fc",
+      "bytes": 5061,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/tests/test_view.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_view.py",
+      "sha256": "8973794eb3db082ad106c4192b1e93d5b3efb343269779af8a32faa8f3d05d31",
+      "bytes": 2730,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/policy_amortized/semantic_json/view.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/view.py",
+      "sha256": "d5c9519ddf43eb0b1f6e706e45c6b3c21ffb8c1426e3c113d0d464abd921185e",
+      "bytes": 1577,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/service.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/service.py",
+      "sha256": "7b8a9d29959d48097e41fd50c7fb0f84ed73e8c9f5f7ef076785e8da388eee75",
+      "bytes": 636,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/specification.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/specification.py",
+      "sha256": "4522ff879cd2e47a0ce54fceba0d83675818ab84a152db092684d1b3928efe50",
+      "bytes": 1671,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_amortized/tests/test_policy.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/tests/test_policy.py",
+      "sha256": "34d3d1941a1bfaf45640f701dc4909822825bc78ccec7c4176a13ebdf12091ba",
+      "bytes": 21845,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/policy_amortized/transport.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/transport.py",
+      "sha256": "fd41e1251edb21f14873d231665dd9570e5a05770810be2131678003083e5e2a",
+      "bytes": 2397,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_warmup/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/__init__.py",
+      "sha256": "ce215344213a7d926bbfc6a2aa765ffbf49bdee07657313b422e9aa0cc353171",
+      "bytes": 68,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_warmup/archive.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/archive.py",
+      "sha256": "2a5a7ca234b5b3dc46f0ca4dd99192cddc34fabfa194c900ed55a3ec68ab2d4a",
+      "bytes": 3542,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_warmup/builder.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/builder.py",
+      "sha256": "4ad0742125aff16198e4616a86c184c89a9754ef7d950538f589e541f0867bf6",
+      "bytes": 12187,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/policy_warmup/lifecycle.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/lifecycle.py",
+      "sha256": "db32fd11809f345fedcca27c54b99173bb12b40256b4b0af1dfa2342236a78a1",
+      "bytes": 4168,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/policy_warmup/tests/test_warmup.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/tests/test_warmup.py",
+      "sha256": "b55d27d8464dc3268ccab2e9c77936ee6c018ed97a97e0ce851db5ff1c5c0e1d",
+      "bytes": 9078,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    },
+    {
+      "path": "src/active_research/reflection_normalization.py",
+      "source": "Active-v3-frozen-control-work/active_research/reflection_normalization.py",
+      "sha256": "25b962aeebaffbf72897bbc5e8f4582c4f86520f74ffd54b504ecdf5900e9bef",
+      "bytes": 5268,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "test_support_implementation"
+    },
+    {
+      "path": "src/active_research/runner.py",
+      "source": "Active-v3-frozen-control-work/active_research/runner.py",
+      "sha256": "8ecf60f36199a272cec31305f0906161addcf1c3c026c576033abb0834390fe0",
+      "bytes": 11485,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "required_compatibility"
+    },
+    {
+      "path": "src/active_research/test_common_scoring.py",
+      "source": "Active-v3-frozen-control-work/active_research/test_common_scoring.py",
+      "sha256": "780c85ebdd8be92faec917e1b3a5e4d0bcc590e09b3425e1247d2d9bd675a6d3",
+      "bytes": 4341,
+      "original_classification": "tests",
+      "classification": "selected_shared_tests"
+    },
+    {
+      "path": "src/active_research/test_daily_session.py",
+      "source": "Active-v3-frozen-control-work/active_research/test_daily_session.py",
+      "sha256": "cd17569330537c2065f452f05b549e64e1382597e3facb6969b2cc505294a9ce",
+      "bytes": 17695,
+      "original_classification": "tests",
+      "classification": "test_helper_or_package"
+    }
+  ],
+  "archived_files": [
+    {
+      "path": "history/active_research/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/__main__.py",
+      "sha256": "74fff10eb2bd330c92909b27a5a9ae84f41b3f268a5c04f51f849276919f19c6",
+      "bytes": 51,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/adaptive/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/adaptive/__main__.py",
+      "sha256": "b72d6210c14303737821fbb3c2f6a4b0fd2ab11b4e77469141e2cd5a4a1e876e",
+      "bytes": 32,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/aligned/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/aligned/__main__.py",
+      "sha256": "990429414b684ba6a8acff3cc22fce94837b2989ecb1e3e6f56de0f139597326",
+      "bytes": 847,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/behavioral/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/behavioral/__main__.py",
+      "sha256": "b72d6210c14303737821fbb3c2f6a4b0fd2ab11b4e77469141e2cd5a4a1e876e",
+      "bytes": 32,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/context_v2/__init__.py",
+      "source": "Active-v3-frozen-control-work/active_research/context_v2/__init__.py",
+      "sha256": "ec1b792318ddb6c39d5d3b66685957e93947832325c06b442cfaa5abeb691d6a",
+      "bytes": 15659,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/context_v2/test_context.py",
+      "source": "Active-v3-frozen-control-work/active_research/context_v2/test_context.py",
+      "sha256": "dbc09a651fccf217d07d38e69d22318f0a3f903a0923d924d2ec991234868d41",
+      "bytes": 22398,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/experience/test_protocol.py",
+      "source": "Active-v3-frozen-control-work/active_research/experience/test_protocol.py",
+      "sha256": "2f0d27f13947799d6e56b2a46e83cf1a4672ce01bb300b43826bf9e35c4f264f",
+      "bytes": 9347,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/formal_report.py",
+      "source": "Active-v3-frozen-control-work/active_research/formal_report.py",
+      "sha256": "abf715586f0f1ea612b92bf6d146e848af8ffb8771cb145997b5682aedead16a",
+      "bytes": 12130,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/formal_worker.py",
+      "source": "Active-v3-frozen-control-work/active_research/formal_worker.py",
+      "sha256": "ae6f18d1fbeee3e2c1568ffb5ad1c9ef22bdb09dc06b9407638f347530883bf5",
+      "bytes": 738,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/llm/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/llm/__main__.py",
+      "sha256": "74fff10eb2bd330c92909b27a5a9ae84f41b3f268a5c04f51f849276919f19c6",
+      "bytes": 51,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/__main__.py",
+      "sha256": "4f8e8737f00512e69d287632e7808ebf02e970c0f5f78c63249c5a9a35ab9d77",
+      "bytes": 222,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/compact_evidence/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/__main__.py",
+      "sha256": "5ca7f9c6b4c4c79d1e2a0aaa43b63c2bd0c601fa9c176f7361455b3ab1ea236e",
+      "bytes": 191,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/compact_evidence/tests/test_runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/tests/test_runtime.py",
+      "sha256": "a657080069f520fa5607caf6d708a879b678422b2b85a24547e9caced7b87f18",
+      "bytes": 4283,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/__main__.py",
+      "sha256": "3a7a6285422d310f71ac944623788383b4cff7a28ec9db5993a1cada8f92924f",
+      "bytes": 63,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/offline.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/offline.py",
+      "sha256": "7c61e6163e0cabd5e03830816d5ad36c97ce912c2bc65c9b1ae0190f01146c7d",
+      "bytes": 9524,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/operations.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/operations.py",
+      "sha256": "c3c941c1cf2c8f29a8640dd0af3856c2fe3d6fd4799bf0b78739e46f0caffc1c",
+      "bytes": 5917,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/supervisor.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/supervisor.py",
+      "sha256": "f06d085518855e24322da050b5add66b0d3832e57a67ccb2e77a43c85b095dcb",
+      "bytes": 9367,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/tests/test_runtime.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_runtime.py",
+      "sha256": "4b5ad42894ad446f87147bee63b9afd83ca67be938b16e936e10d2a7aa38e337",
+      "bytes": 3551,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/readable_evidence/tests/test_supervisor.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_supervisor.py",
+      "sha256": "6938081b5fbf9946f0b1f1ce45102fd732ea7b94a7d756dd2152185cef32b90f",
+      "bytes": 3576,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/semantic_json/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/__main__.py",
+      "sha256": "4419df22e553be1c08cdbfa0d325cc6c0dce0b7aa80019c07f1069c56561a2cf",
+      "bytes": 66,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/semantic_json/offline.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/offline.py",
+      "sha256": "a32cfd59502d9430b49a06c1c610d7af2773e6889c7accce83b9445bb51113eb",
+      "bytes": 8510,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_amortized/semantic_json/operations.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/operations.py",
+      "sha256": "ece3e19cf74398a588f3fa94c942f1a4364d04121d88a647cc98b94d2e4d00bc",
+      "bytes": 7384,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/policy_warmup/__main__.py",
+      "source": "Active-v3-frozen-control-work/active_research/policy_warmup/__main__.py",
+      "sha256": "c819ea9c6a4f378a531cf325e4df5c65853e6776d54ceb0c2f03582b86dc024e",
+      "bytes": 147,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/test_daily.py",
+      "source": "Active-v3-frozen-control-work/active_research/test_daily.py",
+      "sha256": "2725f9e2dcd39ab29e86d823ab2a26bd810a5ca7321b3e3b004f8af80e0f3702",
+      "bytes": 3562,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/test_reflection_normalization.py",
+      "source": "Active-v3-frozen-control-work/active_research/test_reflection_normalization.py",
+      "sha256": "28d9bb60ec81699b42a244a304059a064adb2e04de6a2e2572c13f61523957d3",
+      "bytes": 7657,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/test_transport_recovery.py",
+      "source": "Active-v3-frozen-control-work/active_research/test_transport_recovery.py",
+      "sha256": "1907da14958fa1ed95d617b27a623cd2473f6727d3b2b8ca965ad39da958e9a6",
+      "bytes": 11660,
+      "original_classification": "tests",
+      "classification": "archived_historical_workflow"
+    },
+    {
+      "path": "history/active_research/transport_recovery.py",
+      "source": "Active-v3-frozen-control-work/active_research/transport_recovery.py",
+      "sha256": "6a0f870cb6e04511333f46a07e04d5ff4cd0edbf865b9d52a74924f1de6386aa",
+      "bytes": 30675,
+      "original_classification": "active_research_compatibility_or_history",
+      "classification": "archived_historical_workflow"
+    }
+  ],
+  "modeling_source_copied": false,
+  "scientific_logic_changed": false,
+  "previous_layout_manifest": "metadata/initial-source-manifest.json"
+}
