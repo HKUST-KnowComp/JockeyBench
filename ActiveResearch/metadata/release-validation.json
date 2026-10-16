@@ -71,7 +71,7 @@
   },
   "aggregate_evidence_sha256": "6a645ad9c3ff13e3fffea6aeea48dd97ba9c39f115e6578a9f19ac62af15b9bd",
   "publication_packaging": {
-    "files": 148,
+    "files": 149,
     "scientific_python_files_checked": 128,
     "own_json_resources": 1,
     "packaging_tests_passed": 13,
@@ -79,13 +79,13 @@
     "history_distributed": false,
     "local_audit_distributed": false,
     "document_links_closed": true,
-    "readme_deferred": true
+    "readme_deferred": false
   },
   "publication_scope": {
     "authorized_on": "2026-10-17",
     "repository": "HKUST-KnowComp/JockeyBench",
     "directory": "ActiveResearch",
-    "readme_included": false,
+    "readme_included": true,
     "scientific_source_changes": 0
   }
 }

@@ -16,7 +16,8 @@
   cases the original Mini host. Do not claim full regression without those.
 - Never call providers, launch/resume experiments, create an experiment-host
   marker, or copy datasets/checkpoints/credentials as part of packaging.
-- The user explicitly authorized the 148-file code/documentation upload to
-  HKUST-KnowComp/JockeyBench on 2026-10-17, with README.md deferred.
+- The user explicitly authorized the code/documentation upload to
+  HKUST-KnowComp/JockeyBench on 2026-10-17, followed by the reviewed README.md.
+  The publication now contains 149 files, including README.md.
   Further publication changes still require applicable user authorization;
   no model/provider or scientific run is authorized by this source drop.

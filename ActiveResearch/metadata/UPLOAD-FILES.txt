@@ -1,5 +1,6 @@
 .gitignore
 AGENTS.md
+README.md
 docs/DEPENDENCIES.md
 docs/FILE-INVENTORY.md
 docs/HISTORY-AND-EXPERIMENTS.md
