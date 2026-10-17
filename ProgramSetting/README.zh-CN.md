@@ -60,8 +60,23 @@
 
 ## 安装
 
-需要 **Python 3.13**。真实运行还需要 **macOS**，因为沙箱是 `sandbox-exec`。Linux 可以跑单元测试，但
-不能运行轨迹，也不能运行导入器。
+需要 **Python 3.13**。运行时支持使用 `sandbox-exec` 的 **macOS**，以及使用 `bubblewrap` 和
+`libseccomp` 的 **Linux**。Linux 适配目标为 x86_64 或 aarch64 架构的 Ubuntu 22.04/24.04。
+在 Linux 上先安装系统依赖，再创建 Python 环境：
+
+```bash
+sudo apt-get update
+sudo apt-get install bubblewrap libseccomp2 libarchive-tools lsof build-essential
+```
+
+`lhafile` 在 Linux 上可能需要编译 C 扩展，尤其是 ARM 架构，因此需要 C 编译器。Python 安装还必须提供
+与解释器匹配的 Python 3.13 开发头文件。若系统 Python 不包含这些文件，请从与解释器相同的软件源安装
+对应的开发包（通常为 `python3.13-dev`）；托管的 Python 发行版可能已包含这些文件。
+
+Linux 主机必须允许 bubblewrap 创建用户命名空间。容器策略以及部分
+[Ubuntu 24.04 的 AppArmor 配置](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/)
+可能禁止此操作，即使依赖已经安装。请使用策略允许 bubblewrap 的主机或 CI runner；隔离不可用时，
+运行时会拒绝执行，绝不回退为无沙箱进程。不要为了启动运行而全局关闭主机的安全限制。
 
 ```bash
 python3.13 -m venv .venv
@@ -78,20 +93,23 @@ python3.13 -m venv .venv
 .venv/bin/pytest
 ```
 
-所有测试都使用伪造的数据，放在内存里或写入临时目录。在 macOS 上还可以运行真实的沙箱任务：
+所有测试都使用伪造的数据，放在内存里或写入临时目录。两种支持的平台都可以用伪造数据测试真实沙箱：
 
 ```bash
 JRDB_NATIVE=1 .venv/bin/pytest -m native
 ```
 
+这些测试不需要实验主机标记、JRDB 数据或模型供应商凭据。CI 在 Ubuntu 22.04、Ubuntu 24.04 和 macOS
+上运行单元测试，并在 Ubuntu 22.04 和 macOS 上运行 native 测试。
+
 ## 运行
 
-先把这个 checkout 标记为实验主机，再按 [docs/DATA.md](docs/DATA.md) 准备
-`data/private/expanded.sqlite`。涉及真实数据的命令只能在 macOS 上、从带有标记文件的 checkout 根目录运行。
-然后运行一个参照程序；参照程序不调用任何模型。
+涉及真实数据或模型的命令只在指定的实验主机上运行，并且必须从已预先配置 `.experiment-host` 标记的
+checkout 根目录执行。不要在开发机器上复制或创建该标记。在实验主机上按
+[docs/DATA.md](docs/DATA.md) 准备 `data/private/expanded.sqlite`，然后运行一个参照程序；参照程序
+不调用任何模型。
 
 ```bash
-touch .experiment-host                 # 只需一次，在 checkout 根目录执行
 export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 .venv/bin/jockeybench --config configs/smoke.json doctor
 .venv/bin/jockeybench --config configs/smoke.json run --run-id smoke-r2 --reference R2
@@ -117,8 +135,8 @@ export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 `--initial-from` 从同一个根目录读取，所以一个模型的预热和两个臂共用一个根目录，并且依次运行；不同模型
 请各用一个根目录。
 
-每条命令都输出 JSON。退出码 2 表示协议拒绝，3 表示 provider 请求被中断。遇到退出码 3 时，重新执行同一条
-命令即可续跑。
+每条命令都输出 JSON。退出码 2 表示协议拒绝，3 表示 provider 请求被中断。遇到退出码 3 时，在原有代码和
+环境下重新执行同一条命令即可续跑。切换到 Linux 时必须新建轨迹，不得在 Linux 上续跑或拼接 macOS 轨迹。
 
 ## 仓库结构
 
@@ -126,7 +144,7 @@ export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 | --- | --- |
 | `src/jockeybench/data/` | 只读、按时间门控的档案访问，字段白名单和投影 |
 | `src/jockeybench/protocol/` | 工具代理（计量、价格、幂等），工具说明，智能体任务说明 |
-| `src/jockeybench/sandbox/` | `sandbox-exec` 执行器、CPU 计费、策略版本；`client/` 是沙箱内程序唯一能看到的代码 |
+| `src/jockeybench/sandbox/` | macOS `sandbox-exec` 和 Linux bubblewrap/seccomp 执行器、CPU 计费、策略版本；`client/` 是沙箱内程序唯一能看到的基准代码 |
 | `src/jockeybench/lifecycle.py`、`runner.py` | 预热、封存、结算、反思、验证与回退；带检查点的运行 |
 | `src/jockeybench/scoring.py`、`ledger.py`、`reporting.py` | 计分规则、整数 score-yen 账本、报告与配对比较 |
 | `src/jockeybench/agents/` | 兼容 OpenAI 接口的工具调用智能体、带成本监控的传输层、参照程序 R0–R3 |
@@ -150,6 +168,10 @@ export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 
 [docs/REPRODUCING.md](docs/REPRODUCING.md) 列出了验证过的内容和删去的内容，也说明了哪些部分无法精确复现：
 provider 的非确定性、你自己的私有假名密钥，以及你的解释器环境。
+
+Linux 支持保留协议规则，但不意味着不同操作系统或硬件下的预测、CPU 费用或分数相同。运行时 1.1.0 会为
+每条新轨迹记录机器架构、平台和沙箱环境。本次平台支持仅适用于 `ProgramSetting/`；`ActiveResearch/` 仍依赖外部的
+`jrdb_lh` 框架，并不是可以独立运行的 Linux 包。
 
 ## 引用
 

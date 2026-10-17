@@ -1,4 +1,4 @@
-"""Strategy files and the macOS sandbox. Tests marked ``native`` start real ``sandbox-exec`` jobs."""
+"""Strategy files and native sandbox jobs, using only synthetic fixtures."""
 
 import json
 from dataclasses import replace
@@ -64,7 +64,10 @@ def test_isolation_denies_private_files_network_and_subprocesses(executor, priva
     elsewhere.write_text('not for agents')
     result = executor.preflight([private_file, elsewhere])
     assert result['network_denied'] and result['subprocess_denied'] and result['filesystem_denied'] == 2
-    code = 'import os\ntry:\n    os.stat(' + repr(str(private_file)) + ')\n    result=False\nexcept PermissionError:\n    result=True'
+    code = (
+        'import os, sys\ndenied = (PermissionError, FileNotFoundError) if sys.platform == "linux" else (PermissionError,)\n'
+        'try:\n    os.stat(' + repr(str(private_file)) + ')\n    result=False\nexcept denied:\n    result=True'
+    )
     assert executor.execute(code)['result'] is True
     output = executor.execute("import numpy as np\nresult = {'n': int(np.array([1,2]).sum()), 'p': sdk.call('describe')['projection']}")
     assert output['result'] == {'n': 3, 'p': 'objective-v5'}
@@ -74,7 +77,7 @@ def test_isolation_denies_private_files_network_and_subprocesses(executor, priva
 @pytest.mark.native
 def test_child_processes_escapes_and_external_network_are_denied(executor, private_file):
     executor.preflight([private_file])
-    code = '''import os, socket
+    code = '''import errno, os, socket
 result = {'fork_denied': False, 'write_denied': False, 'external_denied': False}
 try:
     pid = os.fork()
@@ -85,8 +88,8 @@ else:
     os.waitpid(pid, 0)
 try:
     open('../escape.txt','w').write('escape')
-except PermissionError:
-    result['write_denied'] = True
+except OSError as exc:
+    result['write_denied'] = exc.errno in (errno.EACCES, errno.EPERM, errno.EROFS)
 try:
     with socket.socket() as s:
         s.settimeout(1)
@@ -181,7 +184,7 @@ def test_prediction_runs_read_only(executor, private_file):
     service.observation_limit = 2048  # a nearly full model context does not constrain framework jobs
     assert executor.predict(context)['ranking'] == context['runner_numbers']
     executor.save_strategy({'strategy.py': UNIFORM.replace('    return', "    open('notes.txt','w').write('x')\n    return")})
-    with pytest.raises(JobFailed, match='PermissionError|must not change'):
+    with pytest.raises(JobFailed, match='PermissionError|OSError|must not change'):
         executor.predict(context)
     assert not (executor.work / 'notes.txt').exists()
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jockeybench"
-version = "1.0.0"
+version = "1.1.0"
 description = "JockeyBench: evaluating LLM agents that write and revise horse-racing forecasting programs"
 readme = "README.md"
 license = "MIT"
@@ -24,7 +24,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-p no:cacheprovider"
-markers = ["native: runs real sandbox-exec jobs on macOS (synthetic, in-memory data only)"]
+markers = ["native: runs real sandbox jobs on macOS or Linux (synthetic, in-memory data only)"]
 
 [tool.ruff]
 line-length = 140

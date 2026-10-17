@@ -140,7 +140,13 @@ def error_messages():
 
 
 def test_protocol_error_messages_are_pinned():
-    assert digest(error_messages()) == V061_ERROR_MESSAGES
+    # 1.1.0 extends one host-only startup diagnostic to Linux. All messages
+    # delivered through the scientific protocol remain byte-for-byte pinned.
+    old = repr('Full execution requires macOS sandbox-exec; no isolation fallback is provided')
+    new = repr('Full execution requires macOS sandbox-exec or Linux bubblewrap; no isolation fallback is provided')
+    messages = error_messages()
+    assert messages.count(new) == 1 and old not in messages
+    assert digest(sorted(old if text == new else text for text in messages[:-3]) + messages[-3:]) == V061_ERROR_MESSAGES
 
 
 def test_every_correction_is_applied_and_leaves_no_old_wording(paper_service):

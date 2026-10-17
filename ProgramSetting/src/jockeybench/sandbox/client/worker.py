@@ -76,4 +76,8 @@ def main():
 
 
 if __name__ == '__main__':
+    if sys.platform == 'linux':
+        from linux_guard import install
+
+        install()
     main()
