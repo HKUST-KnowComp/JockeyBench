@@ -72,7 +72,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Could not restart the CI distribution as its ordinary user' }
           $project = "$linuxHome/JockeyBench"
           $archive = Join-Path $env:RUNNER_TEMP 'jockeybench-source.tar'
-          git archive --format=tar --output=$archive HEAD
+          git -c core.autocrlf=false -c core.eol=lf archive --format=tar --output=$archive HEAD
           if ($LASTEXITCODE -ne 0) { throw 'Could not archive the exact checked-out source' }
           $linuxArchive = (& wsl.exe --distribution $distro --user jockeyci --exec wslpath -u $archive).Trim()
           if ($LASTEXITCODE -ne 0) { throw 'Could not translate the source archive path' }
@@ -97,6 +97,10 @@ jobs:
           & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action run -BenchmarkArgs @('program', '--config', 'nonexistent config ; literal.json', 'doctor')
           if ($LASTEXITCODE -ne 2) { throw 'The launcher did not preserve the benchmark refusal status' }
           $global:LASTEXITCODE = 0
+      - name: Verify source provenance inside WSL2
+        run: |
+          wsl.exe --distribution $env:JOCKEYBENCH_CI_DISTRO --user jockeyci --cd $env:JOCKEYBENCH_CI_PROJECT --exec "$env:JOCKEYBENCH_CI_PROJECT/.venv/bin/python" -B scripts/verify_research_provenance.py
+          if ($LASTEXITCODE -ne 0) { throw 'The WSL2 source provenance check failed' }
       - name: Full synthetic suite inside WSL2
         run: |
           wsl.exe --distribution $env:JOCKEYBENCH_CI_DISTRO --user jockeyci --cd $env:JOCKEYBENCH_CI_PROJECT --exec "$env:JOCKEYBENCH_CI_PROJECT/.venv/bin/python" -m pytest
@@ -105,7 +109,3 @@ jobs:
         run: |
           & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action check
           if ($LASTEXITCODE -ne 0) { throw 'The real WSL2 sandbox checks failed' }
-      - name: Verify source provenance inside WSL2
-        run: |
-          wsl.exe --distribution $env:JOCKEYBENCH_CI_DISTRO --user jockeyci --cd $env:JOCKEYBENCH_CI_PROJECT --exec "$env:JOCKEYBENCH_CI_PROJECT/.venv/bin/python" -B scripts/verify_research_provenance.py
-          if ($LASTEXITCODE -ne 0) { throw 'The WSL2 source provenance check failed' }

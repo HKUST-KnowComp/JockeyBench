@@ -1,3 +1,6 @@
 *.sh text eol=lf
 *.ps1 text eol=lf
 *.yml text eol=lf
+# Runtime and provenance fingerprints cover exact bytes, including original CRLF.
+src/** -text
+provenance/** -text

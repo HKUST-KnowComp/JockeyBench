@@ -1,8 +1,11 @@
 """Current hashes and historical provenance remain separate; no scientific imports."""
 
 import importlib.util
+import io
 import json
 import shutil
+import subprocess
+import tarfile
 import tomllib
 from pathlib import Path
 
@@ -46,6 +49,35 @@ def test_changed_current_source_fails_without_updating_provenance(source_copy):
     path = source_copy / provenance.RESEARCH / 'common_scoring.py'
     path.write_bytes(path.read_bytes() + b'\n# Unreviewed change\n')
     assert not provenance.verify(source_copy)['passed']
+
+
+def test_source_archive_preserves_recorded_bytes_with_windows_git_defaults(source_copy, tmp_path):
+    shutil.copyfile(ROOT / '.gitattributes', source_copy / '.gitattributes')
+
+    def git(*args):
+        return subprocess.run(['git', '-C', str(source_copy), *args], check=True, capture_output=True).stdout
+
+    git('init', '-q')
+    git('config', 'core.autocrlf', 'true')
+    git('config', 'user.name', 'Fixture')
+    git('config', 'user.email', 'fixture@example.invalid')
+    git('config', 'commit.gpgsign', 'false')
+    git('add', '.')
+    git('-c', 'core.hooksPath=/dev/null', 'commit', '-qm', 'Synthetic source archive fixture')
+    destination = tmp_path / 'extracted'
+    archive = git('archive', '--format=tar', 'HEAD')
+    with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+        # Compare archive bytes to committed blobs, independently of checkout conversion.
+        for path in (
+            provenance.RESEARCH / 'public.py',
+            provenance.RESEARCH / 'daily_reflection_budget.json',
+            provenance.EVIDENCE / 'initial-source-manifest.json',
+        ):
+            name = path.as_posix()
+            assert stream.extractfile(name).read() == git('show', 'HEAD:' + name), name
+        stream.extractall(destination, filter='data')
+    result = provenance.verify(destination)
+    assert result['passed'], result['errors']
 
 
 def test_new_unrecorded_source_is_detected(source_copy):
