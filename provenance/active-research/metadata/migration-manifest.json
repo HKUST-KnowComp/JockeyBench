@@ -1,0 +1,1058 @@
+{
+  "schema": "jockeybench-research-migration-v1",
+  "scope": "Current unified package; historical hashes and validation claims remain separate",
+  "original_published_python_files": 128,
+  "excluded_historical_python_files": 27,
+  "migrated_files": [
+    {
+      "old_path": "ActiveResearch/src/active_research/__init__.py",
+      "new_path": "src/jockeybench/research/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/__init__.py",
+      "original_sha256": "5be6f7a8b87f84d2cc4f199d3e619598c8b539d3f5499dbcda0988355a10dbd7",
+      "current_sha256": "5be6f7a8b87f84d2cc4f199d3e619598c8b539d3f5499dbcda0988355a10dbd7",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/adaptive/__init__.py",
+      "new_path": "src/jockeybench/research/adaptive/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/adaptive/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/adaptive/domains.py",
+      "new_path": "src/jockeybench/research/adaptive/domains.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/adaptive/domains.py",
+      "original_sha256": "8c1f7bfea3b2cd4ee06e18cfd631e0d34a200d142d80471fd67187ab21fb406b",
+      "current_sha256": "3e23f98c842c92953a8e0e67733d1d3b5c3124c92238f2937861472f37ca00fd",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/adaptive/model.py",
+      "new_path": "src/jockeybench/research/adaptive/model.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/adaptive/model.py",
+      "original_sha256": "a4369ef573c49e8e83302477338032fe10d9d55eef21384d5f97bbd5aff4b866",
+      "current_sha256": "c5a0882f701f1f66700c3a68aed74f9773bcb9f57942b48bc9e10fa14285427e",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/adaptive/runner.py",
+      "new_path": "src/jockeybench/research/adaptive/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/adaptive/runner.py",
+      "original_sha256": "b6c0dd9c5ba567b471429b5ae3c31e6f4360152cefee3791d17551b6bcc076e6",
+      "current_sha256": "e1e6f10c3838320d5f899d49b14cdd467b1f6cf0d9dd3a3cbe1aefb0675b3213",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/adaptive/test_adaptive.py",
+      "new_path": "src/jockeybench/research/adaptive/test_adaptive.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/adaptive/test_adaptive.py",
+      "original_sha256": "c50d4bef1059293410e1a9c1489bdeedf2081a798a6fe29e74e0f9f52ba94d54",
+      "current_sha256": "c7b84c8e405c50ecba33356ac4b29024a938a9309ab3865c1316ac71a3010852",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/__init__.py",
+      "new_path": "src/jockeybench/research/aligned/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/__init__.py",
+      "original_sha256": "3252960df95c498c6bf53dc5c099d839fd3f8c089639b955c946c94cc7ac4661",
+      "current_sha256": "3252960df95c498c6bf53dc5c099d839fd3f8c089639b955c946c94cc7ac4661",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/audit.py",
+      "new_path": "src/jockeybench/research/aligned/audit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/audit.py",
+      "original_sha256": "d92982531961c17910592103fe3bdce22cbf63f2f5b8f53ff5df1809a8497c3f",
+      "current_sha256": "8cd94bae8e774a7f0aff496cda4fe2151c89c910210b94a4e83927bfd351fabe",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/delivery.py",
+      "new_path": "src/jockeybench/research/aligned/delivery.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/delivery.py",
+      "original_sha256": "bcaf1d5a9668eed18af3cf6bad3ff747fc0b64e4294da998b6e70d47d4ec2e93",
+      "current_sha256": "ef9d349e9dcd8b5a4abb207357b6cb151cffb8f68760273484e9bc0e893d3b92",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/frame.py",
+      "new_path": "src/jockeybench/research/aligned/frame.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/frame.py",
+      "original_sha256": "0e820ff27838f402254dbb22861a0976c3bb24df15a2333fbf9ed100d6160a32",
+      "current_sha256": "f64d93f0c5c76926a59c3a53eb9136794502e205d518afa94cda9a72e9977582",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/integrity.py",
+      "new_path": "src/jockeybench/research/aligned/integrity.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/integrity.py",
+      "original_sha256": "30e611b43768f0c7f0198c2ead2b052939bbfc21c577d81ce52bf3c2844bf112",
+      "current_sha256": "7d7063110e0039303e382c8ca84e8c76bfe8fbe990858f7fb8811f90abbd8682",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/model.py",
+      "new_path": "src/jockeybench/research/aligned/model.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/model.py",
+      "original_sha256": "29a21bba8f55f3b209dc885708262f91d2cab16bcbd8e815777032d5ea592537",
+      "current_sha256": "af90f5ab05b0a432e96a97e19e1ef0fbe1a51575f0b4814b6a27ef7e585bd3ca",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/prepare.py",
+      "new_path": "src/jockeybench/research/aligned/prepare.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/prepare.py",
+      "original_sha256": "1272aab9baae89f05c95565f30c2afdc6f543c56ef72d6b43cdcd520d2de56a3",
+      "current_sha256": "f0ba5bb4269fd2f2180a05acc03a0457d4223b6c2216e3251aa0134a962d1040",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/report.py",
+      "new_path": "src/jockeybench/research/aligned/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/report.py",
+      "original_sha256": "6cdad3f9dfad213691da73145932b16523a457f8b1eb4eda783f10a39e2ef066",
+      "current_sha256": "6cdad3f9dfad213691da73145932b16523a457f8b1eb4eda783f10a39e2ef066",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/runner.py",
+      "new_path": "src/jockeybench/research/aligned/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/runner.py",
+      "original_sha256": "c6a73e3cc6c34ae6872e8f1c067f4e5ff5fc137befe6ee8a8fb0c34a1e95eab3",
+      "current_sha256": "c3453988ffd5f42512a5cc8183efd9eba034672e6a5f5b20516d23a920637ea5",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/scoring.py",
+      "new_path": "src/jockeybench/research/aligned/scoring.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/scoring.py",
+      "original_sha256": "7a1636f4e703d9f367a8cb47ef70ad926b6d341f0a04a8f9b96a0df1a7ffd944",
+      "current_sha256": "2c9fa06c96309318ae1b4a142f0e49a6a758a62e4749b7750806928938a374d2",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/specification.py",
+      "new_path": "src/jockeybench/research/aligned/specification.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/specification.py",
+      "original_sha256": "517e95bfbd5d9a5d4241c313074a00d4ec1fd50dcba28e973e73a2780d96d7da",
+      "current_sha256": "6afff9c9996fb4d715314e55f06e08d3f03a27fecec9247bb943db2cffa453e8",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/tests/test_aligned.py",
+      "new_path": "src/jockeybench/research/aligned/tests/test_aligned.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/tests/test_aligned.py",
+      "original_sha256": "51575c56b2e816ba688d9f00ec0de0beaa44049bbf1ad95a10c38e41d417eb58",
+      "current_sha256": "f1d2cab60a7e67bf5e86cf9916cec8e2d35fab3495946b64619719f278380c39",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/aligned/tests/test_graceful.py",
+      "new_path": "src/jockeybench/research/aligned/tests/test_graceful.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/aligned/tests/test_graceful.py",
+      "original_sha256": "0d6d12974f97b1799dc6102439ca1bfcdc458528ed86767870e8eb57f202451f",
+      "current_sha256": "dfec8f05fbde37b36e65fb84d8e08bebca5ac4295706165a026e9aa9597ee1be",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/behavioral/__init__.py",
+      "new_path": "src/jockeybench/research/behavioral/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/behavioral/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/behavioral/runner.py",
+      "new_path": "src/jockeybench/research/behavioral/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/behavioral/runner.py",
+      "original_sha256": "849eda516de091223b47510b6f280155d015c3325d998c1fd8a0e15883eac88e",
+      "current_sha256": "15b4934a4e68a11873d6a3fde758d09675a54b9a40012d905e4d2de054f91a6f",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/common_scoring.py",
+      "new_path": "src/jockeybench/research/common_scoring.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/common_scoring.py",
+      "original_sha256": "c1b467d16f6c656c88676473f25e7c8a2acbf771ae0bb7eb8d19d4ffe3f724a1",
+      "current_sha256": "261f584d1591ab3b360b5910feb39fe0902286e1aecd57b220dfc74c2b3b3193",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/daily.py",
+      "new_path": "src/jockeybench/research/daily.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/daily.py",
+      "original_sha256": "00e258a813d326f269a776061f99eff98299fb35d8e60d1091334929bc508bff",
+      "current_sha256": "c8cbf606f1c5ec0b4bcf9cff4aef51d160314489569999e8599df632f5a86b21",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/daily_report.py",
+      "new_path": "src/jockeybench/research/daily_report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/daily_report.py",
+      "original_sha256": "56751b26f7ae9526d4457e1916fc2937323d8100b2fcf95fa6aac96c3fa08d12",
+      "current_sha256": "7b8dd10b6989f6e74033506e26c8adec957cab59f87702eb91314f0676684848",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/daily_session.py",
+      "new_path": "src/jockeybench/research/daily_session.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/daily_session.py",
+      "original_sha256": "a4d7a60243a422650b36d476aedb3fe6550350ae3eed5af94ae8ad2853e8a98a",
+      "current_sha256": "7e67472c8cd96014b7b4a3797df74e20471c2a8b4f4bef69b18f385599a8fab9",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/__init__.py",
+      "new_path": "src/jockeybench/research/experience/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/frame.py",
+      "new_path": "src/jockeybench/research/experience/frame.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/frame.py",
+      "original_sha256": "6fe236be5ddfd258a4ee6be8f9dc8f8496e08abd9201934d90df721a292acafe",
+      "current_sha256": "d1c2ba061c39e61e88e882e2d2eabc1679958dbbdf9f81c86e7cba27b2cdb418",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/model.py",
+      "new_path": "src/jockeybench/research/experience/model.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/model.py",
+      "original_sha256": "6f54d2df03aa8deab541bddd9f85959f91eaa5fae3b93c8b1733d4be36ae9359",
+      "current_sha256": "7389d515f0ad03bb6d1f7637f67a36ac1eaa30e7682f12911fe6d438aa9bb19d",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/report.py",
+      "new_path": "src/jockeybench/research/experience/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/report.py",
+      "original_sha256": "1842866af74d1c7a460722e7fb98ee5a3a4e279e0e8f4c56e3b6e73f15df09d9",
+      "current_sha256": "d85826f2bd16e732e6595ad154ab1b80a666c5a13a2207d163630147b6514ef1",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/runner.py",
+      "new_path": "src/jockeybench/research/experience/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/runner.py",
+      "original_sha256": "819fcc63bdd351ca1e72118552c14b522e213178ffa1b6bdd12e04e6c83e53f7",
+      "current_sha256": "6931cb133feaa627ab41fb8d535b81fe5a60327dfcba75fdd4167030bda7fc15",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/experience/test_frame.py",
+      "new_path": "src/jockeybench/research/experience/test_frame.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/experience/test_frame.py",
+      "original_sha256": "97da6efd343228a21ed41640c819fa92b47d0d3af6ea40f7b9177f7dbda1a578",
+      "current_sha256": "263dacfabf0bd18c4e115c1b415a25aaa1478bbc04610c0f734d85e028339745",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/__init__.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/__init__.py",
+      "original_sha256": "9864e46bc43df79e50316fcaa29f6fb4801df4f26ac6fe31077f60c14395f04e",
+      "current_sha256": "9864e46bc43df79e50316fcaa29f6fb4801df4f26ac6fe31077f60c14395f04e",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/__main__.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/__main__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/__main__.py",
+      "original_sha256": "4419df22e553be1c08cdbfa0d325cc6c0dce0b7aa80019c07f1069c56561a2cf",
+      "current_sha256": "4419df22e553be1c08cdbfa0d325cc6c0dce0b7aa80019c07f1069c56561a2cf",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/audit.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/audit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/audit.py",
+      "original_sha256": "2a979a97a4f9dd62bc352609b1d6d68e93868be98fefccab439eecc4656facd4",
+      "current_sha256": "ecd57aeb007e062ed995eac9d3880bdd628494ca92ee398fbaa49d1cbf7da204",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/audit_live.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/audit_live.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/audit_live.py",
+      "original_sha256": "9ae6d427a190bffabc51d9a29a0c8a9e04e3134c0fcac970674741c387189ba5",
+      "current_sha256": "3d896ff71428c75db5517c9d092544a6253f98afbdb6321cf643f4569e94b940",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/control.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/control.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/control.py",
+      "original_sha256": "d7e4b987522289461cf4b183c91b20965e11f2d25842f80d3a217357c51b68f9",
+      "current_sha256": "d86317eeb425677cc147934f61e70a089bb3752dfcb18848c2a08e69440f2bd6",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/domains.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/domains.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/domains.py",
+      "original_sha256": "97d88904d45ff5da6f5b37b8a5bf0778c67ce1b79f4174edd1ebe494e88a8a91",
+      "current_sha256": "45614a46610038f9dfa6452cfa66de15cedfe97466a276ec6694b4fb43b6e988",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/frame.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/frame.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frame.py",
+      "original_sha256": "61c218ec05a524cebb6332ccfe63a5476270302bcdaa3a323e14bdc0eba17c45",
+      "current_sha256": "9058e458b58e96fa29e6597c54c07fbb9924452bed5a442c1de7ee280a79cabc",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/frozen_inputs.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/frozen_inputs.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frozen_inputs.py",
+      "original_sha256": "0dc5918993d09b9ef5f7d4d9aee9ad01ee8b2a7652bd162661359706d29aea3e",
+      "current_sha256": "157a11480ead60cf5a40afd12176b97142914cbe49a9f6faa8ed5b0e611546aa",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/frozen_report.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/frozen_report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/frozen_report.py",
+      "original_sha256": "09aa407888b9f4dd2cca141f75ab4cb33602b96160db1c6f04c0a73970e4bb10",
+      "current_sha256": "0d4cd9b853689cf712e43430a56dc3769533440278f293ee131bbe1d24271897",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/gate.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/gate.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/gate.py",
+      "original_sha256": "6792499e457dd2a4cbf474646b640e4cf64d90294500f7e0c68f1e3d9bd954e6",
+      "current_sha256": "4984bf98836d50ebd62fcc71a7fa60e03825cc1e3f98d213ee66ebf56b783f07",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/lifecycle.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/lifecycle.py",
+      "original_sha256": "82791e1ce804218984ad71bf85e25650e9f5bac1cd54502858a0380756f161b2",
+      "current_sha256": "472b62c275732692c317b3cffd6bc484f5d7418b983e8e1a7b2de7a1d1e62398",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/marginal_cost.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/marginal_cost.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/marginal_cost.py",
+      "original_sha256": "11cc790921c518359ce19f18a20cb10071e0883806d3eb79abd6589f2a63cf62",
+      "current_sha256": "4316f05c1764b1d642c3a2cad52d020ab73e889a2b9932b37e9af649757451a5",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/native_replay.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/native_replay.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/native_replay.py",
+      "original_sha256": "75b1298559f6d4805a05726db6e0b2b304fe372894ad5ffbc9f8c4c37de02957",
+      "current_sha256": "aaee7c090b9bd10ad7e5150dc9271b9de81510214b1bb244039157e330115e84",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/policy_builder.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/policy_builder.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_builder.py",
+      "original_sha256": "7eed83e93a5e81a698e7759fd0e514b40a870126e4fd0ea572a50a38f6e94c78",
+      "current_sha256": "c3d7f69dbfc9998ab6a9aba939e7b052c70a24a73d2c6f0e9b98a0295ac7caad",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/policy_contract.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/policy_contract.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_contract.py",
+      "original_sha256": "371374dfd2c4d4057565996e69f62c722447fd139e14340580948964c9959847",
+      "current_sha256": "4273810f922464dda6adcf3d5c9c0b0aea2bf5bfba0c5a6e5121519ef7da3c20",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/policy_cpu.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/policy_cpu.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_cpu.py",
+      "original_sha256": "570ed988043287176e0b5b1086f3ecc0f1fee4c1ef9933b35b2133cf4490b32e",
+      "current_sha256": "570ed988043287176e0b5b1086f3ecc0f1fee4c1ef9933b35b2133cf4490b32e",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/policy_executor.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/policy_executor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/policy_executor.py",
+      "original_sha256": "e40fd805080f835e142bae6c22c11a98ccecb3fc5a88a6870060a2690a36f0eb",
+      "current_sha256": "9d46f28b411e1425c43cf55ae6ea2f65db88d3ea63ec8ef0a5cfdb9c8f515991",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/predictor.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/predictor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/predictor.py",
+      "original_sha256": "6f5bbff850507de7a38bced73e61fe379a49abd9b3bcf1b6115d1c7acbb2e101",
+      "current_sha256": "436af0ea7c7c28338107badeaf6c40acab7c018d2779649b21aa049ac4637340",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/prepare.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/prepare.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/prepare.py",
+      "original_sha256": "4ce29210491a56435f9f288e2c1c0da62a8ee106a65034b763b81207d1bca6b6",
+      "current_sha256": "f133d11a1044856aa9cf22375977b274c099dc5de4d0ed09be7b6da8ed1b8f58",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/report.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/report.py",
+      "original_sha256": "c5aaf8156a80f373e735df6974cc6cdb8d4af8bb3368cb1eb1dc4ecf0744fce2",
+      "current_sha256": "09f2760e8dd49b764dab923bdd2ae8370a7a8d552c5af3bff19d3c601acc49ba",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/runtime.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/runtime.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/runtime.py",
+      "original_sha256": "5e9f29a647c2934c6461832d3cbe38334abc0e3c4538bf8a75e0b9d624790cc6",
+      "current_sha256": "1b36f9c8dd61804762808c02b76664f539e98cb57bb879c55f77587fc0a636af",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/source_binding.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/source_binding.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/source_binding.py",
+      "original_sha256": "dbedb2d29532874f8c8fe77621858220ed2be69212e6d99520ff2b8231d488c9",
+      "current_sha256": "01b074ee663c6c923bbd7f82cb54615d51f548ab93cd3b707a5e508d3bfc9633",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/statistics.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/statistics.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/statistics.py",
+      "original_sha256": "d31013d6ce561253ce477ac3aa8c553076bd078b165990dbbaf66f1f9ea5eebd",
+      "current_sha256": "9bc829b0c323b1c45b94650ad1d376f8425625e387d5dae576cbd323240b9741",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/supervisor.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/supervisor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/supervisor.py",
+      "original_sha256": "9cfef40b5286cdb8b73a70c5577a9e77e8a480c073eb1161887f955905e07712",
+      "current_sha256": "3f495094fc27af7a4ad0c8897572f4c76248167d349e3f32c4ee23a64ca474bc",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/__init__.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_frozen_control.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_frozen_control.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_frozen_control.py",
+      "original_sha256": "340d82ec188dde04ccfc05887c83f4071a0202c8b2bbe9bd6f5744e4c0d0bd21",
+      "current_sha256": "e7e601ef197dce4f6bf36d5d3541c106b7c4f03459fdc557526b3ea10b9df6eb",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_integration.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_integration.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_integration.py",
+      "original_sha256": "27de1d2da5787dd24295e26d95552042a499c2050b0e6769d857d7d14a372f97",
+      "current_sha256": "c2191f3f4532a4fbc144f0d7ffc3a52b115f047bad992c8e1b23306aa3ec2229",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_marginal_cost.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_marginal_cost.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_marginal_cost.py",
+      "original_sha256": "48a58dc142d48ec3d6d4c58d75d97009ed511cfdb295f81b5fcfe97eec412558",
+      "current_sha256": "172716567886cc864ad390d525b6ba4999eaa004ec9ae5b417f54b800638ecda",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_timing.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_timing.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_timing.py",
+      "original_sha256": "5399e9b0ca8f33fcdee05eb81f3662a85ae8534d34f2a92d2419541b2e2ab28d",
+      "current_sha256": "dc4ee9848f2924cdb996e949a6d38027f4d4ab8f46f5bc9cb0a6991716e15c00",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_updater_context.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_updater_context.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_updater_context.py",
+      "original_sha256": "15147ce058c30f9ab38e2be603567ca8eb7583c873421a82aee94001842b8e27",
+      "current_sha256": "3bdb8f1c951a47c098c6663aee18379d61feb7d038310f74b532144cd94164df",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_v3.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_v3.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_v3.py",
+      "original_sha256": "283a60951101a143f8a0365b996663f10d5e8ff54a5c1c86d6ceb5c29b50b13c",
+      "current_sha256": "5ad08d48518af9baeeaba69f35118cddfc58fba47d4ef550d0dd3e8227005bcf",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/tests/test_warmup_v3.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/tests/test_warmup_v3.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/tests/test_warmup_v3.py",
+      "original_sha256": "547982ab2cd3cf70b0ddf683b7406e9c10667c25d7d8a7dc738f84c089041a6a",
+      "current_sha256": "d80ac7cda18a663a920048f727ef68f283c15ec7d75c09726b793ed866f42517",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/transport.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/transport.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/transport.py",
+      "original_sha256": "04687098a1873d58da7d2717f273d0da98f37f552fae4b1e31252c535dc39b9c",
+      "current_sha256": "d1b020c2ef1238f17bbe6e6f051a0e906c5283ad166d439ca6f51d774d8bc87c",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/updater_context.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/updater_context.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/updater_context.py",
+      "original_sha256": "d154a4d38aeec9c070a5b46d7f524e33c381f761b6bb2548a7e61b118a4cf09d",
+      "current_sha256": "dbb5d09dad222e2cfa5af272496d1ee0310ce0f52b51d05978fbbcfa4bb2d41c",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/warmup.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/warmup.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/warmup.py",
+      "original_sha256": "7b399dcb24d9e063980e1f67d010a2e394558a441c6843d84ed979b5b3f1169e",
+      "current_sha256": "a53cd420d9149f93bda40a9ac05dbb78be42330a603226d2db28d8fe33b239c7",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/finegrained_v3/warmup_context_fit.py",
+      "new_path": "src/jockeybench/research/finegrained_v3/warmup_context_fit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/finegrained_v3/warmup_context_fit.py",
+      "original_sha256": "b3b66a667c6187c8f7988baf316f0ebd7db5a17756181dcbb7f2e6ad5b7e7bfa",
+      "current_sha256": "f65f9ecdbb376f346bb469f8197ee2b833be1a4092e04539a464eec10e7f74d3",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/llm/__init__.py",
+      "new_path": "src/jockeybench/research/llm/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/llm/__init__.py",
+      "original_sha256": "0ecebcce09818e188343c0c5159c6d00c406818115a73c15634d37360b75cd1a",
+      "current_sha256": "0ecebcce09818e188343c0c5159c6d00c406818115a73c15634d37360b75cd1a",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/llm/agent.py",
+      "new_path": "src/jockeybench/research/llm/agent.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/llm/agent.py",
+      "original_sha256": "8d9fe3c88d8a7194c506a66fdb56bf0a85cb047cac1ba19c1adfd03186297a5c",
+      "current_sha256": "f6eb5b149618114cb68b1a49e6201ce0ccc01ac520ece9b7d742da00b5908471",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/llm/runner.py",
+      "new_path": "src/jockeybench/research/llm/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/llm/runner.py",
+      "original_sha256": "b281bc738ee4c5016b8ea97657329ec6b72c051712dbf4a7bab1006d1396085f",
+      "current_sha256": "b9f2367a926610604a8449353090f1e6d6d6a283e03df8f43f326220d032100f",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/mock_agent.py",
+      "new_path": "src/jockeybench/research/mock_agent.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/mock_agent.py",
+      "original_sha256": "d7720801704b61d805aa85ee406357dc47fce19a84b9637b8634706e62dcb54b",
+      "current_sha256": "d7720801704b61d805aa85ee406357dc47fce19a84b9637b8634706e62dcb54b",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/__init__.py",
+      "original_sha256": "e9ca37e063cb3291332f25b9047120176610a257fba929827e4d0fafe9324b64",
+      "current_sha256": "e9ca37e063cb3291332f25b9047120176610a257fba929827e4d0fafe9324b64",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/audit.py",
+      "new_path": "src/jockeybench/research/policy_amortized/audit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/audit.py",
+      "original_sha256": "7c4e66ca44fbca3fdc0a96ab09647f039ed3328d2f697686a1b8fdfe6afd16aa",
+      "current_sha256": "59f17f9de3abe820aa023ae389fc8a49f4bdc5f9337a2784c71134f154f3bba9",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/__init__.py",
+      "original_sha256": "adbac783a697e6a955a9241775e9c155a64da56c52f9bd2b3f0326bccf4d0c4c",
+      "current_sha256": "adbac783a697e6a955a9241775e9c155a64da56c52f9bd2b3f0326bccf4d0c4c",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/audit.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/audit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/audit.py",
+      "original_sha256": "280b254fcde9dd4764ce9ae7c99394364bd920e545c311af9c49eecb2b80315f",
+      "current_sha256": "46ce2c1969523f2fc028d2f6a9d38c51c48c91fde185090d7e1d0f40a9831adb",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/expand.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/expand.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/expand.py",
+      "original_sha256": "a136caf554cb28ffbbb1edd5d440476518edafb160b221585fd83773b872fae6",
+      "current_sha256": "a136caf554cb28ffbbb1edd5d440476518edafb160b221585fd83773b872fae6",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/lifecycle.py",
+      "original_sha256": "bd7871080a291bd84bd0aac507432d06e004e05cf67f8dccecc63053c40cc032",
+      "current_sha256": "847953b0b647096a8dbf9895a695bc6db99a263f51215b1c0c446976030407b5",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/offline.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/offline.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/offline.py",
+      "original_sha256": "ef8731d275e8d6a3c5a08b71b15c3b32af1fd2c42e7125811981f4ed48e51756",
+      "current_sha256": "88dcd41d2d6800f1d01d06b77b79d8ff6c132f27add3f1d0b10035178519c0c2",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/project.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/project.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/project.py",
+      "original_sha256": "290fa01ab3362760467e6990dee22bfb4bd92ae8010b9c9de5dbdba16929d751",
+      "current_sha256": "290fa01ab3362760467e6990dee22bfb4bd92ae8010b9c9de5dbdba16929d751",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/runtime.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/runtime.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/runtime.py",
+      "original_sha256": "62459e10f8f25837f9cb4fe6755cb723729362143751d086e4053b01f52dc449",
+      "current_sha256": "c1acfebe75221b82a477834ba6149ef7836815e03503ec9e4e45b9150573ca8e",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/schema.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/schema.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/schema.py",
+      "original_sha256": "7b61eda78cb7c8db8c338d28711214efc1b4bc9f20d8c86d7021e6ba63b11a3c",
+      "current_sha256": "cd0abc41a3952c789f5bdce565732d0a2b49d1a931675b08aade467b2cdbb2ac",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/smoke_report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/smoke_report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/smoke_report.py",
+      "original_sha256": "2cca3e64e8ab71a463ef4fcbd40504d7ea93cbf9185de09d3576f84b47087807",
+      "current_sha256": "3e8da57978aa77f2527893b5ba6d3d674a8a95eee7b5fe42b3257a92af73f432",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/compact_evidence/tests/test_codec.py",
+      "new_path": "src/jockeybench/research/policy_amortized/compact_evidence/tests/test_codec.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/compact_evidence/tests/test_codec.py",
+      "original_sha256": "b053b30a9d7585ca82f95eb1b959978d055833b1e18a07a0db0430ea0a14b229",
+      "current_sha256": "37e0abe5b02fb6bfa29d76d352d497c00040538020bda9e1645bfb306f9e2def",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/frame.py",
+      "new_path": "src/jockeybench/research/policy_amortized/frame.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/frame.py",
+      "original_sha256": "9e611d398363c5e082966b5ae1eb15978f655c02733e6648220c7f3c0768c26b",
+      "current_sha256": "457535d5428f535f62689ab09665408a263027bc39d842cc73f481b56061ddb5",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_amortized/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/lifecycle.py",
+      "original_sha256": "a148d0d376559405c100709b29df2c6840b8ab61f5b1f0d92300dcb671a24592",
+      "current_sha256": "5935d73418a3b1bbdf08aadb74ef035b3377f9188a1eadfb0215c298ec967206",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/model_usage.py",
+      "new_path": "src/jockeybench/research/policy_amortized/model_usage.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/model_usage.py",
+      "original_sha256": "3db4a14913c839020a8846bd3bc46f5a734ca05801dc6aeb867c69a6c2d6e559",
+      "current_sha256": "3db4a14913c839020a8846bd3bc46f5a734ca05801dc6aeb867c69a6c2d6e559",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/policy_builder.py",
+      "new_path": "src/jockeybench/research/policy_amortized/policy_builder.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_builder.py",
+      "original_sha256": "b1cfd1a09e1aac23d2002172bf0568e930aa4cc79b8a19c75c476b6cb7854296",
+      "current_sha256": "637d6eb44b48833ee07742f4b72c6bbf87667edc024a9038ce43c7c7d5efaeaf",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/policy_contract.py",
+      "new_path": "src/jockeybench/research/policy_amortized/policy_contract.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_contract.py",
+      "original_sha256": "cf17cb92b669c2d36390ea0f0a91adc143a18d4eb5248f95aad720e7a145143a",
+      "current_sha256": "7fe27dc67ed2ec04ea3b92ee6075120379a58aace05a6a80945b43cd8ddd4981",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/policy_executor.py",
+      "new_path": "src/jockeybench/research/policy_amortized/policy_executor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/policy_executor.py",
+      "original_sha256": "ff443bb642323797d077fe09be4aa20880503e5f312ebbb7215073a023b99fb5",
+      "current_sha256": "b59b98682e46acdc465b427d815447e76247606118bf1a2c9028bed35ec97d76",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/predictor.py",
+      "new_path": "src/jockeybench/research/policy_amortized/predictor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/predictor.py",
+      "original_sha256": "f1c05ed1602363eef12b74bb4021801e25eed4a47ca15da0c26e72a0cd32f6a5",
+      "current_sha256": "92800b68034d829c3dc86720d98a18259635b3a601c380da49bd3101601c7c29",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/prepare.py",
+      "new_path": "src/jockeybench/research/policy_amortized/prepare.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/prepare.py",
+      "original_sha256": "8bcb0cb06ef91fb1c14fb1eee11b738a1fe38e3e445bfc28b1ec97b74e3656a7",
+      "current_sha256": "17c33c808192343a849b835c3d38a47df93b744b5237e834df1683176042f87a",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/__init__.py",
+      "original_sha256": "f16a35cd40674af2f643f4ffa07c5fd3761d09c04581ab144df7c6f5a5190c36",
+      "current_sha256": "f16a35cd40674af2f643f4ffa07c5fd3761d09c04581ab144df7c6f5a5190c36",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/audit.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/audit.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/audit.py",
+      "original_sha256": "05d038cbab0cea061111a65953ef8e89908d70ed508a09c1e70f4cf55b22492a",
+      "current_sha256": "858acd79535ccc86f09a10a46a73369f0e98e2c516cbf0fc76462dbe89527f9d",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/codec.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/codec.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/codec.py",
+      "original_sha256": "3ebf9e079a0787e52b99296703840ca391822f643d1f6ce8af6c5bd8129ee00d",
+      "current_sha256": "3ebf9e079a0787e52b99296703840ca391822f643d1f6ce8af6c5bd8129ee00d",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/lifecycle.py",
+      "original_sha256": "2ed6456af39f8f84e98069ce47d137e476bceb54fd9bf16d04d7acd9fecaf096",
+      "current_sha256": "fd4f9e50ed3df656500a65c6a5b1e7a8d00407e56393604e5f4bb61ac7bf43d4",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/report.py",
+      "original_sha256": "2fcff7d1496e3907e8039a4a8d3fe974f37dd578d52d13b46ca7196ecc7aac80",
+      "current_sha256": "d1fc3356aaeeeb5cac261fcbd9e4986584cd692ac12b47a0e4661a2a289bf554",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/runtime.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/runtime.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/runtime.py",
+      "original_sha256": "3f6e24e60c5ecddd9461f1a0ecad5306682aab301fb147768bacc6ea1d854dc3",
+      "current_sha256": "d1ce6d1777948897f8c4cad3bb35aa95802e0bfd299c94b5a332b0e265d4a4f8",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/schema.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/schema.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/schema.py",
+      "original_sha256": "29bd206dcf3a717bccdd4eb20059ddd2b60f7ea2a64a59ace03252dd53764598",
+      "current_sha256": "29bd206dcf3a717bccdd4eb20059ddd2b60f7ea2a64a59ace03252dd53764598",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/tests/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/tests/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/__init__.py",
+      "original_sha256": "0867eb5f1ca7a9703b3ca030c2636852aefb9fc164e9e0a764ccdbfd661e1385",
+      "current_sha256": "0867eb5f1ca7a9703b3ca030c2636852aefb9fc164e9e0a764ccdbfd661e1385",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/tests/test_codec.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/tests/test_codec.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_codec.py",
+      "original_sha256": "3c82e6145739a95d1685517c0b5d6dce6203a6a24e764f6caa50900ed08d1500",
+      "current_sha256": "6eea7ccf961ae8748366cc242b71da240d4847a77dbb60cea3740c2d0dce4283",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/readable_evidence/tests/test_report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/readable_evidence/tests/test_report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/readable_evidence/tests/test_report.py",
+      "original_sha256": "c7efebf6d48ebb5e9f893556c05e0df578677ec616d866d94c4e64ab65ff635c",
+      "current_sha256": "cce837990f55842be9edf69d07db723c77bd98604ad0d3dc618529fe946816f8",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/report.py",
+      "original_sha256": "1ac909c749ad1924f26bf2979298848e9af03ba329b403c8700c57c26dbf49cb",
+      "current_sha256": "0b5013216cd4dc21bdeea01de1dc132c5e9dcd48f1d91bd9de11e0e2336248db",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/__init__.py",
+      "original_sha256": "cc3779c6e3f34faabfda06ae0a59f9cfdeefaa230bf0fe807fa8b12af57da802",
+      "current_sha256": "cc3779c6e3f34faabfda06ae0a59f9cfdeefaa230bf0fe807fa8b12af57da802",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/gate.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/gate.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/gate.py",
+      "original_sha256": "c3643aad099cc4fea6d4c148a4c24f0f6ad130adb69b6598fd00d45eb2dfc8cf",
+      "current_sha256": "70efc120f17b5be8164cd2f8913f0e362bf1dca08d439f72bf1a7b7804b8437b",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/lifecycle.py",
+      "original_sha256": "7ab5529589858794b45d7d10046b5d4a860d5d83381e4b5d81cce414f6779afa",
+      "current_sha256": "ff10b602ca55d22d0d777c8bdad85b40d11d7190c00ea7494d75f4c46ba6de77",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/report.py",
+      "original_sha256": "9d69258ff782f8d32f89c106c59064eea0d443ad1dcf07b27526a6d53c902788",
+      "current_sha256": "23eefe8724addc5c5dbd73a77267b2289275445932a873098a6ccd9f0381010e",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/runtime.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/runtime.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/runtime.py",
+      "original_sha256": "da955a70e96e7a2b4b014a115db1242694819763fa9511fa9152d3425dcdf6a5",
+      "current_sha256": "feb79e18169f8a44ea1d0f24454292768f9e6b2bb53da6e42a562195c5565c16",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/supervisor.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/supervisor.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/supervisor.py",
+      "original_sha256": "d7b72ebc971bbb66a5bf96a747f8ba5ef6f2adf00ce6a6d3794895368fe0634e",
+      "current_sha256": "b7eb9605858749a7108711ec380a698535e067f022c302fcce2b1abca317410d",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/__init__.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/test_gate.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/test_gate.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_gate.py",
+      "original_sha256": "bea2df17a4f3ae1dadc60404f702be97bc84cab0d394fbcde78aa8b11dafe3bb",
+      "current_sha256": "37f308bc19046bef655761890aca31bc46e306ec81f2647eb89d984eece2a9a6",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/test_report.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/test_report.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_report.py",
+      "original_sha256": "49dbb235ba88ce07671bfc9929e29f12525348753bd3924027f13731a3ca4a6f",
+      "current_sha256": "2c2deb64dbebc972361a634c724baeaef3a452c5ff718823729f2a4fa4436031",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/test_runtime.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/test_runtime.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_runtime.py",
+      "original_sha256": "beb014ece468193a68b267ecc0e25d87009094551533917715a422017b918286",
+      "current_sha256": "02c5b29f0c7e4103f966a314e046c839e7602347dd671d4134b086658e842e0a",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/test_supervisor_lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/test_supervisor_lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_supervisor_lifecycle.py",
+      "original_sha256": "dcf4aa9daf906abc79603a6214e192aeba9ec7d20fec9b3dbcc9ae7b150b74fc",
+      "current_sha256": "b8805392614c8d815d2308486419d2fa7ee3175d8401482aec41886dee7224f0",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/tests/test_view.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/tests/test_view.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/tests/test_view.py",
+      "original_sha256": "8973794eb3db082ad106c4192b1e93d5b3efb343269779af8a32faa8f3d05d31",
+      "current_sha256": "47a2482d2a59f44784d51a73a0129b4cb8d5f52fcaf07994e03867aba13e196c",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/semantic_json/view.py",
+      "new_path": "src/jockeybench/research/policy_amortized/semantic_json/view.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/semantic_json/view.py",
+      "original_sha256": "d5c9519ddf43eb0b1f6e706e45c6b3c21ffb8c1426e3c113d0d464abd921185e",
+      "current_sha256": "2690cdd90aa28ec5b5ef4b78db87a639cf85a9576af470f56877834e02222d81",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/service.py",
+      "new_path": "src/jockeybench/research/policy_amortized/service.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/service.py",
+      "original_sha256": "7b8a9d29959d48097e41fd50c7fb0f84ed73e8c9f5f7ef076785e8da388eee75",
+      "current_sha256": "af98a35c64f2ebbbce3bd97983966307821cce41b25c0d576c19d52f15b9085c",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/specification.py",
+      "new_path": "src/jockeybench/research/policy_amortized/specification.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/specification.py",
+      "original_sha256": "4522ff879cd2e47a0ce54fceba0d83675818ab84a152db092684d1b3928efe50",
+      "current_sha256": "1ce7028e274c6cc7033efe339ab265011948c81a0b79be8609e895e50a4706f2",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/tests/test_policy.py",
+      "new_path": "src/jockeybench/research/policy_amortized/tests/test_policy.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/tests/test_policy.py",
+      "original_sha256": "34d3d1941a1bfaf45640f701dc4909822825bc78ccec7c4176a13ebdf12091ba",
+      "current_sha256": "6879ca7afdad086f0ccb6280edd66d5f38a40956341d32de731c614e0cebdfaa",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_amortized/transport.py",
+      "new_path": "src/jockeybench/research/policy_amortized/transport.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_amortized/transport.py",
+      "original_sha256": "fd41e1251edb21f14873d231665dd9570e5a05770810be2131678003083e5e2a",
+      "current_sha256": "34cc2d21127427227f0d782867f067ab7bb292cd6eb03b71aa5b7c3cef144307",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_warmup/__init__.py",
+      "new_path": "src/jockeybench/research/policy_warmup/__init__.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_warmup/__init__.py",
+      "original_sha256": "ce215344213a7d926bbfc6a2aa765ffbf49bdee07657313b422e9aa0cc353171",
+      "current_sha256": "ce215344213a7d926bbfc6a2aa765ffbf49bdee07657313b422e9aa0cc353171",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_warmup/archive.py",
+      "new_path": "src/jockeybench/research/policy_warmup/archive.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_warmup/archive.py",
+      "original_sha256": "2a5a7ca234b5b3dc46f0ca4dd99192cddc34fabfa194c900ed55a3ec68ab2d4a",
+      "current_sha256": "2a5a7ca234b5b3dc46f0ca4dd99192cddc34fabfa194c900ed55a3ec68ab2d4a",
+      "changed": false
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_warmup/builder.py",
+      "new_path": "src/jockeybench/research/policy_warmup/builder.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_warmup/builder.py",
+      "original_sha256": "4ad0742125aff16198e4616a86c184c89a9754ef7d950538f589e541f0867bf6",
+      "current_sha256": "851d87efc5110a192bbdb7120a43229e709658114e82380c2988e27d330788f1",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_warmup/lifecycle.py",
+      "new_path": "src/jockeybench/research/policy_warmup/lifecycle.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_warmup/lifecycle.py",
+      "original_sha256": "db32fd11809f345fedcca27c54b99173bb12b40256b4b0af1dfa2342236a78a1",
+      "current_sha256": "51945dae5f9eaf0d574facac2aaa350e1f73f8d9707243b66f6f17e89ad57861",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/policy_warmup/tests/test_warmup.py",
+      "new_path": "src/jockeybench/research/policy_warmup/tests/test_warmup.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/policy_warmup/tests/test_warmup.py",
+      "original_sha256": "b55d27d8464dc3268ccab2e9c77936ee6c018ed97a97e0ce851db5ff1c5c0e1d",
+      "current_sha256": "c6c25b83a447ca32e0ee7636cf6832522f0161b44250972dce200c1abe55efa7",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/reflection_normalization.py",
+      "new_path": "src/jockeybench/research/reflection_normalization.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/reflection_normalization.py",
+      "original_sha256": "25b962aeebaffbf72897bbc5e8f4582c4f86520f74ffd54b504ecdf5900e9bef",
+      "current_sha256": "bd22f698d8ddee91272371b6c98e820675d5101004c88abc2e0c80a13099557a",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/runner.py",
+      "new_path": "src/jockeybench/research/runner.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/runner.py",
+      "original_sha256": "8ecf60f36199a272cec31305f0906161addcf1c3c026c576033abb0834390fe0",
+      "current_sha256": "7ee955a63af34d8c2c243083402656a95099b9e75c0b11f4a8848f23f005c0d5",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/test_common_scoring.py",
+      "new_path": "src/jockeybench/research/test_common_scoring.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/test_common_scoring.py",
+      "original_sha256": "780c85ebdd8be92faec917e1b3a5e4d0bcc590e09b3425e1247d2d9bd675a6d3",
+      "current_sha256": "7db4a0ef42d4cde6a4bc449fad797fa25da179a50080208657e742d66f99ca40",
+      "changed": true
+    },
+    {
+      "old_path": "ActiveResearch/src/active_research/test_daily_session.py",
+      "new_path": "src/jockeybench/research/test_daily_session.py",
+      "original_source": "Active-v3-frozen-control-work/active_research/test_daily_session.py",
+      "original_sha256": "cd17569330537c2065f452f05b549e64e1382597e3facb6969b2cc505294a9ce",
+      "current_sha256": "51c45c06b2089051f88a0ed935f2b5f7ce0e469bfc1e7a41923bf1e7993cbd38",
+      "changed": true
+    }
+  ],
+  "new_files": [
+    {
+      "path": "src/jockeybench/research/cli.py",
+      "sha256": "a951338d3283aaa636f4d8abdc2b03507b23c1306c13c4212f58016746ff8a1f"
+    },
+    {
+      "path": "src/jockeybench/research/portable_warmup.py",
+      "sha256": "391dbfbcf928e132d8b62394d4462151d5f355f904e1185ce7cd58c6e6e5af89"
+    },
+    {
+      "path": "src/jockeybench/research/profile.py",
+      "sha256": "2b4d93216066b5ea960c979de3dda69fc1ff896e874b5d22b22d4af0b82edd9e"
+    },
+    {
+      "path": "src/jockeybench/research/public.py",
+      "sha256": "cc99431ec39e13b95dd3627362fccaaacc0b5511017f6cc71883484aa5362e6c"
+    }
+  ],
+  "resources": [
+    {
+      "old_path": "ActiveResearch/src/active_research/daily_reflection_budget.json",
+      "new_path": "src/jockeybench/research/daily_reflection_budget.json",
+      "original_sha256": "1ee97de1d8637b580e7cd6720c0a42ef4f03264d812dc9cb36135fae89904d42",
+      "current_sha256": "1ee97de1d8637b580e7cd6720c0a42ef4f03264d812dc9cb36135fae89904d42"
+    }
+  ]
+}
