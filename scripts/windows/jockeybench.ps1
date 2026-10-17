@@ -12,7 +12,7 @@ copied by this launcher. Pass benchmark arguments as an explicit string array.
 #>
 [CmdletBinding()]
 param(
-    [ValidatePattern('^[A-Za-z0-9_.-]+$')]
+    [ValidatePattern('\A[A-Za-z0-9_.-]+\z')]
     [string] $Distribution = 'Ubuntu-22.04',
 
     [string] $ProjectPath,
@@ -78,8 +78,27 @@ function Get-JockeyBenchWslPath {
     return [string] $command.Source
 }
 
+function New-JockeyBenchWslCommandLine {
+    param(
+        [string] $Distro,
+        [string] $Python,
+        [string] $Payload
+    )
+    if ([string]::IsNullOrEmpty($Distro) -or -not [regex]::IsMatch($Distro, '\A[A-Za-z0-9_.-]+\z')) {
+        throw 'Distribution must contain only ASCII letters, digits, underscores, dots, or hyphens.'
+    }
+    # WSL parses its own control flags before invoking CommandLineToArgvW.
+    # Quoted "--distribution" is treated as a Linux shell command, not a flag.
+    # Keep this validated ASCII prefix raw; quote data only after --exec.
+    # Microsoft WslClient.cpp (WslMain) and helpers.cpp (ParseArgument):
+    # https://github.com/microsoft/WSL/blob/ce886386d3093e339593e2729a0721972546fa69/src/windows/common/WslClient.cpp#L1580
+    $prefix = '--distribution ' + $Distro + ' --exec /usr/bin/python3 -c '
+    return $prefix + (ConvertTo-JockeyBenchWindowsArgument $Python) + ' ' + (ConvertTo-JockeyBenchWindowsArgument $Payload)
+}
+
 function Invoke-JockeyBenchWsl {
     param(
+        [ValidatePattern('\A[A-Za-z0-9_.-]+\z')]
         [string] $Distro,
         [string] $Project,
         [string] $Operation,
@@ -96,11 +115,10 @@ function Invoke-JockeyBenchWsl {
     }
     $bootstrap = [Convert]::ToBase64String([IO.File]::ReadAllBytes($bootstrapPath))
     $python = "import base64;exec(compile(base64.b64decode('$bootstrap'),'<jockeybench-wsl-launcher>','exec'))"
-    $argumentsForWsl = @('--distribution', $Distro, '--exec', '/usr/bin/python3', '-c', $python, $payload)
-    $quoted = @($argumentsForWsl | ForEach-Object { ConvertTo-JockeyBenchWindowsArgument -Value $_ })
+    $commandLine = New-JockeyBenchWslCommandLine -Distro $Distro -Python $python -Payload $payload
     $start = New-Object System.Diagnostics.ProcessStartInfo
     $start.FileName = $wslPath
-    $start.Arguments = $quoted -join ' '
+    $start.Arguments = $commandLine
     $start.UseShellExecute = $false
     # Do not propagate Windows secrets through a caller's WSLENV list. This
     # changes only this child process; the user's Windows environment is intact.

@@ -28,6 +28,30 @@ Assert-Equal (ConvertTo-JockeyBenchWindowsArgument '') '""' 'empty Windows argum
 Assert-Equal (ConvertTo-JockeyBenchWindowsArgument 'a"b') '"a\"b"' 'embedded quote'
 Assert-Equal (ConvertTo-JockeyBenchWindowsArgument 'a\') '"a\\"' 'trailing backslash'
 
+# WSL parses its control prefix before Windows argv decoding. A CRT-only argv
+# receiver does not catch quoted --distribution being sent to the Linux shell.
+$pythonCommand = "import base64;exec(base64.b64decode('cGFzcw=='))"
+$wslCommandLine = New-JockeyBenchWslCommandLine -Distro 'JockeyBench-CI' -Python $pythonCommand -Payload $payload
+$controlTokens = $wslCommandLine -split '[ \t]', 4
+Assert-Equal $controlTokens[0] '--distribution' 'WSL distribution flag is unquoted'
+Assert-Equal $controlTokens[1] 'JockeyBench-CI' 'WSL distribution value is unquoted'
+Assert-Equal $controlTokens[2] '--exec' 'WSL exec flag is unquoted'
+Assert-Equal $controlTokens[3] ('/usr/bin/python3 -c ' + (ConvertTo-JockeyBenchWindowsArgument $pythonCommand) + ' ' + (ConvertTo-JockeyBenchWindowsArgument $payload)) 'only exec data uses argv quoting'
+foreach ($invalidDistro in @('', 'Ubuntu --exec', 'Ubuntu"quoted', 'Ubuntu;echo', "Ubuntu`n")) {
+    $invalidRejected = $false
+    try {
+        New-JockeyBenchWslCommandLine -Distro $invalidDistro -Python $pythonCommand -Payload $payload | Out-Null
+    }
+    catch { $invalidRejected = $_.Exception.Message.Contains('Distribution must contain only ASCII') }
+    Assert-Equal $invalidRejected $true 'unsafe distribution cannot enter raw prefix'
+}
+$invalidHelperRejected = $false
+try {
+    Invoke-JockeyBenchWsl -Distro 'Ubuntu --exec' -Project $project -Operation run | Out-Null
+}
+catch { $invalidHelperRejected = $_.Exception.Message.Contains('Distro') }
+Assert-Equal $invalidHelperRejected $true 'direct invocation also validates distribution'
+
 # Regression: current Windows images can return both system and Store WSL.
 # ProcessStartInfo.FileName must never receive their space-joined paths.
 $resolvedWsl = Get-JockeyBenchWslPath -CommandLookup {
