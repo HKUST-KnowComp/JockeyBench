@@ -22,7 +22,7 @@ for name in ('numpy', 'scipy', 'sklearn', 'pandas', 'statsmodels'):
         available[name] = True
     except Exception:
         available[name] = False
-print(json.dumps({'python_version': platform.python_version(), 'imports': available,
+print(json.dumps({'python_version': platform.python_version(), 'imports': available, 'machine': platform.machine(),
                   'system': platform.system(), 'system_release': platform.release()}))
 '''
     env = {'PATH': '/usr/bin:/bin', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONHASHSEED': '0', **{k: str(threads) for k in THREAD_VARIABLES}}

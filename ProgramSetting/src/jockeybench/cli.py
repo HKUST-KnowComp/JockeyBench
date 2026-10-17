@@ -20,9 +20,9 @@ HOST_MARKER = '.experiment-host'
 
 
 def require_experiment_host():
-    """Real data and model calls run only on macOS, from a checkout explicitly marked as an experiment host."""
-    if platform.system() != 'Darwin':
-        raise Rejected('Full execution requires macOS sandbox-exec; no isolation fallback is provided')
+    """Real data and model calls require a supported OS and a designated experiment checkout."""
+    if platform.system() not in {'Darwin', 'Linux'}:
+        raise Rejected('Full execution requires macOS sandbox-exec or Linux bubblewrap; no isolation fallback is provided')
     if not (Path.cwd() / HOST_MARKER).is_file():
         raise Rejected(f'Run from the designated experiment checkout containing {HOST_MARKER}')
 
