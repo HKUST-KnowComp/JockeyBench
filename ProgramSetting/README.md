@@ -1,5 +1,7 @@
 # JockeyBench
 
+English | [简体中文](README.zh-CN.md)
+
 **Evaluating LLM agents that write, test and revise forecasting programs under a research budget — on ten years of Japanese horse racing.**
 
 An agent receives a sandboxed Python environment, a metered set of data tools over a time-gated
