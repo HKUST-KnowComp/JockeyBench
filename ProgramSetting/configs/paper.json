@@ -1,0 +1,42 @@
+{
+  "protocol": "economic-v1",
+  "arm": "A",
+  "start": "2024-01-01",
+  "end": "2024-06-30",
+  "smoke_days": 10,
+  "schedule_mode": "full",
+  "limits": {
+    "cache_mib": null,
+    "rss_bytes": 10737418240,
+    "job_seconds": 1800,
+    "batch_seconds": null,
+    "strategy_cpu_seconds": 120,
+    "storage_bytes": 5368709120,
+    "numerical_threads": 4,
+    "artifact_bytes": null,
+    "open_files": null,
+    "warmup_calls": 1000,
+    "batch_calls": 1000,
+    "warmup_evidence_cells": 400000,
+    "batch_evidence_cells": 100000,
+    "warmup_model_calls": 40,
+    "batch_model_calls": 20,
+    "strategy_calls": 40,
+    "strategy_evidence_cells": 5000,
+    "model_output_tokens": null,
+    "repair_model_calls": 5
+  },
+  "tariff": {
+    "version": "score-yen-v2",
+    "multiplier": 0.5,
+    "field_yen": 0.01,
+    "call_yen": 0.5,
+    "cpu_yen": 0.2,
+    "score_scale": 100,
+    "smoothing": 0.02,
+    "usd_to_yen": 150,
+    "hit_bonus_yen": 100
+  },
+  "races_per_day": 5,
+  "projection": "objective-v5"
+}
