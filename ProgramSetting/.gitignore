@@ -1,0 +1,33 @@
+# Licensed inputs, derived data, keys and run artifacts never enter the repository.
+/data/
+/runs/
+*.sqlite*
+*.db
+*.db-*
+*.lzh
+*.zip
+*.gz
+*.tar
+*.csv
+*.parquet
+*.pkl
+*.jsonl
+*.log
+*.key
+*.pem
+.env
+.env.*
+.experiment-host
+provider*.json
+/configs/*.local.json
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+/build/
+/dist/
+.DS_Store
