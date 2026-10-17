@@ -9,6 +9,7 @@ import hashlib
 import hmac
 import json
 import re
+import shutil
 import sqlite3
 import subprocess
 from datetime import date, timedelta
@@ -33,7 +34,10 @@ def quiescent(path):
     if wal.exists() and wal.stat().st_size:
         raise Rejected('Source WAL is not empty; immutable access refused')
     try:
-        proc = subprocess.run(['/usr/sbin/lsof', '-F', 'fa', '--', str(path)], capture_output=True, text=True, timeout=20)
+        lsof = shutil.which('lsof')
+        if lsof is None:
+            raise FileNotFoundError('lsof')
+        proc = subprocess.run([lsof, '-F', 'fa', '--', str(path)], capture_output=True, text=True, timeout=20)
     except (OSError, subprocess.TimeoutExpired) as e:
         raise Rejected('Cannot check active source writers') from e
     if proc.returncode not in (0, 1) or proc.stderr.strip():

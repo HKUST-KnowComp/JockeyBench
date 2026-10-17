@@ -51,7 +51,13 @@ TYPES = {
 def list_members(archive: Path) -> list[str]:
     if archive.suffix.lower() == '.zip':
         return zipfile.ZipFile(archive).namelist()
-    out = subprocess.run(['bsdtar', '-tf', str(archive)], capture_output=True, text=True, check=True).stdout
+    try:
+        out = subprocess.run(['bsdtar', '-tf', str(archive)], capture_output=True, text=True, check=True).stdout
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        import lhafile
+
+        with archive.open('rb') as stream:
+            return lhafile.Lhafile(stream).namelist() or []
     return [line.strip() for line in out.splitlines() if line.strip()]
 
 
@@ -60,8 +66,8 @@ def read_member(archive: Path, member: str) -> bytes:
         return zipfile.ZipFile(archive).read(member)
     try:
         return subprocess.run(['bsdtar', '-xOf', str(archive), member], capture_output=True, check=True).stdout
-    except subprocess.CalledProcessError:
-        # macOS libarchive rejects some valid LH5 streams (e.g. OZ221211).
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        # bsdtar may be absent or reject an otherwise valid LH5 stream.
         # lhafile independently enforces both the decoded size and the member CRC.
         import lhafile
 
@@ -87,7 +93,7 @@ class ArchiveReadCache:
             try:
                 subprocess.run(['bsdtar', '-cf', str(path), '@' + key], capture_output=True, check=True)
                 handle = tarfile.open(path, 'r:')
-            except subprocess.CalledProcessError:
+            except (FileNotFoundError, subprocess.CalledProcessError):
                 # A bad member elsewhere in a pack must not poison healthy days: read the requested
                 # member with strict error checking instead; never use partial tar output.
                 temp.cleanup()

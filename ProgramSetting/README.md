@@ -51,8 +51,26 @@ directory. Its CI workflow is `.github/workflows/program-setting.yml` at the rep
 
 ## Install
 
-Requires **Python 3.13** and, for real execution, **macOS** (the sandbox is `sandbox-exec`).
-Linux runs the unit suite, but neither trajectories nor the importer.
+Requires **Python 3.13**. The runtime supports **macOS** with `sandbox-exec` and **Linux** with
+`bubblewrap` and `libseccomp`. Linux targets Ubuntu 22.04/24.04 on x86_64 or aarch64. Install its
+system dependencies before creating the Python environment:
+
+```bash
+sudo apt-get update
+sudo apt-get install bubblewrap libseccomp2 libarchive-tools lsof build-essential
+```
+
+`lhafile` may need to compile a C extension on Linux, especially on ARM, so a C compiler is required.
+The Python installation must also provide matching Python 3.13 development headers. If your system
+Python does not include them, install its matching development package (usually `python3.13-dev`
+from the same package source as the interpreter); a managed Python distribution may include them.
+
+The Linux host must permit bubblewrap to create user namespaces. Container policies and some
+[Ubuntu 24.04 AppArmor configurations](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/)
+restrict this even when the packages are installed. Use a host
+or runner with a policy that permits bubblewrap; the runtime refuses execution when isolation is
+unavailable and never falls back to an unsandboxed process. Do not disable host security controls
+globally to make a run start.
 
 ```bash
 python3.13 -m venv .venv
@@ -70,21 +88,24 @@ Contributors also install `requirements-dev.txt`, which adds `ruff`.
 .venv/bin/pytest
 ```
 
-Every test uses fabricated data, held in memory or written to temporary directories. On macOS, also
-start real sandboxed jobs:
+Every test uses fabricated data, held in memory or written to temporary directories. On either
+supported platform, also exercise the native sandbox with fabricated data:
 
 ```bash
 JRDB_NATIVE=1 .venv/bin/pytest -m native
 ```
 
+These tests do not require an experiment-host marker, JRDB data or provider credentials. CI runs the
+unit suite on Ubuntu 22.04, Ubuntu 24.04 and macOS, and native jobs on Ubuntu 22.04 and macOS.
+
 ## Run
 
-Mark the checkout as an experiment host, then prepare `data/private/expanded.sqlite`
-([docs/DATA.md](docs/DATA.md)). Real-data commands run only on macOS, from the checkout root that
-holds the marker. Then run a reference program; reference programs make no model calls.
+Run real-data and model commands only on your designated experiment host, from a checkout root
+already provisioned with the `.experiment-host` marker. Do not copy or create that marker on a
+development machine. Prepare `data/private/expanded.sqlite` there
+([docs/DATA.md](docs/DATA.md)), then run a reference program; reference programs make no model calls.
 
 ```bash
-touch .experiment-host                 # once, in the checkout root
 export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 .venv/bin/jockeybench --config configs/smoke.json doctor
 .venv/bin/jockeybench --config configs/smoke.json run --run-id smoke-r2 --reference R2
@@ -112,7 +133,8 @@ every run in it. `--initial-from` reads from the same root, so a model's warmup 
 root and run one after another; give each model its own root.
 
 Every command prints JSON. Exit code 2 is a protocol refusal, and 3 an interrupted provider request.
-For exit 3, resume by re-running the same command.
+For exit 3, resume by re-running the same command with the original code and environment. Moving to
+Linux requires fresh trajectories; do not resume or splice a macOS trajectory on Linux.
 
 ## Repository layout
 
@@ -120,7 +142,7 @@ For exit 3, resume by re-running the same command.
 | --- | --- |
 | `src/jockeybench/data/` | Read-only, time-gated archive access, field whitelist and projection |
 | `src/jockeybench/protocol/` | Tool broker (metering, prices, idempotence), tool specifications, the agent task specification |
-| `src/jockeybench/sandbox/` | `sandbox-exec` executor, CPU accounting, strategy versions; `client/` is the only code a sandboxed program can see |
+| `src/jockeybench/sandbox/` | macOS `sandbox-exec` and Linux bubblewrap/seccomp execution, CPU accounting, strategy versions; `client/` is the only benchmark code a sandboxed program can see |
 | `src/jockeybench/lifecycle.py`, `runner.py` | Warmup, sealing, settlement, reflection, validation and fallbacks; the checkpointed run |
 | `src/jockeybench/scoring.py`, `ledger.py`, `reporting.py` | Scoring rule, integer score-yen ledger, reports and paired comparisons |
 | `src/jockeybench/agents/` | OpenAI-compatible tool-calling agent, transport with cost monitoring, reference programs R0–R3 |
@@ -147,6 +169,12 @@ no difference other than those the corrections cause and three no-op limits that
 the bound configuration. [docs/REPRODUCING.md](docs/REPRODUCING.md) lists what was verified and what
 was removed. It also covers what cannot be reproduced exactly: provider nondeterminism, your private
 pseudonymisation key and your interpreter environment.
+
+Linux support preserves the protocol rules but does not establish identical predictions, CPU fees
+or scores across operating systems or hardware. Runtime 1.1.0 records the machine architecture with
+the platform and sandbox environment for each new trajectory. This platform support applies to
+`ProgramSetting/`; `ActiveResearch/` still
+depends on its external `jrdb_lh` harness and is not a standalone Linux package.
 
 ## Citation
 

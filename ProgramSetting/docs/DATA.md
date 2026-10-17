@@ -7,8 +7,10 @@ subscribes independently at [jrdb.com](https://jrdb.com/order), reads JRDB's ter
 everything below on their own machine. Pseudonymisation does not make licensed data public. Never
 attach outputs to issues, pull requests or CI artifacts.
 
-Every `data` command except `layouts` runs only on macOS, from the checkout root that holds the
-experiment-host marker (`touch .experiment-host`; see [Running](../README.md#run)).
+Every `data` command except `layouts` runs only on a designated experiment host (macOS or Linux),
+from the checkout root already provisioned with the `.experiment-host` marker. Do not create or
+copy that marker onto a development machine; see [Running](../README.md#run). Linux installation
+requires the system packages listed in [Install](../README.md#install).
 
 ## 1. Place the archives
 
@@ -26,7 +28,10 @@ data/
 ```
 
 The importer reads `.zip` archives with Python's `zipfile` and `.lzh` archives with `bsdtar` (part of
-macOS), falling back to `lhafile` (in the lock). `jockeybench data layouts` prints the directory and specification document for every record type.
+macOS; provided by `libarchive-tools` on Ubuntu), falling back to `lhafile` (in the lock).
+Installing `lhafile` may compile a C extension on Linux, especially on ARM; the setup instructions
+include `build-essential` and explain the matching Python development headers requirement.
+`jockeybench data layouts` prints the directory and specification document for every record type.
 It reads no data. The importer uses BAC, KAB, KYI, UKC, KKA, CYB, CHA, JOA, TYB, SED, SKB, SRB and HJC.
 Cards need at least BAC and KYI. Missing types lower coverage and are listed in the build receipt.
 Layouts from 2015 onward are supported. For the paper protocol, cover the history the agents may

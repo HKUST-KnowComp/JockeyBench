@@ -10,9 +10,10 @@ def run(capsys, *argv):
     return code, json.loads(capsys.readouterr().out)
 
 
-def test_data_and_model_commands_refuse_hosts_without_the_marker(capsys, tmp_path, monkeypatch):
+@pytest.mark.parametrize('system', ['Darwin', 'Linux'])
+def test_data_and_model_commands_refuse_hosts_without_the_marker(capsys, tmp_path, monkeypatch, system):
     monkeypatch.chdir(tmp_path)
-    monkeypatch.setattr(cli.platform, 'system', lambda: 'Darwin')
+    monkeypatch.setattr(cli.platform, 'system', lambda: system)
     for argv in (
         ['doctor'],
         ['run', '--run-id', 'x'],
@@ -23,12 +24,20 @@ def test_data_and_model_commands_refuse_hosts_without_the_marker(capsys, tmp_pat
         assert code == 2 and '.experiment-host' in out['reason']
 
 
-def test_full_execution_requires_macos(capsys, tmp_path, monkeypatch):
+def test_full_execution_refuses_unsupported_systems(capsys, tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     (tmp_path / cli.HOST_MARKER).touch()
-    monkeypatch.setattr(cli.platform, 'system', lambda: 'Linux')
+    monkeypatch.setattr(cli.platform, 'system', lambda: 'Windows')
     code, out = run(capsys, 'doctor')
-    assert code == 2 and 'macOS' in out['reason']
+    assert code == 2 and 'macOS' in out['reason'] and 'Linux' in out['reason']
+
+
+@pytest.mark.parametrize('system', ['Darwin', 'Linux'])
+def test_designated_supported_host_passes_the_platform_guard(tmp_path, monkeypatch, system):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / cli.HOST_MARKER).touch()
+    monkeypatch.setattr(cli.platform, 'system', lambda: system)
+    cli.require_experiment_host()  # No database access or model call.
 
 
 def test_run_names_are_validated_before_anything_runs(capsys):

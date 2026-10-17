@@ -1,6 +1,6 @@
 """Deny-default execution of agent code, the SDK pipe broker, CPU accounting and strategy versions.
 
-Each ``compute`` call starts a fresh interpreter under ``sandbox-exec``: no
+Each ``compute`` call starts a fresh interpreter under the native sandbox: no
 network, no subprocesses, and file access limited to the strategy workspace
 (read-only for framework-run predictions). The only channel out is a pair of
 pipes to the tool broker. CPU time is measured with ``wait4`` and billed.
@@ -10,6 +10,7 @@ Saved strategy files are content-addressed snapshots under ``versions/``.
 import ast
 import json
 import os
+import platform
 import resource
 import selectors
 import shutil
@@ -27,12 +28,13 @@ from .environment import execution_env
 CLIENT = Path(__file__).parent / 'client'
 ALLOWED_SUFFIXES = {'.py', '.json', '.txt', '.md', '.bin', '.pkl'}
 SAMPLE_CACHE_KEYS = ('examples', 'runners', 'card', 'label_missing', 'records')
-PREFLIGHT = '''import os, socket, subprocess
+PREFLIGHT = '''import os, socket, subprocess, sys
 result = {'blocked': [], 'metadata_blocked': [], 'network_blocked': False, 'spawn_blocked': False}
+denied = (PermissionError, FileNotFoundError) if sys.platform == 'linux' else (PermissionError,)
 for p in PROBES:
     try:
         with open(p, 'rb') as f: f.read(1)
-    except PermissionError:
+    except denied:
         result['blocked'].append(True)
     except Exception:
         result['blocked'].append(False)
@@ -40,7 +42,7 @@ for p in PROBES:
         result['blocked'].append(False)
     try:
         os.stat(p)
-    except PermissionError:
+    except denied:
         result['metadata_blocked'].append(True)
     except Exception:
         result['metadata_blocked'].append(False)
@@ -53,7 +55,7 @@ try:
 except PermissionError:
     result['network_blocked'] = True
 try:
-    subprocess.run(['/usr/bin/true'], check=True)
+    subprocess.run([sys.executable, '-c', 'pass'], check=True)
 except PermissionError:
     result['spawn_blocked'] = True
 '''
@@ -159,6 +161,32 @@ def cpu_time(text):
     return total
 
 
+def linux_process_usage(pid):
+    """CPU and RSS of bubblewrap and its worker, including already reaped children.
+
+    The launcher stays alive as a monitor on Linux. Inspect its descendants so
+    ceilings cover the Python worker, not just the small, mostly idle monitor.
+    A worker cannot create processes after its seccomp filter is installed.
+    """
+    cpu, rss, pending, seen = 0, 0, [pid], set()
+    while pending:
+        current = pending.pop()
+        if current in seen:
+            continue
+        seen.add(current)
+        root = Path('/proc') / str(current)
+        try:
+            fields = (root / 'stat').read_text().rsplit(')', 1)[1].split()
+            cpu += sum(int(fields[i]) for i in (11, 12, 13, 14))
+            rss += int(fields[21])
+            pending.extend(int(p) for p in (root / 'task' / str(current) / 'children').read_text().split())
+        except ProcessLookupError:
+            continue
+        except FileNotFoundError:
+            continue  # It exited during the sample; wait4 supplies final CPU.
+    return cpu / os.sysconf('SC_CLK_TCK'), rss * os.sysconf('SC_PAGE_SIZE')
+
+
 class Executor:
     def __init__(self, config, storage, service):
         self.config, self.storage, self.service = config, storage, service
@@ -171,7 +199,17 @@ class Executor:
             [config.python, '-I', '-B', '-c', 'import sys;print(sys.base_prefix)'], capture_output=True, text=True, check=True
         )
         self.base = Path(probe.stdout.strip())
-        self.policy = profile(config.python, self.base, self.work)
+        self.system = platform.system()
+        self.policy = self._policy()
+
+    def _policy(self, readonly=False):
+        if self.system == 'Darwin':
+            return profile(self.config.python, self.base, self.work, readonly=readonly)
+        if self.system == 'Linux':
+            from .linux import policy
+
+            return policy(self.config.python, self.base, self.work, CLIENT, readonly=readonly)
+        raise ValueError('Native execution supports macOS and Linux only')
 
     # -- strategy versions -------------------------------------------------------------
     def files_digest(self):
@@ -320,11 +358,39 @@ class Executor:
             self.actual_cpu = usage.ru_utime + usage.ru_stime
         return proc.returncode
 
-    def _cpu_guard(self, proc, preflight):
+    def _cpu_guard(self, proc, preflight, measured_cpu=None):
         if not preflight and self.service.state.get('strategy_job') and self.config.limits.strategy_cpu_seconds is not None:
-            result = subprocess.run(['/bin/ps', '-o', 'time=', '-p', str(proc.pid)], capture_output=True, text=True)
-            if result.stdout.strip() and cpu_time(result.stdout) >= self.config.limits.strategy_cpu_seconds:
+            if measured_cpu is None:
+                result = subprocess.run(['/bin/ps', '-o', 'time=', '-p', str(proc.pid)], capture_output=True, text=True)
+                measured_cpu = cpu_time(result.stdout) if result.stdout.strip() else 0
+            if measured_cpu >= self.config.limits.strategy_cpu_seconds:
                 raise BudgetExceeded('Strategy CPU safety limit reached')
+
+    def _terminate(self, proc):
+        if self.system == 'Linux':
+            # Killing the monitor and worker together loses unreaped worker
+            # CPU. Kill the worker first and let bubblewrap reap it, then wait4
+            # obtains the complete process-tree CPU usage from the monitor.
+            children = Path('/proc') / str(proc.pid) / 'task' / str(proc.pid) / 'children'
+            try:
+                for child in children.read_text().split():
+                    try:
+                        os.kill(int(child), signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+            except FileNotFoundError:
+                pass
+            end = time.monotonic() + 2
+            while time.monotonic() < end:
+                if self._reap(proc, os.WNOHANG) is not None:
+                    return
+                time.sleep(0.01)
+        os.killpg(proc.pid, signal.SIGKILL)
+        self._reap(proc, 0)
+        if self.system == 'Linux':
+            # If the monitor itself had to be killed, descendant usage is not
+            # proven complete. Keep the reservation as interrupted/unknown.
+            self.actual_cpu = None
 
     def _run(self, code, preflight=False):
         """Run one job and bill its CPU. Interrupted jobs keep their reservation, never a zero charge."""
@@ -404,6 +470,13 @@ class Executor:
         ):
             raise JobFailed('Batch compute time exhausted')
         self.storage.check()
+        policy = self._policy(readonly=True) if strategy_job else self.policy
+        if self.system == 'Linux':
+            from .linux import command as linux_command
+
+            command = linux_command(policy)
+        else:
+            command = ['/usr/bin/sandbox-exec', '-p', policy, self.config.python, '-B', str(CLIENT / 'worker.py')]
         rq_r, rq_w = os.pipe()
         rp_r, rp_w = os.pipe()
         env = {
@@ -415,8 +488,6 @@ class Executor:
             'JRDB_RESPONSE_FD': str(rp_r),
             **execution_env(limits),
         }
-        policy = profile(self.config.python, self.base, self.work, readonly=True) if strategy_job else self.policy
-        command = ['/usr/bin/sandbox-exec', '-p', policy, self.config.python, '-B', str(CLIENT / 'worker.py')]
 
         def child_limits():
             file_caps = [v for v in (limits.storage_bytes, limits.artifact_bytes) if v is not None]
@@ -476,11 +547,15 @@ class Executor:
                     raise BudgetExceeded('Code execution timed out')
                 self.storage.check()
                 if self._reap(proc, os.WNOHANG) is None:
-                    if limits.rss_bytes is not None:
+                    measured_cpu, rss = None, 0
+                    if self.system == 'Linux':
+                        measured_cpu, rss = linux_process_usage(proc.pid)
+                    elif limits.rss_bytes is not None:
                         ps = subprocess.run(['/bin/ps', '-o', 'rss=', '-p', str(proc.pid)], capture_output=True, text=True)
-                        if ps.stdout.strip() and int(ps.stdout.strip()) * 1024 >= limits.rss_bytes:
-                            raise BudgetExceeded('Code RSS stop threshold reached')
-                    self._cpu_guard(proc, preflight)
+                        rss = int(ps.stdout.strip()) * 1024 if ps.stdout.strip() else 0
+                    if limits.rss_bytes is not None and rss >= limits.rss_bytes:
+                        raise BudgetExceeded('Code RSS stop threshold reached')
+                    self._cpu_guard(proc, preflight, measured_cpu)
                 for event, _ in selector.select(0.05):
                     fd = event.fd
                     if event.data == 'reply':
@@ -524,8 +599,7 @@ class Executor:
             return reply
         finally:
             if proc is not None and self._reap(proc, os.WNOHANG) is None:
-                os.killpg(proc.pid, signal.SIGKILL)
-                self._reap(proc, 0)
+                self._terminate(proc)
             selector.close()
             for fd in (rq_r, rq_w, rp_r, rp_w):
                 if fd >= 0:
