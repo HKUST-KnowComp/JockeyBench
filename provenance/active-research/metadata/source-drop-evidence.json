@@ -1,0 +1,41 @@
+{
+  "description": "Hashes of the published source-drop metadata, preserved before namespace migration. Historical validation is not validation of the current runtime.",
+  "files": [
+    {
+      "path": "provenance/active-research/metadata/UPLOAD-FILES.txt",
+      "sha256": "1cea8006ed04828fe78869a65ab80cfcf2365f1b1ee392c87fa8a56b5a435a75"
+    },
+    {
+      "path": "provenance/active-research/metadata/dependency-map.json",
+      "sha256": "8c2f763b7db5fc37cc32eed07b3595898d7722e4dc9273811eb62b12c62f3214"
+    },
+    {
+      "path": "provenance/active-research/metadata/file-list.txt",
+      "sha256": "fe9e47e47d9bd547f327ef5d60dbadcb76c138593ec8ce59dd361398103c41e2"
+    },
+    {
+      "path": "provenance/active-research/metadata/initial-source-manifest.json",
+      "sha256": "7ac379fc7e27da0d46dd207227a04e79425becc7ee55a22b1773e81452e148d2"
+    },
+    {
+      "path": "provenance/active-research/metadata/package-layout.json",
+      "sha256": "abb04bf71c7dad3daf8288e059a9c68628bf11e8bd4beb5120699958a7b4c738"
+    },
+    {
+      "path": "provenance/active-research/metadata/release-validation.json",
+      "sha256": "7d02cca56a083aafd086e42b136fb5d68be4c72dfbdd2246121a870c12c6bf36"
+    },
+    {
+      "path": "provenance/active-research/metadata/resource-manifest.json",
+      "sha256": "c946251e1bb851e3f613499cce8c5fcea75727e2c3f070b180b72b94d7e86052"
+    },
+    {
+      "path": "provenance/active-research/metadata/source-drop-pyproject.toml",
+      "sha256": "75d401783484cff39f17ce5ee1ce22146616c76e1fe878748091c642d3f8af35"
+    },
+    {
+      "path": "provenance/active-research/metadata/source-manifest.json",
+      "sha256": "5afc1e51ee6e7291ac71566ae711ca3c463d55dca31fa1f906177eb9027da685"
+    }
+  ]
+}

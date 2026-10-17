@@ -1,0 +1,8 @@
+# Files a source distribution needs beyond the package, so that its tests run.
+include CHANGELOG.md CONTRIBUTING.md LICENSE NOTICE.md requirements-lock.txt requirements-dev.txt
+include README.zh-CN.md
+recursive-include configs *.json
+recursive-include docs *.md
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include provenance *.md *.json *.toml *.txt *.py
