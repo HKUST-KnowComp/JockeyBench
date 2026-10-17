@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 — Linux runtime support, protocol 0.6.1
+
+* Add a Linux sandbox using bubblewrap namespaces, restricted mounts and a libseccomp syscall
+  filter. Missing dependencies or unavailable isolation refuse execution; there is no unsandboxed
+  fallback. The existing macOS sandbox remains available.
+* Allow the importer and runtime on designated Linux experiment hosts, retaining the
+  `.experiment-host` guard. Document Ubuntu dependencies, including the compiler and Python headers
+  needed when `lhafile` builds from source.
+* Record machine architecture in the execution environment. Code and environment bindings require
+  fresh trajectories; existing macOS checkpoints must not be resumed or spliced on Linux.
+* Add Ubuntu native sandbox coverage to CI using fabricated data. Platform support does not imply
+  equal predictions, CPU fees or scores across operating systems or hardware.
+
+The scoring rules, information projection, tariffs and protocol remain unchanged. This release
+applies to `ProgramSetting/`; `ActiveResearch/` still depends on its external harness.
+
 ## 1.0.0 — protocol 0.6.1
 
 First public release: the runtime of the paper's Program setting, reduced to the published protocol

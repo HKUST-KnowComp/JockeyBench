@@ -22,8 +22,8 @@ DAYS = ['2023-12-01', '2023-12-02', '2024-01-06', '2024-01-06', '2024-01-07', '2
 NUMBERS = ['01', '02', '03', '04', '05']
 
 native = pytest.mark.skipif(
-    os.environ.get('JRDB_NATIVE') != '1' or platform.system() != 'Darwin',
-    reason='real sandbox-exec jobs: set JRDB_NATIVE=1 on macOS',
+    os.environ.get('JRDB_NATIVE') != '1' or platform.system() not in {'Darwin', 'Linux'},
+    reason='real sandbox jobs: set JRDB_NATIVE=1 on macOS or Linux',
 )
 
 

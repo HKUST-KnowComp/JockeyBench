@@ -25,7 +25,7 @@ cli.py ──► runner.Run ──► lifecycle (warmup · predict · settle · 
 | `protocol/service.py` | The only boundary between an agent or program and the data: validation, metering, pricing, allowances, cursors, idempotence and the audit log |
 | `protocol/tools.py` | Tool arguments and JSON-schema specifications, in the order sent to the model |
 | `protocol/specification.py` | The task specification (system prompt), `describe`, and the per-session task payload |
-| `sandbox/executor.py` | `sandbox-exec` jobs, the SDK pipe broker, `wait4` CPU accounting, and content-addressed strategy versions |
+| `sandbox/executor.py` | Platform-specific sandbox jobs, the SDK pipe broker, `wait4` CPU accounting, and content-addressed strategy versions |
 | `lifecycle.py` | The trajectory state machine: sessions, validation, repair, prediction fallbacks and daily settlement |
 | `runner.py` | The checkpoint binding, resume and shared-warmup import, and the isolation preflight |
 | `scoring.py`, `ledger.py` | Prediction validation, the scoring rule, and the integer micro-yen ledger with reconciliation |
@@ -86,12 +86,19 @@ Calls made on behalf of a model carry an `operation_id`. After a crash:
 
 ## Programs and the sandbox
 
-Each `compute` runs in a fresh interpreter under a deny-default `sandbox-exec` profile. The profile
-allows the interpreter and its libraries, `sandbox/client/`, and the strategy workspace. Prediction
-and validation jobs get the workspace read-only. There is no network and no subprocess. The SDK
-reaches the broker through two inherited pipes. `Run.preflight` proves, before any agent code runs,
-that the archive, its key, a canary and the checkpoint are unreadable, and that network and
-subprocesses are denied.
+Each `compute` runs in a fresh interpreter inside the platform's sandbox. macOS uses a deny-default
+`sandbox-exec` profile. Linux uses bubblewrap namespaces and restricted filesystem mounts, with a
+libseccomp filter that denies network and subprocess creation. Both backends expose the interpreter
+and its libraries, `sandbox/client/`, and the strategy workspace. Prediction and validation jobs
+get the workspace read-only. The SDK reaches the broker through two inherited pipes.
+`Run.preflight` checks, before any agent code runs, that the archive, its key, a canary and the
+checkpoint are unreadable, and that network and subprocesses are denied.
+
+Linux requires bubblewrap, libseccomp and a host policy permitting user namespaces; the target
+distributions are Ubuntu 22.04/24.04 on x86_64 and aarch64. A missing dependency, denied namespace
+operation or failed isolation check refuses execution. There is no unsandboxed fallback. Containers
+and Ubuntu 24.04 AppArmor policies may require an appropriately configured host. Native tests
+exercise isolation using fabricated data and require no experiment-host marker.
 
 `save_strategy` takes flat `.py/.json/.txt/.md` files. The workspace, and so every saved version, may
 also hold flat `.bin/.pkl` files written by `compute`. Every `.py` file must parse, `strategy.py`
@@ -139,7 +146,12 @@ diagnostics. They are never shown to agents.
 A run directory holds `checkpoint.json.gz`, the strategy `versions/` and the `workspace/`. Checkpoints
 are written atomically with an embedded digest. Each one binds the source manifest, the public
 configuration, the runtime code hash (the package minus the importer), the agent identity and the
-sandbox environment. A resume with any of them changed is refused.
+sandbox environment, including machine architecture. A resume with any of them changed is refused.
+
+Moving between macOS and Linux requires a new trajectory, including a new warmup. Checkpoints must
+not be resumed or spliced across operating systems. The protocol rules remain the same, but native
+library behavior and CPU time can differ; Linux support does not establish equal predictions,
+CPU fees or final scores across platforms.
 
 * `replay-audit` re-serves every successful response from the unchanged source and checks its
   digest, evidence count and fee. It also reconciles the ledger with the receipts and recomputes
