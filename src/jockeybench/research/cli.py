@@ -11,7 +11,9 @@ from .profile import ARMS, provider_settings, validate_config
 
 
 def build_parser():
-    parser = argparse.ArgumentParser(prog='jockeybench research', description=__doc__)
+    from jockeybench.cli import WINDOWS_GUIDANCE
+
+    parser = argparse.ArgumentParser(prog='jockeybench research', description=__doc__, epilog=WINDOWS_GUIDANCE)
     parser.add_argument('--config', help='Shared engine configuration; research requires hit_bonus_yen=0')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('doctor', help='Check the source and planned schedule on the designated experiment host')
@@ -27,6 +29,10 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
+    from jockeybench.cli import refuse_native_windows
+
+    if refuse_native_windows():
+        return 2
     try:
         config = Config.load(args.config)
         if args.config is None:

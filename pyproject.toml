@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jockeybench"
-version = "1.2.0"
+version = "1.3.0"
 description = "JockeyBench: Program and Active Research settings in one forecasting benchmark"
 readme = "README.md"
 license-files = ["LICENSE", "NOTICE.md", "docs/LICENSE-SCOPE.md"]

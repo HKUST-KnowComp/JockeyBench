@@ -44,10 +44,11 @@ jobs:
       - run: jockeybench program --help
       - run: jockeybench research --help
       - run: python -m pytest
+      - run: python scripts/windows/test_setup.py
       - name: One built distribution contains both settings
         run: |
           python -m pip wheel --no-deps --no-build-isolation --wheel-dir dist .
-          python scripts/check_wheel.py dist/jockeybench-1.2.0-py3-none-any.whl
+          python scripts/check_wheel.py dist/jockeybench-*.whl
       # Ubuntu 24.04 may restrict unprivileged user namespaces through AppArmor.
       # Exercise native Linux isolation on 22.04 without weakening host security policy.
       - name: Sandbox jobs (fabricated data only)

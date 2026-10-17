@@ -2,6 +2,7 @@
 
 The public `jockeybench research` entrypoint is installed together with Program. It uses the shared
 JockeyBench engine and does not require an external framework checkout or warmup archive.
+It runs on macOS, Linux, and [Windows through WSL2 with Ubuntu 22.04](WINDOWS.md).
 
 ## Lifecycle and profile
 

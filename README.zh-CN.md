@@ -20,7 +20,9 @@ JockeyBench 评测 LLM 智能体在研究预算约束下开发预测程序的能
 
 ## 统一安装
 
-使用 **Python 3.13**。支持 macOS 的 `sandbox-exec`，以及 Linux 的 bubblewrap 与 libseccomp。
+使用 **Python 3.13**。支持 macOS、Linux，以及 **Windows 上的 WSL2 + Ubuntu 22.04**。
+Windows 用户请按 [Windows 安装指南](docs/WINDOWS.md)操作，其中提供 PowerShell 启动器和全新环境安装脚本。
+不支持直接使用 Windows 原生 Python 或 WSL1。macOS 使用 `sandbox-exec`；Linux 和 WSL2 使用 bubblewrap 与 libseccomp。
 Ubuntu 22.04/24.04 先安装系统依赖：
 
 ```bash
@@ -54,7 +56,8 @@ JRDB_NATIVE=1 .venv/bin/pytest -m native
 ```
 
 默认测试使用合成输入，不调用模型。源码内嵌的历史 Research 测试不被默认收集；它们不能证明新 profile
-复现了历史轨迹。CI 覆盖 Ubuntu 和 macOS。贡献者另安装 `requirements-dev.txt`。
+复现了历史轨迹。CI 针对 Ubuntu、macOS，以及实际启动 WSL2 Ubuntu 22.04 的 Windows Server 2025；
+Windows 10/11 用户电脑属于部署目标，并不表示已测试每种硬件。贡献者另安装 `requirements-dev.txt`。
 
 ## 运行两种设定
 
