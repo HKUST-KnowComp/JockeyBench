@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.3.0 — Windows deployment through WSL2
+
+* Add the supported Windows route through WSL2 with Ubuntu 22.04, using the existing Linux sandbox
+  for both Program and Active Research. Native Windows Python reports the WSL2 route clearly.
+* Add a PowerShell 5.1/7 launcher that forwards literal argument arrays, checks WSL2 and the Linux
+  project filesystem, and preserves the child exit code. Add a fresh-environment installer with
+  pinned Python 3.13.2, locked dependencies and synthetic sandbox checks.
+* Add Windows Server 2025 CI for native launcher behavior and an actual WSL2 distribution imported
+  from a pinned Ubuntu image. Run the full synthetic suite and native isolation fixtures inside
+  Linux; no real data, model calls or experiment-host designation are part of installation or CI.
+* Keep the existing protocol, scoring and acquisition contracts unchanged. WSL2 is a different
+  execution environment and requires fresh trajectories; checkpoints must not cross environments.
+
+Windows 10/11 are deployment targets, not an exhaustively tested hardware matrix. Platform support
+does not establish cross-platform score equality or reproduce historical experiments.
+
 ## 1.2.0 — One package, Program and Active Research settings
 
 * Move the runtime to the repository root and integrate Active Research under

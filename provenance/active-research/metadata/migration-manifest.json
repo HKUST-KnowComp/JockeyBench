@@ -1032,7 +1032,7 @@
   "new_files": [
     {
       "path": "src/jockeybench/research/cli.py",
-      "sha256": "a951338d3283aaa636f4d8abdc2b03507b23c1306c13c4212f58016746ff8a1f"
+      "sha256": "c2f472818e1865e4f79de1a12cab942420513427a81fa281e3b4a10b7e46d722"
     },
     {
       "path": "src/jockeybench/research/portable_warmup.py",

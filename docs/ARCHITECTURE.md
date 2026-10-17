@@ -123,6 +123,11 @@ operation or failed isolation check refuses execution. There is no unsandboxed f
 and Ubuntu 24.04 AppArmor policies may require an appropriately configured host. Native tests
 exercise isolation using fabricated data and require no experiment-host marker.
 
+Windows runs both settings through WSL2 with Ubuntu 22.04, using this same Linux backend.
+The PowerShell launcher forwards an argument array into an existing Linux checkout under the
+distribution's home filesystem. It does not provide a native Windows sandbox. WSL1 and Windows
+mounted project directories are refused. See [Windows setup and validation](WINDOWS.md).
+
 `save_strategy` takes flat `.py/.json/.txt/.md` files. The workspace, and so every saved version, may
 also hold flat `.bin/.pkl` files written by `compute`. Every `.py` file must parse, `strategy.py`
 must define `predict(sdk, context)`, and JSON that is not finite or looks like cached historical
@@ -171,7 +176,7 @@ are written atomically with an embedded digest. Each one binds the source manife
 configuration, the runtime code hash (the package minus the importer), the agent identity and the
 sandbox environment, including machine architecture. A resume with any of them changed is refused.
 
-Moving between macOS and Linux requires a new trajectory, including a new warmup. Checkpoints must
+Moving between macOS, native Linux and WSL2 requires a new trajectory, including a new warmup. Checkpoints must
 not be resumed or spliced across operating systems. The protocol rules remain the same, but native
 library behavior and CPU time can differ; Linux support does not establish equal predictions,
 CPU fees or final scores across platforms.

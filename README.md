@@ -21,7 +21,10 @@ database with the included importer. The 2026 season remains sealed. See [data](
 
 ## Install once
 
-Use **Python 3.13** on macOS or Linux. macOS uses `sandbox-exec`; Linux uses bubblewrap and libseccomp.
+Use **Python 3.13** on macOS, Linux, or **Windows through WSL2 with Ubuntu 22.04**.
+Windows users should follow the [Windows installation guide](docs/WINDOWS.md), which includes a
+PowerShell launcher and a fresh-environment installer. Native Windows Python and WSL1 are unsupported.
+macOS uses `sandbox-exec`; Linux and WSL2 use bubblewrap and libseccomp.
 On Ubuntu 22.04/24.04, first install:
 
 ```bash
@@ -57,7 +60,9 @@ JRDB_NATIVE=1 .venv/bin/pytest -m native
 
 Default tests use fabricated inputs and do not call providers. Embedded historical Research tests
 are not collected by default; they are not evidence that the migrated public profile reproduced
-historical trajectories. CI checks Ubuntu and macOS. Contributors also install `requirements-dev.txt`.
+historical trajectories. CI targets Ubuntu, macOS, and Windows Server 2025 with an actual WSL2 Ubuntu
+22.04 instance; Windows 10/11 user machines are deployment targets, not a tested hardware matrix.
+Contributors also install `requirements-dev.txt`.
 
 ## Run either setting
 

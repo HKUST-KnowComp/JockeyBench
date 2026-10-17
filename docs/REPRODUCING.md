@@ -4,6 +4,10 @@ This document covers the Program setting. The unified Active Research public pro
 [guide](RESEARCH.md); the original source-drop validation results do not establish reproduction of
 its historical experiments with the migrated profile.
 
+The runtime supports macOS, Linux, and [Windows through WSL2 with Ubuntu 22.04](WINDOWS.md).
+Platform support and synthetic sandbox checks do not establish reproduction of the historical
+experiment's scores in a different environment.
+
 ## Configuration
 
 `configs/paper.json` is the main-cohort protocol, and it equals the defaults of `jockeybench.config.Config`:

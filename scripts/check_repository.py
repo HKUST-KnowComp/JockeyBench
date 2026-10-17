@@ -26,8 +26,8 @@ HISTORICAL_PERSONAL_PATHS = {
     'ActiveResearch/src/active_research/llm/agent.py': '8d9fe3c88d8a7194c506a66fdb56bf0a85cb047cac1ba19c1adfd03186297a5c',
 }
 PERSONAL_PATH = re.compile(rb'/(?:Users|home)/[A-Za-z0-9._-]+')
-ALLOWED_SUFFIXES = {'.py', '.md', '.toml', '.txt', '.json', '.yml', '.cff', '.in'}
-ALLOWED_NAMES = {'.gitignore', '.python-version', 'LICENSE'}
+ALLOWED_SUFFIXES = {'.py', '.md', '.toml', '.txt', '.json', '.yml', '.cff', '.in', '.sh', '.ps1'}
+ALLOWED_NAMES = {'.gitignore', '.gitattributes', '.python-version', 'LICENSE'}
 ARCHIVE_NAME = re.compile(r'[A-Za-z]{2,4}(?:_\d{4}|\d{6})(?:\.txt)?\.(?:lzh|zip|txt)', re.I)  # JRDB file naming
 MAX_BYTES = 256 * 1024
 SECRETS = [

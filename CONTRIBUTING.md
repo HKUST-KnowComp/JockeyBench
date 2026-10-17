@@ -8,6 +8,11 @@ sudo apt-get update
 sudo apt-get install bubblewrap libseccomp2 libarchive-tools lsof build-essential
 ```
 
+On Windows, use [WSL2 with Ubuntu 22.04](docs/WINDOWS.md). Run the Python suite inside Linux;
+the native Windows checks are standalone scripts under `scripts/windows/` and deliberately do not
+collect the POSIX test fixture. CI tests the PowerShell bridge on Windows Server 2025 and imports
+a pinned Ubuntu image into WSL2 for the full synthetic suite and real sandbox fixtures.
+
 `lhafile` may compile its C extension, especially on Linux ARM. Ensure the interpreter includes
 matching Python 3.13 development headers; for a system interpreter these may require its
 `python3.13-dev` package from the same package source. Managed interpreters may include the headers.
@@ -18,6 +23,7 @@ python3.13 -m venv .venv
 .venv/bin/pip install --no-build-isolation --no-deps -e .
 .venv/bin/ruff check . && .venv/bin/ruff format --check .
 .venv/bin/pytest
+python3 scripts/windows/test_setup.py
 JRDB_NATIVE=1 .venv/bin/pytest -m native  # real macOS or Linux sandbox, fabricated data only
 python3 scripts/check_repository.py    # refuses data, keys and local paths in staged files
 python3 scripts/check_repository.py --history   # every commit; run before a push

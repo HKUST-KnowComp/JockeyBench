@@ -15,9 +15,20 @@ from pathlib import Path
 from .agents.reference import DEFAULT_KIND, DEFAULT_SAMPLES, KINDS
 from .config import ARMS, Config
 from .errors import Pending, Rejected
-from .storage import read_checkpoint, valid_run_id
 
 HOST_MARKER = '.experiment-host'
+WINDOWS_GUIDANCE = (
+    'On Windows, run JockeyBench inside WSL2 with Ubuntu 22.04. Native Windows Python cannot provide the required sandbox. '
+    'macOS and Linux run directly. See docs/WINDOWS.md.'
+)
+
+
+def refuse_native_windows():
+    """Stop before loading Unix-only execution modules; help remains portable."""
+    if platform.system() != 'Windows':
+        return False
+    print(json.dumps({'status': 'stopped', 'reason': WINDOWS_GUIDANCE}))
+    return True
 
 
 def require_experiment_host():
@@ -30,7 +41,7 @@ def require_experiment_host():
 
 def build_parser():
     summary, exit_codes = __doc__.split('\n\n', 1)
-    parser = argparse.ArgumentParser(prog='jockeybench', description=summary, epilog=' '.join(exit_codes.split()))
+    parser = argparse.ArgumentParser(prog='jockeybench', description=summary, epilog=' '.join(exit_codes.split()) + ' ' + WINDOWS_GUIDANCE)
     parser.add_argument('--config', help='JSON configuration (defaults: the paper protocol)')
     parser.add_argument('--arm', choices=ARMS, help='override the configured arm')
     sub = parser.add_subparsers(dest='command', required=True)
@@ -104,6 +115,8 @@ def execute(args, config):
         finally:
             source.close()
     if args.command in {'replay-audit', 'reexecute-audit'}:
+        from .storage import read_checkpoint
+
         checkpoint = read_checkpoint(Path(config.managed_root) / args.run_id / 'checkpoint.json.gz')
         if args.command == 'replay-audit':
             from .audit.replay import replay
@@ -128,7 +141,10 @@ def main(argv=None):
         commands = parser.add_subparsers(dest='setting')
         commands.add_parser('program', help='Write and revise forecasting programs (A/S)')
         commands.add_parser('research', help='Write and revise acquisition programs (Adaptive/Frozen)')
-        parser.epilog = 'Use jockeybench program --help or jockeybench research --help. Existing Program commands also work directly.'
+        parser.epilog = (
+            'Use jockeybench program --help or jockeybench research --help. Existing Program commands also work directly. '
+            + WINDOWS_GUIDANCE
+        )
         parser.print_help()
         return 0
     if argv and argv[0] == 'research':
@@ -138,6 +154,10 @@ def main(argv=None):
     if argv and argv[0] == 'program':
         argv = argv[1:]
     args = build_parser().parse_args(argv)
+    if refuse_native_windows():
+        return 2
+    from .storage import valid_run_id
+
     if getattr(args, 'run_id', None) is not None and not valid_run_id(args.run_id):
         print(json.dumps({'status': 'stopped', 'reason': 'Invalid run name'}))
         return 2

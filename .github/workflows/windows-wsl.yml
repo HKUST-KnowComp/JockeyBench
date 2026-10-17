@@ -1,0 +1,111 @@
+name: Windows and WSL2
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+
+jobs:
+  windows-launcher:
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.2'
+      # These standalone checks never collect the root POSIX runtime test fixture.
+      - run: python scripts/windows/test_cli.py
+      - run: python scripts/windows/test_launcher.py
+      - name: Windows PowerShell 5.1 bridge tests
+        shell: powershell
+        run: '& .\scripts\windows\test_launcher.ps1'
+      - name: PowerShell 7 bridge tests
+        shell: pwsh
+        run: '& .\scripts\windows\test_launcher.ps1'
+
+  wsl2-runtime:
+    runs-on: windows-2025
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Import verified Ubuntu 22.04 into WSL2
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $distro = 'JockeyBench-CI'
+          $image = Join-Path $env:RUNNER_TEMP 'ubuntu-rootfs.tar'
+          $install = Join-Path $env:RUNNER_TEMP 'JockeyBench-WSL'
+          # Canonical's release image; SHA also published in microsoft/WSL DistributionInfo.json.
+          $uri = 'https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl'
+          $expected = '4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f'
+          Invoke-WebRequest -Uri $uri -OutFile $image
+          if ((Get-FileHash $image -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
+            throw 'Ubuntu WSL image hash mismatch'
+          }
+          wsl.exe --version
+          if ($LASTEXITCODE -ne 0) { throw 'WSL is unavailable on this runner' }
+          wsl.exe --import $distro $install $image --version 2
+          if ($LASTEXITCODE -ne 0) { throw 'A real WSL2 distribution could not be created' }
+          wsl.exe --list --verbose
+          if ($LASTEXITCODE -ne 0) { throw 'Could not inspect WSL distribution versions' }
+          $kernel = (& wsl.exe --distribution $distro --user root --exec uname -r)
+          if ($LASTEXITCODE -ne 0 -or $kernel -notmatch '(?i)WSL2') { throw 'The imported distribution is not running a WSL2 kernel' }
+          Write-Host $kernel
+          "JOCKEYBENCH_CI_DISTRO=$distro" >> $env:GITHUB_ENV
+      - name: Prepare an ordinary Linux user and isolated source checkout
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $distro = $env:JOCKEYBENCH_CI_DISTRO
+          wsl.exe --distribution $distro --user root --exec /bin/bash -c 'set -eu; apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-venv git bubblewrap libseccomp2 libarchive-tools lsof build-essential ca-certificates; useradd --create-home --shell /bin/bash jockeyci'
+          if ($LASTEXITCODE -ne 0) { throw 'Linux dependency/user preparation failed' }
+          $linuxHome = (& wsl.exe --distribution $distro --user jockeyci --exec /bin/sh -c 'printf "%s" "$HOME"').Trim()
+          if ($LASTEXITCODE -ne 0 -or -not $linuxHome) { throw 'Could not determine Linux home' }
+          # The imported distro starts as root. Configure its ordinary default user for the launcher.
+          wsl.exe --distribution $distro --user root --exec /usr/bin/python3 -c "import configparser, pathlib; p = pathlib.Path('/etc/wsl.conf'); c = configparser.ConfigParser(); c.read(p); c['user'] = {'default': 'jockeyci'}; c.write(p.open('w'))"
+          if ($LASTEXITCODE -ne 0) { throw 'Could not set the CI distribution user' }
+          wsl.exe --terminate $distro
+          if ($LASTEXITCODE -ne 0) { throw 'Could not restart the CI distribution as its ordinary user' }
+          $project = "$linuxHome/JockeyBench"
+          $archive = Join-Path $env:RUNNER_TEMP 'jockeybench-source.tar'
+          git archive --format=tar --output=$archive HEAD
+          if ($LASTEXITCODE -ne 0) { throw 'Could not archive the exact checked-out source' }
+          $linuxArchive = (& wsl.exe --distribution $distro --user jockeyci --exec wslpath -u $archive).Trim()
+          if ($LASTEXITCODE -ne 0) { throw 'Could not translate the source archive path' }
+          wsl.exe --distribution $distro --user jockeyci --exec mkdir -p $project
+          if ($LASTEXITCODE -ne 0) { throw 'Could not create the Linux source directory' }
+          wsl.exe --distribution $distro --user jockeyci --exec tar -xf $linuxArchive -C $project
+          if ($LASTEXITCODE -ne 0) { throw 'Could not extract the Linux source directory' }
+          "JOCKEYBENCH_CI_PROJECT=$project" >> $env:GITHUB_ENV
+      - name: Bootstrap through the actual Windows launcher
+        run: |
+          & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action setup
+          if ($LASTEXITCODE -ne 0) { throw 'WSL2 bootstrap failed' }
+      - name: Run both setting entrypoints through Windows PowerShell
+        shell: powershell
+        run: |
+          & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action run -BenchmarkArgs @('program', '--help')
+          if ($LASTEXITCODE -ne 0) { throw 'Program launcher failed' }
+          & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action run -BenchmarkArgs @('research', '--help')
+          if ($LASTEXITCODE -ne 0) { throw 'Research launcher failed' }
+      - name: Preserve a refused command exit code through the real bridge
+        run: |
+          & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action run -BenchmarkArgs @('program', '--config', 'nonexistent config ; literal.json', 'doctor')
+          if ($LASTEXITCODE -ne 2) { throw 'The launcher did not preserve the benchmark refusal status' }
+          $global:LASTEXITCODE = 0
+      - name: Full synthetic suite inside WSL2
+        run: |
+          wsl.exe --distribution $env:JOCKEYBENCH_CI_DISTRO --user jockeyci --cd $env:JOCKEYBENCH_CI_PROJECT --exec "$env:JOCKEYBENCH_CI_PROJECT/.venv/bin/python" -m pytest
+          if ($LASTEXITCODE -ne 0) { throw 'The WSL2 synthetic test suite failed' }
+      - name: Native sandbox fixtures through the Windows launcher
+        run: |
+          & .\scripts\windows\jockeybench.ps1 -Distribution $env:JOCKEYBENCH_CI_DISTRO -ProjectPath $env:JOCKEYBENCH_CI_PROJECT -Action check
+          if ($LASTEXITCODE -ne 0) { throw 'The real WSL2 sandbox checks failed' }
+      - name: Verify source provenance inside WSL2
+        run: |
+          wsl.exe --distribution $env:JOCKEYBENCH_CI_DISTRO --user jockeyci --cd $env:JOCKEYBENCH_CI_PROJECT --exec "$env:JOCKEYBENCH_CI_PROJECT/.venv/bin/python" -B scripts/verify_research_provenance.py
+          if ($LASTEXITCODE -ne 0) { throw 'The WSL2 source provenance check failed' }

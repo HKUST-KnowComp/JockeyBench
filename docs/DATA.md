@@ -7,7 +7,8 @@ subscribes independently at [jrdb.com](https://jrdb.com/order), reads JRDB's ter
 everything below on their own machine. Pseudonymisation does not make licensed data public. Never
 attach outputs to issues, pull requests or CI artifacts.
 
-Every `data` command except `layouts` runs only on a designated experiment host (macOS or Linux),
+Every `data` command except `layouts` runs only on a designated experiment host (macOS or Linux,
+including [Windows through WSL2](WINDOWS.md)),
 from the checkout root already provisioned with the `.experiment-host` marker. Do not create or
 copy that marker onto a development machine; see [Running](../README.md#run). Linux installation
 requires the system packages listed in [Install](../README.md#install).
