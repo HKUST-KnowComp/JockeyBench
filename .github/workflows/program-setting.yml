@@ -1,14 +1,9 @@
-name: ProgramSetting
+name: JockeyBench
 on:
   push:
-    paths: ['ProgramSetting/**', '.github/workflows/program-setting.yml']
   pull_request:
-    paths: ['ProgramSetting/**', '.github/workflows/program-setting.yml']
 permissions:
   contents: read
-defaults:
-  run:
-    working-directory: ProgramSetting
 
 jobs:
   lint:
@@ -23,7 +18,10 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: ruff check .
       - run: ruff format --check .
+      - run: ruff check src/jockeybench/research/public.py src/jockeybench/research/profile.py src/jockeybench/research/cli.py src/jockeybench/research/portable_warmup.py
+      - run: ruff format --check src/jockeybench/research/public.py src/jockeybench/research/profile.py src/jockeybench/research/cli.py src/jockeybench/research/portable_warmup.py
       - run: python scripts/check_repository.py --history
+      - run: python -B scripts/verify_research_provenance.py
 
   test:
     strategy:
@@ -43,7 +41,13 @@ jobs:
       - run: python -m pip install -r requirements-lock.txt
       - run: python -m pip install --no-build-isolation --no-deps -e .
       - run: python -m pip check
+      - run: jockeybench program --help
+      - run: jockeybench research --help
       - run: python -m pytest
+      - name: One built distribution contains both settings
+        run: |
+          python -m pip wheel --no-deps --no-build-isolation --wheel-dir dist .
+          python scripts/check_wheel.py dist/jockeybench-1.2.0-py3-none-any.whl
       # Ubuntu 24.04 may restrict unprivileged user namespaces through AppArmor.
       # Exercise native Linux isolation on 22.04 without weakening host security policy.
       - name: Sandbox jobs (fabricated data only)
