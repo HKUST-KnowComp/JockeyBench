@@ -65,6 +65,19 @@ function New-JockeyBenchPayload {
     return [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($json))
 }
 
+function Get-JockeyBenchWslPath {
+    param(
+        [scriptblock] $CommandLookup = { Get-Command 'wsl.exe' -CommandType Application -ErrorAction SilentlyContinue }
+    )
+    # Windows may expose both the system launcher and the Store-installed WSL.
+    # Preserve command/PATH precedence, but pass exactly one executable path.
+    $command = & $CommandLookup | Select-Object -First 1
+    if ($null -eq $command) {
+        throw 'wsl.exe was not found. Install WSL 2 and Ubuntu 22.04 first; this launcher does not install Windows components.'
+    }
+    return [string] $command.Source
+}
+
 function Invoke-JockeyBenchWsl {
     param(
         [string] $Distro,
@@ -76,10 +89,7 @@ function Invoke-JockeyBenchWsl {
         throw 'This launcher runs on Windows. On Linux or macOS, use .venv/bin/jockeybench directly.'
     }
     $payload = New-JockeyBenchPayload -Project $Project -Operation $Operation -Arguments $Arguments
-    $wsl = Get-Command 'wsl.exe' -CommandType Application -ErrorAction SilentlyContinue
-    if ($null -eq $wsl) {
-        throw 'wsl.exe was not found. Install WSL 2 and Ubuntu 22.04 first; this launcher does not install Windows components.'
-    }
+    $wslPath = Get-JockeyBenchWslPath
     $bootstrapPath = Join-Path $PSScriptRoot 'dispatch.py'
     if (-not (Test-Path -LiteralPath $bootstrapPath -PathType Leaf)) {
         throw 'dispatch.py is missing. Keep it beside jockeybench.ps1 from the same checkout.'
@@ -89,7 +99,7 @@ function Invoke-JockeyBenchWsl {
     $argumentsForWsl = @('--distribution', $Distro, '--exec', '/usr/bin/python3', '-c', $python, $payload)
     $quoted = @($argumentsForWsl | ForEach-Object { ConvertTo-JockeyBenchWindowsArgument -Value $_ })
     $start = New-Object System.Diagnostics.ProcessStartInfo
-    $start.FileName = $wsl.Source
+    $start.FileName = $wslPath
     $start.Arguments = $quoted -join ' '
     $start.UseShellExecute = $false
     # Do not propagate Windows secrets through a caller's WSLENV list. This

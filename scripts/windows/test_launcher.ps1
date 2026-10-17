@@ -28,6 +28,28 @@ Assert-Equal (ConvertTo-JockeyBenchWindowsArgument '') '""' 'empty Windows argum
 Assert-Equal (ConvertTo-JockeyBenchWindowsArgument 'a"b') '"a\"b"' 'embedded quote'
 Assert-Equal (ConvertTo-JockeyBenchWindowsArgument 'a\') '"a\\"' 'trailing backslash'
 
+# Regression: current Windows images can return both system and Store WSL.
+# ProcessStartInfo.FileName must never receive their space-joined paths.
+$resolvedWsl = Get-JockeyBenchWslPath -CommandLookup {
+    [pscustomobject]@{ Source = 'C:\Windows\system32\wsl.exe' }
+    [pscustomobject]@{ Source = 'C:\Program Files\WSL\wsl.exe' }
+}
+Assert-Equal $resolvedWsl 'C:\Windows\system32\wsl.exe' 'first WSL executable wins'
+Assert-Equal $resolvedWsl.GetType().FullName 'System.String' 'single executable path'
+$resolvedStore = Get-JockeyBenchWslPath -CommandLookup {
+    [pscustomobject]@{ Source = 'C:\Program Files\WSL\wsl.exe' }
+    [pscustomobject]@{ Source = 'C:\Windows\system32\wsl.exe' }
+}
+Assert-Equal $resolvedStore 'C:\Program Files\WSL\wsl.exe' 'lookup precedence is preserved'
+$missingWslRejected = $false
+try {
+    Get-JockeyBenchWslPath -CommandLookup {} | Out-Null
+}
+catch {
+    $missingWslRejected = $_.Exception.Message.Contains('wsl.exe was not found')
+}
+Assert-Equal $missingWslRejected $true 'missing WSL is actionable'
+
 if ([Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT) {
     # Compile a tiny argv receiver using the .NET Framework compiler already
     # present on Windows. This tests the actual Windows process parser under
