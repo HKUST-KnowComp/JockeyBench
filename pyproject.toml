@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools==81.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jockeybench"
+version = "1.2.0"
+description = "JockeyBench: Program and Active Research settings in one forecasting benchmark"
+readme = "README.md"
+license-files = ["LICENSE", "NOTICE.md", "docs/LICENSE-SCOPE.md"]
+requires-python = ">=3.13,<3.14"
+dependencies = ["numpy==2.4.2", "scipy==1.17.0", "scikit-learn==1.8.0"]
+
+[project.optional-dependencies]
+data = ["lhafile==0.3.1"]  # the importer; requirements-lock.txt includes it
+reports = ["matplotlib>=3.7"]
+
+[project.scripts]
+jockeybench = "jockeybench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["jockeybench*"]
+
+[tool.setuptools.package-data]
+"jockeybench.research" = ["daily_reflection_budget.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+markers = ["native: runs real sandbox jobs on macOS or Linux (synthetic, in-memory data only)"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py313"
+src = ["src", "tests"]
+# Imported research code has its original formatting. Lint new public adapters
+# explicitly as they settle; do not reformat the historical scientific tree.
+extend-exclude = ["src/jockeybench/research", "provenance", "ProgramSetting"]
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "C4", "RUF100"]
+# E501: agent-facing strings are kept verbatim; E731: small key lambdas are clearer inline.
+ignore = ["E501", "E731"]
