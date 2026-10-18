@@ -18,6 +18,13 @@ JockeyBench 评测 LLM 智能体在研究预算约束下开发预测程序的能
 **不分发任何数据。** 使用者需自行订阅 JRDB，再用仓库内的导入器构建私有数据库。2026 年数据仍保持封存。
 详见[数据说明](docs/DATA.md)。
 
+## 当前 Program 实验结果
+
+[2026-10-18 结果快照](results/README.md)纳入 **26 个模型，每个模型的 A、S 两组均取第 1–5 轮**：
+共 130 条 A 轨迹和 130 条 S 轨迹，使用相同的 324 场比赛、10 个比赛日。
+额外完成的轮次单独用于稳健性比较；不足五个完整轮次的两个模型列入排除说明。
+这些结果属于 Program 设定，表格同时提供[机器可读汇总](results/program-results.json)。
+
 ## 统一安装
 
 使用 **Python 3.13**。支持 macOS、Linux，以及 **Windows 上的 WSL2 + Ubuntu 22.04**。
@@ -83,7 +90,6 @@ Research 会调用配置的模型并可能产生费用。provider 文件和运�
 这些命令不是已经完成实验的记录。具体格式见 [Research 配置](docs/RESEARCH.md)。原有
 `jockeybench --config ...` 命令仍默认选择 Program。另见[模型配置](docs/MODELS.md)与
 [Program 复现说明](docs/REPRODUCING.md)。
-Program 设置主实验的结果见[结果说明](results/README.md)。
 
 ## 目录
 

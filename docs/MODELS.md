@@ -56,6 +56,11 @@ Audit each run with the same `--config` and `--arm` it ran with. One runs root h
 trajectory, and `--initial-from` reads from the same root, so a model's warmup and arms run one after
 another; run other models or repetitions in their own roots.
 
+For comparison with the [current Program result snapshot](../results/README.md), use five independent
+repetitions per model, each with a shared warmup for its matched A/S pair. The published main table
+selects round indices 1–5 for both arms; extra complete rounds are reported separately as robustness
+comparisons. These commands run one pair at a time and do not automatically repeat it five times.
+
 A run that exits with code 3 has an interrupted provider request. Resume it by re-running the same
 command; the checkpoint continues exactly where it stopped. Never resume a run with a changed
 provider file or configuration: the binding refuses it, by design. Keep independent repetitions in

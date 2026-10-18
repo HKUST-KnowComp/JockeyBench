@@ -6,7 +6,7 @@ Snapshot: 2026-10-18 16:58:57 EDT. Schedule SHA-256 `1f74656e91857339a1e1d429bee
 
 ## Main table
 
-Each model contributes rounds 1–5 by round index, a rule fixed by design before any comparison. Complete later rounds appear only in the [robustness table](#robustness-rounds-beyond-the-main-table). Rows are sorted by mean log gain; the order is not a significance ranking.
+For this snapshot, each model contributes rounds 1–5 by round index. Complete later rounds appear only in the [robustness table](#robustness-rounds-beyond-the-main-table). Rows are sorted by mean log gain; the order is not a significance ranking.
 
 | Model | Rounds A / S | Log gain ± SD | Share of v5 ref. | Brier skill ± SD | Top-1 | Top-3 precision | Program delivery | A − S [95% CI] | A − (S+Te) [95% CI] |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -18,7 +18,7 @@ Each model contributes rounds 1–5 by round index, a rule fixed by design befor
 | Claude-Fable-5.1 | 5 / 5 | 0.456 ± 0.048 | 75% | 0.076 ± 0.012 | 26.7% | 45.6% | 100.0% | +0.007 [−0.018, 0.031] | +0.010 [−0.009, 0.029] |
 | Claude-Opus-5.5 | 5 / 5 | 0.453 ± 0.030 | 74% | 0.078 ± 0.005 | 27.5% | 46.0% | 100.0% | −0.001 [−0.003, 0.001] | +0.003 [−0.010, 0.015] |
 | GLM-5.3 | 5 / 5 | 0.401 ± 0.054 | 66% | 0.064 ± 0.009 | 24.6% | 43.5% | 100.0% | +0.017 [−0.006, 0.039] | +0.017 [−0.001, 0.035] |
-| Qwen3.8-2.4T-A95B | 5 / 5 | 0.367 ± 0.048 | 60% | 0.058 ± 0.010 | 24.6% | 43.1% | 100.0% | +0.030 [0.002, 0.058] | +0.001 [−0.021, 0.024] |
+| Qwen3.8-2.4T-A95B | 5 / 5 | 0.367 ± 0.048 | 60% | 0.058 ± 0.010 | 24.6% | 43.1% | 100.0% | +0.030 [0.002, 0.058] | +0.002 [−0.021, 0.024] |
 | Hunyuan-4-Preview | 5 / 5 | 0.354 ± 0.202 | 58% | 0.060 ± 0.035 | 23.2% | 40.7% | 86.7% | +0.018 [−0.001, 0.037] | +0.013 [−0.002, 0.028] |
 | Kimi-K3 | 5 / 5 | 0.348 ± 0.112 | 57% | 0.053 ± 0.024 | 24.8% | 42.7% | 100.0% | +0.354 [0.244, 0.464] | +0.071 [0.027, 0.115] |
 | MiMo-V2.6-Pro | 5 / 5 | 0.338 ± 0.195 | 56% | 0.057 ± 0.031 | 24.6% | 42.9% | 100.0% | +0.203 [0.141, 0.265] | −0.009 [−0.024, 0.005] |
@@ -80,6 +80,6 @@ Models with complete rounds beyond 5: the same statistics over rounds 1–5 (mai
 
 ## Files
 
-* [`program-results.json`](program-results.json): the three tables above at full precision (`main`, `references`, `robustness`).
+* [`program-results.json`](program-results.json): machine-readable aggregates for the three tables above (`main`, `references`, `robustness`), plus the snapshot, schedule and exclusions. Table aggregates are stored to six decimal places and rounded further for display here.
 
 All values are aggregates of private trajectories. No race, runner or JRDB record is included.

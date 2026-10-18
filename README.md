@@ -19,6 +19,14 @@ See [architecture](docs/ARCHITECTURE.md) and [Research](docs/RESEARCH.md).
 **No data are distributed.** Users obtain JRDB data under their own subscription and build a private
 database with the included importer. The 2026 season remains sealed. See [data](docs/DATA.md).
 
+## Current Program results
+
+The [2026-10-18 result snapshot](results/README.md) includes **26 models, with rounds 1–5 for each
+model in both A and S**: 130 A and 130 S trajectories on the same 324 races over 10 race days.
+Additional complete rounds are reported separately as robustness comparisons; two models with
+fewer than five complete rounds are listed as exclusions. These are Program-setting results.
+The [machine-readable aggregates](results/program-results.json) accompany the tables.
+
 ## Install once
 
 Use **Python 3.13** on macOS, Linux, or **Windows through WSL2 with Ubuntu 22.04**.
@@ -89,7 +97,6 @@ Research execution calls the configured model and may incur provider charges. It
 run directories are private inputs, not included examples of completed experiments. See
 [Research configuration and boundaries](docs/RESEARCH.md). Existing `jockeybench --config ...`
 commands continue to select Program. See [models](docs/MODELS.md) and [Program reproduction](docs/REPRODUCING.md).
-Results of the Program setting's main cohort are in [results](results/README.md).
 
 ## Project layout
 

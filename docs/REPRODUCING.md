@@ -8,6 +8,19 @@ The runtime supports macOS, Linux, and [Windows through WSL2 with Ubuntu 22.04](
 Platform support and synthetic sandbox checks do not establish reproduction of the historical
 experiment's scores in a different environment.
 
+## Current result snapshot
+
+The [2026-10-18 Program results](../results/README.md) use rounds 1–5 by round index for each of
+26 models in both A and S: 130 trajectories per arm. All use the same 324 races across 10 race days,
+from 2024-01-06 to 2024-02-03. The schedule digest, model list, aggregate values and exclusions are
+recorded in [program-results.json](../results/program-results.json).
+
+The main table uses the same five round indices for every included model. Additional complete
+rounds appear only in the robustness comparison; models with fewer than five complete rounds are
+excluded from the main table and documented separately. Failed or default predictions within an
+included trajectory remain in its scores. This reporting selection does not change the per-run
+protocol in `configs/paper.json`, which does not itself launch five repetitions.
+
 ## Configuration
 
 `configs/paper.json` is the main-cohort protocol, and it equals the defaults of `jockeybench.config.Config`:
@@ -34,7 +47,7 @@ protocols. This repository is that runtime reduced to the published protocol:
   dead helpers. The importer no longer builds the research-only "expanded" tables (odds snapshots,
   expert indices, entity links, free-text views) that the runtime never reads.
 * **Corrected (protocol 0.6.1):** agent-visible statements that contradicted the rules the runtime
-  enforces ([CHANGELOG.md](../CHANGELOG.md), `protocol/revisions.py`). Examples:
+  enforces (see the correction pairs in [protocol/revisions.py](../src/jockeybench/protocol/revisions.py)). Examples:
   * probabilities were called optional although they are required;
   * the hit bonus was called independent of the probabilities;
   * the response ceiling was stated wrongly;
@@ -44,7 +57,7 @@ protocols. This repository is that runtime reduced to the published protocol:
   for example, a prediction without probabilities was rejected either way.
 * **Fixed:** defects of the v0.6.0 runtime. Each one stopped or crashed the run, made an audit report
   a false mismatch, or prevented a start, so none changes a trajectory that ran to completion without
-  being resumed after such a stop ([CHANGELOG.md](../CHANGELOG.md) lists the details):
+  being resumed after such a stop. The fixes were:
   * `reexecute-audit` quoted every fee as zero, so a program's `max_spend` never bound during
     re-execution. It now quotes the live fees and still books nothing.
   * A strategy exception whose class name contained "storage" stopped the whole run as if managed
@@ -102,9 +115,11 @@ protocols. This repository is that runtime reduced to the published protocol:
 
 ## Acceptance on licensed data
 
-Run on 2026-10-16 on the experiment host (macOS 27, Python 3.13.2, the pinned lock) with this
-release's final tree (runtime code hash `ee26a2ce…`). It used the same interpreter environment and the
-same private database as the acceptance run of the original release. No model calls were made.
+This historical acceptance was run on 2026-10-16 on the experiment host (macOS 27, Python 3.13.2,
+the pinned lock), before the unified cross-platform integration, with runtime code hash `ee26a2ce…`.
+It used the same interpreter environment and private database as the original runtime's acceptance
+run. No model calls were made. The counts below describe that historical check, not the current
+test-suite size or a new acceptance run for the unified release.
 
 | Check | Result |
 | --- | --- |
