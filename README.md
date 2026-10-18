@@ -89,6 +89,7 @@ Research execution calls the configured model and may incur provider charges. It
 run directories are private inputs, not included examples of completed experiments. See
 [Research configuration and boundaries](docs/RESEARCH.md). Existing `jockeybench --config ...`
 commands continue to select Program. See [models](docs/MODELS.md) and [Program reproduction](docs/REPRODUCING.md).
+Results of the Program setting's main cohort are in [results](results/README.md).
 
 ## Project layout
 
@@ -98,6 +99,7 @@ src/jockeybench/research/    Active Research setting and compatibility component
 configs/                    Public configuration templates
 tests/                      Supported synthetic and packaging tests
 provenance/active-research/ Original source-drop records and migration hashes
+results/                    Program-setting results of the main cohort (aggregates only)
 ```
 
 The Program code retains its MIT license. The original Research source drop did not include a

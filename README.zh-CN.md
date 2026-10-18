@@ -83,6 +83,7 @@ Research 会调用配置的模型并可能产生费用。provider 文件和运�
 这些命令不是已经完成实验的记录。具体格式见 [Research 配置](docs/RESEARCH.md)。原有
 `jockeybench --config ...` 命令仍默认选择 Program。另见[模型配置](docs/MODELS.md)与
 [Program 复现说明](docs/REPRODUCING.md)。
+Program 设置主实验的结果见[结果说明](results/README.md)。
 
 ## 目录
 
@@ -92,6 +93,7 @@ src/jockeybench/research/    Active Research 设定及兼容组件
 configs/                    公开配置模板
 tests/                      当前支持的合成测试与包装检查
 provenance/active-research/ 原源码整理记录与迁移哈希
+results/                    Program 设置主实验结果（仅汇总数据）
 ```
 
 Program 代码保留原 MIT 许可。原 Research 源码整理包没有单独的许可声明，本次合并目录不扩大原 MIT
