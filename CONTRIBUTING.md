@@ -39,12 +39,12 @@ data nor an `.experiment-host` marker; only a designated experiment host may car
 Rules that keep results comparable:
 
 * **One package, separate setting contracts.** Install from the root. Default pytest collects `tests/`
-  only; historical tests embedded in Research source are not a supported regression suite by themselves.
-  Research's public profile is versioned separately from the Program contract described below.
-* **Preserve provenance.** Never rewrite the original Research metadata to make current code appear
-  unchanged. After reviewing a Research source change, refresh only its current migration record with
+  only; historical tests embedded in the LLM-as-policy source are not a supported regression suite by themselves.
+  The public LLM-as-policy profile is versioned separately from the code-as-policy contract described below.
+* **Preserve provenance.** Never rewrite the original LLM-as-policy metadata to make current code appear
+  unchanged. After reviewing an LLM-as-policy source change, refresh only its current migration record with
   `python3 -B scripts/verify_research_provenance.py --record-migration`, then rerun verification and
-  the relevant synthetic tests. The imported Research tree is excluded from blanket formatting to avoid
+  the relevant synthetic tests. The imported LLM-as-policy tree is excluded from blanket formatting to avoid
   gratuitous changes; lint and format new adapters explicitly.
 
 * **Never commit data.** No archives, specification documents, databases, keys, checkpoints, run

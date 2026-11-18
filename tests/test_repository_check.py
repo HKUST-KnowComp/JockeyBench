@@ -1,5 +1,6 @@
 """scripts/check_repository.py reads what git records: the index, or every commit with --history."""
 
+import csv
 import importlib.util
 import subprocess
 from pathlib import Path
@@ -58,6 +59,35 @@ def test_a_clean_index_passes_and_an_empty_one_fails(repo):
 def test_staged_files_that_could_carry_data_or_secrets_are_refused(repo, name, content, reason):
     add(repo, name, content)
     assert reason in found(repo)[name]
+
+
+@pytest.mark.parametrize('name', check_repository.PAPER_ARTIFACTS)
+def test_paper_exception_requires_exact_path_and_content(repo, name):
+    content = (check_repository.ROOT / name).read_bytes()
+    (repo / '.gitattributes').write_text('*.csv -text\n*.zip binary\n')
+    add(repo, name, content)
+    assert found(repo) == {}
+    other = 'artifacts/other' + Path(name).suffix
+    add(repo, other, content)
+    assert 'data or run directory' in found(repo)[other]
+    add(repo, name, content + b'!')
+    assert 'differs from the reviewed paper artifact' in found(repo)[name]
+
+
+def test_public_and_legacy_rosters_differ_only_in_workflow_names():
+    def read_rows(filename):
+        with (check_repository.ROOT / 'artifacts' / filename).open(encoding='utf-8', newline='') as source:
+            return list(csv.reader(source))
+
+    header, *legacy = read_rows('workflow-cohort-legacy-labels.csv')
+    public_header, *public = read_rows('workflow-cohort.csv')
+    names = {'Program': 'code-as-policy', 'Adaptive Acquisition': 'LLM-as-policy'}
+    workflow = header.index('workflow')
+    assert public_header == header
+    assert len(legacy) == 54
+    for row in legacy:
+        row[workflow] = names[row[workflow]]
+    assert public == legacy
 
 
 def test_the_package_data_module_is_code_not_data(repo):

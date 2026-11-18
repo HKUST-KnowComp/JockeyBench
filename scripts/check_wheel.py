@@ -52,7 +52,7 @@ def check(wheel):
                 raise ValueError('Missing or changed packaged source/resource: ' + name)
         with tempfile.TemporaryDirectory(prefix='jockeybench-wheel-') as folder:
             archive.extractall(folder)
-            for setting in ('program', 'research'):
+            for setting in ('code-as-policy', 'llm-as-policy', 'program', 'research'):
                 result = subprocess.run(
                     [sys.executable, '-I', '-c', PROBE, folder, setting],
                     cwd=folder,

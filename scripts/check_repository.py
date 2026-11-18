@@ -17,6 +17,11 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 BLOCKED_DIRS = {'data', 'private', 'raw', 'runs', 'logs', 'checkpoints', 'artifacts'}  # at any depth, any case
+PAPER_ARTIFACTS = {
+    'artifacts/workflow-cohort.csv': 'eaeacb9a16bf6b878daa5edcbcdb1524f46c311d824c3e5526d72c8f45971899',
+    'artifacts/workflow-cohort-legacy-labels.csv': '207d5de4e674de61dfd3286a5090324e008ca599f7ec83390fd009c76a0ec933',
+    'artifacts/minimal-interface-supplement.zip': '4ba56fd554fb9aa496341a8de344006ec4a5abfde4762aa0751f77cae88a8b1a',
+}
 PACKAGE_DATA = ('src', 'jockeybench', 'data')  # the archive-access subpackage is code, not data
 # The same code namespace before the unified repository-root migration.
 FORMER_PACKAGE_DATA = ('ProgramSetting', *PACKAGE_DATA)
@@ -87,15 +92,21 @@ def check(root, path, mode, blob, history=False):
         return 'submodule'
     if not path.isprintable() or any('\udc80' <= ch <= '\udcff' for ch in path):
         return 'path is not printable UTF-8'
-    if BLOCKED_DIRS & set(directories):
+    paper_digest = PAPER_ARTIFACTS.get(path)
+    if paper_digest is None and BLOCKED_DIRS & set(directories):
         return 'path inside a data or run directory'
     if ARCHIVE_NAME.fullmatch(rel.name):
         return 'named like a JRDB archive'
-    if rel.suffix not in ALLOWED_SUFFIXES and rel.name not in ALLOWED_NAMES:
+    if paper_digest is None and rel.suffix not in ALLOWED_SUFFIXES and rel.name not in ALLOWED_NAMES:
         return 'file type not allowed in the repository'
     if int(git(root, 'cat-file', '-s', blob)) > MAX_BYTES:
         return 'file larger than 256 KiB'
     content = git(root, 'cat-file', 'blob', blob)
+    if paper_digest is not None:
+        if hashlib.sha256(content).hexdigest() != paper_digest:
+            return 'content differs from the reviewed paper artifact'
+        if rel.suffix == '.zip':
+            return None
     try:
         content.decode('utf-8')
     except UnicodeDecodeError:

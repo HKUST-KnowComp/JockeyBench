@@ -9,6 +9,9 @@
 *.gz
 *.tar
 *.csv
+!/artifacts/workflow-cohort.csv
+!/artifacts/workflow-cohort-legacy-labels.csv
+!/artifacts/minimal-interface-supplement.zip
 *.parquet
 *.pkl
 *.jsonl

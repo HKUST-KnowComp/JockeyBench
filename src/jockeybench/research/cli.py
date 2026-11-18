@@ -1,4 +1,4 @@
-"""Run the portable Active Research setting from the common installation."""
+"""Run the llm-as-policy workflow with an adaptive or frozen evidence plan."""
 
 import argparse
 import json
@@ -10,11 +10,11 @@ from jockeybench.errors import Pending, Rejected
 from .profile import ARMS, provider_settings, validate_config
 
 
-def build_parser():
+def build_parser(prog='jockeybench llm-as-policy'):
     from jockeybench.cli import WINDOWS_GUIDANCE
 
-    parser = argparse.ArgumentParser(prog='jockeybench research', description=__doc__, epilog=WINDOWS_GUIDANCE)
-    parser.add_argument('--config', help='Shared engine configuration; research requires hit_bonus_yen=0')
+    parser = argparse.ArgumentParser(prog=prog, description=__doc__, epilog=WINDOWS_GUIDANCE)
+    parser.add_argument('--config', help='Shared engine configuration with hit_bonus_yen=0')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('doctor', help='Check the source and planned schedule on the designated experiment host')
     run = sub.add_parser('run', help='Start a fresh Active or matched Frozen trajectory; never resumes')
@@ -27,8 +27,8 @@ def build_parser():
     return parser
 
 
-def main(argv=None):
-    args = build_parser().parse_args(argv)
+def main(argv=None, *, prog='jockeybench llm-as-policy'):
+    args = build_parser(prog).parse_args(argv)
     from jockeybench.cli import refuse_native_windows
 
     if refuse_native_windows():
@@ -38,12 +38,12 @@ def main(argv=None):
         if args.config is None:
             config = replace(config, tariff=replace(config.tariff, hit_bonus_yen=0))
         validate_config(config)
-        from .public import audit, execute, run_path
+        from .public import audit, execute, read_report, run_path
 
         if getattr(args, 'run_id', None):
             run_path(config, args.run_id)
         if args.command == 'report':
-            result = json.loads((run_path(config, args.run_id) / 'report.json').read_text())
+            result = read_report(config, args.run_id)
         else:
             from jockeybench.cli import require_experiment_host
 

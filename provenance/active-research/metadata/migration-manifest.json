@@ -1032,7 +1032,7 @@
   "new_files": [
     {
       "path": "src/jockeybench/research/cli.py",
-      "sha256": "c2f472818e1865e4f79de1a12cab942420513427a81fa281e3b4a10b7e46d722"
+      "sha256": "90a977763a9cba482fe416be040027057cabab499274acf08824331a3a291df7"
     },
     {
       "path": "src/jockeybench/research/portable_warmup.py",
@@ -1044,7 +1044,7 @@
     },
     {
       "path": "src/jockeybench/research/public.py",
-      "sha256": "cc99431ec39e13b95dd3627362fccaaacc0b5511017f6cc71883484aa5362e6c"
+      "sha256": "209fff200a72298cb056c72fd823c3a4da55e1330cdc132eb48a26c35daefb15"
     }
   ],
   "resources": [

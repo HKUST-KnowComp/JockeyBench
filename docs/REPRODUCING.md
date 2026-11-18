@@ -1,6 +1,8 @@
-# Reproducing the Program setting
+<a name="reproducing-the-program-setting"></a>
 
-This document covers the Program setting. The unified Active Research public profile has a separate
+# Reproducing the code-as-policy workflow
+
+This document covers the code-as-policy workflow. The public LLM-as-policy profile has a separate
 [guide](RESEARCH.md); the original source-drop validation results do not establish reproduction of
 its historical experiments with the migrated profile.
 
@@ -10,7 +12,7 @@ experiment's scores in a different environment.
 
 ## Current result snapshot
 
-The [2026-10-18 Program results](../results/README.md) use rounds 1–5 by round index for each of
+The [2026-10-18 code-as-policy results](../results/README.md) use rounds 1–5 by round index for each of
 26 models in both A and S: 130 trajectories per arm. All use the same 324 races across 10 race days,
 from 2024-01-06 to 2024-02-03. The schedule digest, model list, aggregate values and exclusions are
 recorded in [program-results.json](../results/program-results.json).
