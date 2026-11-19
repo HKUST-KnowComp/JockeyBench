@@ -4,9 +4,11 @@ Checks what git records under this project's directory (the repository root or a
 not the working tree:
 
     python3 scripts/check_repository.py            # the index: what the next commit contains
-    python3 scripts/check_repository.py --history  # every file of every commit (full clone); run before a push
+    python3 scripts/check_repository.py --history  # code history (full clone); run before a push
 
-CI runs the history check on a full clone.
+CI runs the history check on a full clone. The project website's gh-pages refs
+(local and remote-tracking) are excluded, along with refs/stash. Commits reachable
+from other refs are still checked, including website files if merged into code history.
 """
 
 import hashlib
@@ -61,7 +63,7 @@ def entries(records, object_field):
 
 
 def recorded_files(top, prefix, history):
-    """``(path, label, mode, object)`` under ``prefix`` for the index, or for every commit a push can send.
+    """``(path, label, mode, object)`` under ``prefix`` for the index, or for code history.
 
     Paths are relative to the project directory.
     """
@@ -71,7 +73,7 @@ def recorded_files(top, prefix, history):
             yield path[strip:], path, mode, blob
         return
     seen = set()
-    for commit in git(top, 'rev-list', '--exclude=refs/stash', '--all').decode().split():
+    for commit in git(top, 'rev-list', '--exclude=refs/stash', '--exclude=*gh-pages', '--all').decode().split():
         for path, mode, blob in entries(git(top, 'ls-tree', '-r', '-z', commit, '--', prefix or '.'), 2):
             if (path, blob) not in seen:
                 seen.add((path, blob))

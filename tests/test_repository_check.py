@@ -110,6 +110,25 @@ def test_history_finds_a_secret_removed_in_a_later_commit(repo):
     assert any(label.startswith('notes.md@') for label in found(repo, history=True))
 
 
+@pytest.mark.parametrize('remote_tracking', [False, True], ids=['local-gh-pages', 'remote-gh-pages'])
+def test_history_excludes_website_refs_but_checks_website_files_on_code_branch(repo, remote_tracking):
+    add(repo, 'README.md', 'code\n')
+    git(repo, 'commit', '-qm', 'code')
+    code_branch = check_repository.git(repo, 'branch', '--show-current').decode().strip()
+    git(repo, 'switch', '--orphan', 'gh-pages')
+    for name in ['.nojekyll', 'index.html', 'app.js', 'style.css', 'assets/preview.png', 'favicon.svg']:
+        add(repo, name, 'website fixture\n')
+    git(repo, 'commit', '-qm', 'website')
+    if remote_tracking:
+        git(repo, 'update-ref', 'refs/remotes/origin/gh-pages', 'HEAD')
+    git(repo, 'switch', code_branch)
+    assert found(repo, history=True) == {}
+    add(repo, 'index.html', 'website fixture\n')
+    assert 'file type' in found(repo)['index.html']
+    git(repo, 'commit', '-qm', 'website file on code branch')
+    assert any(label.startswith('index.html@') for label in found(repo, history=True))
+
+
 def test_a_project_in_a_subdirectory_checks_only_its_own_files(repo):
     add(repo, 'other/notes.md', 'key = ' + TOKEN + '\n')  # another project in the same repository
     add(repo, 'project/notes.md', 'clean\n')
