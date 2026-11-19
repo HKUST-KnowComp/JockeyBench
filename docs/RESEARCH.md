@@ -1,12 +1,14 @@
-# Active Research
+<a name="active-research"></a>
 
-The public `jockeybench research` entrypoint is installed together with Program. It uses the shared
-JockeyBench engine and does not require an external framework checkout or warmup archive.
+# LLM-as-policy
+
+The public `jockeybench llm-as-policy` entrypoint is installed alongside the code-as-policy workflow.
+It uses the shared JockeyBench engine and does not require an external framework checkout or warmup archive.
 It runs on macOS, Linux, and [Windows through WSL2 with Ubuntu 22.04](WINDOWS.md).
 
 ## Lifecycle and profile
 
-`jockeybench-research-v1` is the public Research deployment profile:
+`jockeybench-research-v1` is the public LLM-as-policy deployment profile:
 
 1. Adaptive constructs an initial acquisition policy using historical support before the configured
    origin, subject to the public warmup's publication-time boundary.
@@ -15,14 +17,19 @@ It runs on macOS, Linux, and [Windows through WSL2 with Ubuntu 22.04](WINDOWS.md
 4. Adaptive may update its policy for later days. Frozen loads the exact initial policy from a
    completed matching Adaptive run and neither warms up again nor runs the updater.
 
+The updater after the first race day must pass its lifecycle check before the second day starts.
+From the second day onward, a failed check retains the previous validated policy and execution
+continues. Each check is saved in `updater-checkpoint-<day>.json`; the final report lists the failed
+dates in `updater_failed_days`, including a failure after the last race day. A candidate saved during
+an unsuccessful updater session remains in the audit records, while the previous policy stays active.
+
 The public warmup is identified separately as `jockeybench-research-warmup-v1`. It uses the installed
 engine's source projection and services. Its output transfers an acquisition policy into the evaluated
 trajectory; it is not a replacement claiming the fixed historical archive's hash or behavior.
 
-Research uses the common configuration with core `arm: "A"` and `tariff.hit_bonus_yen: 0`.
-Choose the Research arm through `--arm adaptive` or `--arm frozen`; the Program A/S flag is not the
-Research control assignment. The score components and weighted research charges remain distinct
-from provider USD and from real betting profit. See `research/common_scoring.py` and the run report.
+The LLM-as-policy workflow uses the common configuration with core `arm: "A"` and `tariff.hit_bonus_yen: 0`.
+Select the LLM-as-policy arm with `--arm adaptive` or `--arm frozen`. The A/S flag controls the
+code-as-policy arm. The score components and weighted research charges remain distinct from provider USD and from real betting profit. See `research/common_scoring.py` and the run report.
 
 ## Provider settings
 
@@ -69,25 +76,32 @@ On the designated experiment host, using its local private data and credentials:
 export JRDB_SOURCE="$PWD/data/private/expanded.sqlite" JRDB_RUNS="$PWD/runs"
 export JOCKEYBENCH_API_KEY=...
 
-.venv/bin/jockeybench research --config configs/research.json doctor
-.venv/bin/jockeybench research --config configs/research.json run \
+.venv/bin/jockeybench llm-as-policy --config configs/research.json doctor
+.venv/bin/jockeybench llm-as-policy --config configs/research.json run \
   --run-id research-adaptive --provider-config provider.local.json --arm adaptive
-.venv/bin/jockeybench research --config configs/research.json report --run-id research-adaptive
-.venv/bin/jockeybench research --config configs/research.json replay-audit --run-id research-adaptive
+.venv/bin/jockeybench llm-as-policy --config configs/research.json report --run-id research-adaptive
+.venv/bin/jockeybench llm-as-policy --config configs/research.json replay-audit --run-id research-adaptive
 
-.venv/bin/jockeybench research --config configs/research.json run \
+.venv/bin/jockeybench llm-as-policy --config configs/research.json run \
   --run-id research-frozen --provider-config provider.local.json --arm frozen \
   --initial-from research-adaptive
 ```
 
 Frozen's source must be a completed Adaptive run under the same managed root, with matching config,
 provider, source, code, platform environment and schedule. Initial-policy and warmup-accounting
-identities are checked. Every new run requires a new name. Stopped or interrupted Research runs are
+identities are checked. Every new run requires a new name. Stopped or interrupted LLM-as-policy runs are
 not restarted, resumed or spliced; changes require a fresh trajectory.
 
 The manifest records the public profile, config, source identity, code, provider, environment and
-schedule. Inspect delivery state before interpreting scores. `report` reads saved aggregate results;
-`replay-audit` reads the source and replays recorded evidence and scoring on the experiment host.
+schedule. The paper compares trajectories using `score.common_net`; the forecast prompt uses the
+delivery-gated objective reported as `score.aligned_net`. The [README](../README.md#llm-as-policy-paper-scores-and-materials)
+defines both scores. For completed reports from earlier public LLM-as-policy versions, the two scores agree
+when the saved delivery counts show that every forecast was direct or repaired. Otherwise, `report`
+computes `common_net` in memory from the saved scoring checkpoints. If the available records cannot
+establish the common score, it returns `null` for that field and retains the recorded aligned net.
+`replay-audit` separately verifies recorded evidence and scoring on the experiment host.
+For an exact replay audit or a matched Frozen control, use the source revision recorded in the
+original run's manifest. On an older revision, the LLM-as-policy command is `jockeybench research`.
 
 ## Historical evidence and verification scope
 

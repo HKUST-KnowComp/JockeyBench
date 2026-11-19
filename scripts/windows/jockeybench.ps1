@@ -8,7 +8,7 @@ ext4 filesystem under /home. WSL and the distribution must already be installed.
 Credentials remain configured in Linux; Windows environment variables are not
 copied by this launcher. Pass benchmark arguments as an explicit string array.
 .EXAMPLE
-.\scripts\windows\jockeybench.ps1 -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('research', '--help')
+.\scripts\windows\jockeybench.ps1 -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('llm-as-policy', '--help')
 #>
 [CmdletBinding()]
 param(

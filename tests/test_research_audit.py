@@ -14,6 +14,7 @@ from jockeybench.storage import checkpoint_digest, read_checkpoint
 
 SETTINGS = lifecycle_fixtures.SETTINGS
 fake_provider = lifecycle_fixtures.fake_provider
+updater_steps = lifecycle_fixtures.updater_steps
 research_config = lifecycle_fixtures.research_config
 
 

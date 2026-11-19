@@ -1,6 +1,6 @@
 # Windows through WSL2
 
-Both Program and Active Research run on Windows through **WSL2 with Ubuntu 22.04**.
+Both the code-as-policy and LLM-as-policy workflows run on Windows through **WSL2 with Ubuntu 22.04**.
 The benchmark executes inside Linux using bubblewrap and libseccomp; native Windows Python and
 WSL1 are unsupported. The Windows launcher works with Windows PowerShell 5.1 and PowerShell 7.
 
@@ -53,8 +53,8 @@ install a fresh checkout with a new environment. The installer never creates `.e
 After successful setup, either setting is available directly in Ubuntu:
 
 ```bash
-.venv/bin/jockeybench program --help
-.venv/bin/jockeybench research --help
+.venv/bin/jockeybench code-as-policy --help
+.venv/bin/jockeybench llm-as-policy --help
 # Repeat the installation's sandbox checks without changing the environment:
 bash scripts/windows/setup.sh --check
 ```
@@ -69,9 +69,9 @@ printed by `pwd` in the Ubuntu checkout:
 ```powershell
 $LinuxProject = '/home/<linux-user>/JockeyBench'
 & .\scripts\windows\jockeybench.ps1 -Distribution Ubuntu-22.04 `
-    -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('program', '--help')
+    -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('code-as-policy', '--help')
 & .\scripts\windows\jockeybench.ps1 -Distribution Ubuntu-22.04 `
-    -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('research', '--help')
+    -ProjectPath $LinuxProject -Action run -BenchmarkArgs @('llm-as-policy', '--help')
 ```
 
 Use `-Action setup` for a fresh checkout whose Ubuntu system dependencies are already installed;
@@ -88,7 +88,7 @@ An environment variable exported in one Ubuntu terminal is not inherited by a la
 launch. For provider-backed runs, export the credentials and run `.venv/bin/jockeybench` in that
 same Ubuntu terminal. The launcher also clears `WSLENV` for its child process.
 Real-data and model runs still require a separately authorized and provisioned experiment host.
-Follow the normal [Program](REPRODUCING.md) or [Research](RESEARCH.md) configuration inside that host.
+Follow the normal [code-as-policy](REPRODUCING.md) or [LLM-as-policy](RESEARCH.md) configuration inside that host.
 
 ## What CI verifies
 

@@ -53,7 +53,12 @@ def research_config(config):
 
 
 @pytest.fixture
-def fake_provider(monkeypatch):
+def updater_steps():
+    return {}
+
+
+@pytest.fixture
+def fake_provider(monkeypatch, updater_steps):
     calls = []
 
     def request(service, settings, body, request_id, phase):
@@ -67,7 +72,8 @@ def fake_provider(monkeypatch):
                 ('finish', {}),
             ][index]
         elif phase.startswith('policy_update-'):
-            name, args = [('inspect_contract', {}), ('finish', {})][index]
+            steps = updater_steps.get(service.state['run_id'], [('inspect_contract', {}), ('finish', {})])
+            name, args = steps[index]
         else:
             assert phase == 'prediction-1'
             observation = json.loads(body['messages'][1]['content'])
@@ -78,6 +84,8 @@ def fake_provider(monkeypatch):
             'content': '',
             'tool_calls': [{'id': request_id, 'type': 'function', 'function': {'name': name, 'arguments': json.dumps(args)}}],
         }
+        if name is None:
+            message['tool_calls'] = []
         attempt = {
             'request_id': request_id,
             'status': 'complete',
@@ -103,6 +111,7 @@ def test_adaptive_and_matched_frozen_share_warmup_and_release_after_sealing(rese
     adaptive = public.execute(research_config, 'adaptive', SETTINGS, source_factory=factory)
     assert adaptive['completed'] and adaptive['races'] == 3 and adaptive['days'] == 2
     assert adaptive['updater_sessions'] == 2
+    assert adaptive['updater_failed_days'] == []
     assert adaptive['api_usage']['incurred_this_run']['logical_requests'] == 11
     assert adaptive['api_usage']['incurred_this_run']['cost_coverage_complete']
     assert adaptive['warmup']['accounting']['normalization_races'] == 3
@@ -116,8 +125,13 @@ def test_adaptive_and_matched_frozen_share_warmup_and_release_after_sealing(rese
     calls_before = len(fake_provider)
     frozen = public.execute(research_config, 'frozen', SETTINGS, arm='frozen', initial_from='adaptive', source_factory=factory)
     assert frozen['completed'] and frozen['updater_sessions'] == 0
+    assert frozen['updater_failed_days'] == []
     assert frozen['initial_policy_hash'] == adaptive['initial_policy_hash']
     assert frozen['warmup']['accounting'] == adaptive['warmup']['accounting']
+    for report in (adaptive, frozen):
+        score = report['score']
+        assert score['common_net'] == score['aligned_net'] == score['net_after_warmup']
+        assert score['aligned_net'] == score['race_net_total'] - score['warmup_weighted_cost']
     assert frozen['api_usage']['incurred_this_run']['logical_requests'] == 3
     assert frozen['api_usage']['attributed_total']['logical_requests'] == 7
     assert frozen['api_usage']['updaters']['logical_requests'] == 0
@@ -125,6 +139,68 @@ def test_adaptive_and_matched_frozen_share_warmup_and_release_after_sealing(rese
     assert public.audit(research_config, 'frozen', source_factory=factory)['verified_races'] == 3
     with pytest.raises(Rejected, match='fresh research run name'):
         public.execute(research_config, 'adaptive', SETTINGS, source_factory=factory)
+
+
+def test_first_day_updater_failure_stops_before_second_day(research_config, fake_provider, updater_steps):
+    day = '2024-01-06'
+    updater_steps['policy_update-' + day] = [('inspect_contract', {}), (None, {})]
+    with pytest.raises(Rejected, match='Updater did not finish its required lifecycle'):
+        public.execute(research_config, 'first-day-failure', SETTINGS, source_factory=lambda *args: make_source())
+    out = public.run_path(research_config, 'first-day-failure')
+    checkpoint = json.loads((out / ('updater-checkpoint-' + day + '.json')).read_text())
+    assert not checkpoint['passed'] and not checkpoint['finish_received']
+    status = json.loads((out / 'status.json').read_text())
+    assert status['status'] == 'stopped' and status['completed_days'] == []
+    assert not (out / 'report.json').exists()
+    events = json.loads((out / 'events.json').read_text())
+    assert [e['day'] for e in events if e['kind'] == 'day_start'] == [day]
+    assert sum(e['kind'] == 'sealed' for e in events) == 2
+    assert len(list(out.glob('policy_update-*.json'))) == 1
+
+
+@pytest.mark.parametrize('failed_indices', [(1,), (2,), (1, 2)], ids=['middle-day', 'final-day', 'consecutive-days'])
+def test_later_updater_failure_retains_plan_and_completes_report(research_config, fake_provider, updater_steps, failed_indices):
+    from jockeybench.research.finegrained_v3.policy_contract import source_hash, validate_source
+
+    config = replace(research_config, smoke_days=3)
+    days = ['2024-01-06', '2024-01-07', '2024-01-20']
+    codes = [CODE.replace('depth=3', 'depth=' + str(depth)) for depth in (5, 1, 3)]
+    assert all(validate_source(code)['valid'] for code in codes)
+    for index, day in enumerate(days):
+        # Failed sessions save a valid, different candidate before omitting finish.
+        updater_steps['policy_update-' + day] = [
+            ('inspect_contract', {}),
+            ('validate_research_policy', {'source': codes[index]}),
+            ('save_research_policy', {'source': codes[index]}),
+            (None if index in failed_indices else 'finish', {}),
+        ]
+    report = public.execute(config, 'later-failure', SETTINGS, source_factory=lambda *args: make_source())
+    out = public.run_path(config, 'later-failure')
+    assert report['completed'] and report['races'] == 4 and report['days'] == 3
+    assert report['updater_sessions'] == 3
+    assert report['updater_failed_days'] == [days[i] for i in failed_indices]
+    assert report['api_usage']['updaters']['logical_requests'] == 12
+    assert json.loads((out / 'report.json').read_text()) == report
+    assert public.read_report(config, 'later-failure') == report
+    status = json.loads((out / 'status.json').read_text())
+    assert status['status'] == 'completed' and status['completed_days'] == days
+    events = json.loads((out / 'events.json').read_text())
+    active_hash = report['initial_policy_hash']
+    for index, day in enumerate(days):
+        frame = json.loads((out / ('frame-' + day + '.json')).read_text())
+        assert frame['policy_identity']['policy_hash'] == active_hash
+        checkpoint = json.loads((out / ('updater-checkpoint-' + day + '.json')).read_text())
+        session = json.loads((out / ('policy_update-' + day + '.json')).read_text())
+        assert checkpoint == session['updater_lifecycle_checkpoint']
+        assert checkpoint['saved'] and checkpoint['accepted_policy_hash'] == source_hash(codes[index])
+        assert checkpoint['passed'] is (index not in failed_indices)
+        assert checkpoint['finish_received'] is (index not in failed_indices)
+        if index not in failed_indices:
+            active_hash = source_hash(codes[index])
+        complete = next(e for e in events if e['kind'] == 'day_complete' and e['day'] == day)
+        assert complete['next_policy_hash'] == active_hash
+    assert report['final_policy_hash'] == active_hash
+    assert public.audit(config, 'later-failure', source_factory=lambda *args: make_source())['verified_races'] == 4
 
 
 def test_changed_model_identity_stops_before_any_release(research_config, fake_provider, monkeypatch):
@@ -218,6 +294,75 @@ def test_report_distinguishes_unknown_api_cost_from_zero(research_config, fake_p
     assert not usage['cost_coverage_complete']
     assert usage['estimated_cost_usd'] > 0
     assert report['api_cost_in_score'] is False
+
+
+@pytest.mark.parametrize(
+    ('deliveries', 'expected'),
+    [
+        ({'direct_predictor': 1, 'repaired_predictor': 1}, 12.5),
+        ({'direct_predictor': 1}, None),
+        ({'direct_predictor': 1, 'execution_fallback': 1}, None),
+    ],
+)
+def test_archived_report_with_only_delivery_totals(research_config, deliveries, expected):
+    out = public.run_path(research_config, 'archived')
+    out.mkdir(parents=True)
+    report = {
+        'completed': True,
+        'run_id': 'archived',
+        'races': 2,
+        'delivery_totals': deliveries,
+        'score': {'evaluator': 'common-aligned-delivery-v1', 'net_after_warmup': 12.5},
+    }
+    saved = out / 'report.json'
+    saved.write_text(json.dumps(report))
+    score = public.read_report(research_config, 'archived')['score']
+    assert score['common_net'] == expected and score['aligned_net'] == 12.5
+    assert json.loads(saved.read_text()) == report
+    report['run_id'] = 'different'
+    saved.write_text(json.dumps(report))
+    with pytest.raises(Rejected, match='does not match its run'):
+        public.read_report(research_config, 'archived')
+
+
+def test_uniform_delivery_and_read_only_legacy_report(research_config, fake_provider, monkeypatch):
+    original = provider.request
+
+    def uniform_submission(*args):
+        response, attempt = original(*args)
+        if args[-1] == 'prediction-1':
+            function = response['choices'][0]['message']['tool_calls'][0]['function']
+            prediction = json.loads(function['arguments'])
+            numbers = prediction['ranking']
+            prediction['probabilities'] = dict.fromkeys(numbers, 1 / len(numbers))
+            function['arguments'] = json.dumps(prediction)
+        return response, attempt
+
+    monkeypatch.setattr(provider, 'request', uniform_submission)
+    config = replace(research_config, smoke_days=1, races_per_day=1)
+    report = public.execute(config, 'uniform', SETTINGS, source_factory=lambda *args: make_source())
+    assert report['delivery_totals'] == {'uniform_submit': 1}
+    # In this five-runner fixture the first-ranked horse wins. Only the paper
+    # score retains the centered hit term for a uniform submission.
+    assert report['score']['common_net'] == pytest.approx(report['score']['aligned_net'] + 80)
+    assert public.read_report(config, 'uniform') == report
+
+    out = public.run_path(config, 'uniform')
+    saved = out / 'report.json'
+    legacy = copy.deepcopy(report)
+    for name in ('common_evaluator', 'aligned_evaluator', 'common_net', 'aligned_net'):
+        del legacy['score'][name]
+    original_bytes = json.dumps(legacy).encode()
+    saved.write_bytes(original_bytes)
+    monkeypatch.setattr(public, 'code_hash', lambda: 'a-new-installation')
+    requests_before = len(fake_provider)
+    assert public.read_report(config, 'uniform') == report
+    (out / 'runs/PAR-000001/checkpoint.json.gz').unlink()
+    unavailable = public.read_report(config, 'uniform')['score']
+    assert unavailable['common_net'] is None and unavailable['common_net_unavailable_reason']
+    assert unavailable['aligned_net'] == legacy['score']['net_after_warmup']
+    assert saved.read_bytes() == original_bytes
+    assert len(fake_provider) == requests_before
 
 
 @native

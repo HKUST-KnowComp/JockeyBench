@@ -4,3 +4,6 @@
 # Runtime and provenance fingerprints cover exact bytes, including original CRLF.
 src/** -text
 provenance/** -text
+artifacts/workflow-cohort.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
+artifacts/workflow-cohort-legacy-labels.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
+artifacts/minimal-interface-supplement.zip binary
