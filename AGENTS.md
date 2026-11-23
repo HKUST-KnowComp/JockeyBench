@@ -1,8 +1,9 @@
 # JockeyBench development
 
-This repository is one installable project with two settings: Program and Active
-Research. Runtime code is in `src/jockeybench`; the public Research entry point is
-`jockeybench research`. Its `jockeybench-research-v1` deployment profile is distinct
+This repository is one installable project with two workflows, code-as-policy and
+LLM-as-policy. Runtime code is in `src/jockeybench`; the public LLM-as-policy entry point is
+`jockeybench llm-as-policy` (formerly `jockeybench research`, still supported). Its
+`jockeybench-research-v1` deployment profile is distinct
 from the historical fixed-run profile retained in the imported research modules.
 
 The 2026-10-17 user request authorizes the runtime integration, including adapting

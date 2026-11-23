@@ -1,6 +1,8 @@
-# Program setting results
+<a id="program-setting-results"></a>
 
-Main cohort of the Program setting: 26 models, 130 A and 130 S trajectories on the same 324 JRA races over 10 race days (2024-01-06 to 2024-02-03). Protocol `economic-v1`, projection `objective-v5`, tariff `score-yen-v2` (multiplier 0.5, hit bonus 100); see [Program reproduction](../docs/REPRODUCING.md).
+# Results for code-as-policy
+
+Main code-as-policy cohort: 26 models, 130 A and 130 S trajectories on the same 324 JRA races over 10 race days (2024-01-06 to 2024-02-03). Protocol `economic-v1`, projection `objective-v5`, tariff `score-yen-v2` (multiplier 0.5, hit bonus 100); see the [code-as-policy reproduction guide](../docs/REPRODUCING.md).
 
 Snapshot: 2026-10-18 16:58:57 EDT. Schedule SHA-256 `1f74656e91857339a1e1d429bee555db317c84909904d9f26dc9ea5d2695c808`.
 

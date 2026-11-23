@@ -2,17 +2,17 @@
 
 ## One package, two settings
 
-The root distribution is `jockeybench`. `jockeybench program` uses the Program trajectory engine;
-`jockeybench research` uses the public Active Research lifecycle under `jockeybench.research`.
-The existing command without a setting prefix still selects Program.
+The root distribution is `jockeybench`. `jockeybench code-as-policy` uses the code-as-policy trajectory engine;
+`jockeybench llm-as-policy` uses the public LLM-as-policy lifecycle under `jockeybench.research`.
+The existing command without a setting prefix still selects the code-as-policy workflow.
 
-Both settings use the root `Config`, `Source`, ledger, scoring and sandbox components. Research
+Both settings use the root `Config`, `Source`, ledger, scoring and sandbox components. The LLM-as-policy workflow
 adds acquisition-policy validation/execution, evidence views, a predictor, released daily feedback,
 Adaptive policy updates and a matched Frozen control. Its compatibility modules translate the
 original extension's interfaces to the installed shared engine; no external `jrdb_lh` installation
 is required by the public entrypoint.
 
-Research has an explicit new profile, `jockeybench-research-v1`, and a public historical-support
+The LLM-as-policy workflow has an explicit new profile, `jockeybench-research-v1`, and a public historical-support
 warmup over the shared engine. The fixed archived warmup and historical experiment preparation code
 are retained for provenance, not used by that public entrypoint. Its deployment and scientific
 differences are documented in [RESEARCH.md](RESEARCH.md).
@@ -21,9 +21,11 @@ Original source-drop evidence remains separate from the current migration invent
 `provenance/active-research/metadata/`. The static verifier checks original/current file identity and
 imports; it is not an equivalence test or an experiment replay.
 
-## Program contract
+<a name="program-contract"></a>
 
-The rest of this document describes the Program setting and where each rule lives. The agent-facing
+## The code-as-policy contract
+
+The rest of this document describes the code-as-policy workflow and where each rule lives. The agent-facing
 wording of every rule is produced by `protocol/specification.py`. Agents read it as the system prompt
 and through `describe`.
 

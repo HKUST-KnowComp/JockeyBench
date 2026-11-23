@@ -1,6 +1,7 @@
 # Files a source distribution needs beyond the package, so that its tests run.
 include CHANGELOG.md CONTRIBUTING.md LICENSE NOTICE.md requirements-lock.txt requirements-dev.txt
 include README.zh-CN.md .gitattributes
+include artifacts/workflow-cohort.csv artifacts/workflow-cohort-legacy-labels.csv artifacts/minimal-interface-supplement.zip
 recursive-include configs *.json
 recursive-include docs *.md
 recursive-include tests *.py

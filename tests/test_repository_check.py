@@ -1,5 +1,6 @@
 """scripts/check_repository.py reads what git records: the index, or every commit with --history."""
 
+import csv
 import importlib.util
 import subprocess
 from pathlib import Path
@@ -60,6 +61,35 @@ def test_staged_files_that_could_carry_data_or_secrets_are_refused(repo, name, c
     assert reason in found(repo)[name]
 
 
+@pytest.mark.parametrize('name', check_repository.PAPER_ARTIFACTS)
+def test_paper_exception_requires_exact_path_and_content(repo, name):
+    content = (check_repository.ROOT / name).read_bytes()
+    (repo / '.gitattributes').write_text('*.csv -text\n*.zip binary\n')
+    add(repo, name, content)
+    assert found(repo) == {}
+    other = 'artifacts/other' + Path(name).suffix
+    add(repo, other, content)
+    assert 'data or run directory' in found(repo)[other]
+    add(repo, name, content + b'!')
+    assert 'differs from the reviewed paper artifact' in found(repo)[name]
+
+
+def test_public_and_legacy_rosters_differ_only_in_workflow_names():
+    def read_rows(filename):
+        with (check_repository.ROOT / 'artifacts' / filename).open(encoding='utf-8', newline='') as source:
+            return list(csv.reader(source))
+
+    header, *legacy = read_rows('workflow-cohort-legacy-labels.csv')
+    public_header, *public = read_rows('workflow-cohort.csv')
+    names = {'Program': 'code-as-policy', 'Adaptive Acquisition': 'LLM-as-policy'}
+    workflow = header.index('workflow')
+    assert public_header == header
+    assert len(legacy) == 54
+    for row in legacy:
+        row[workflow] = names[row[workflow]]
+    assert public == legacy
+
+
 def test_the_package_data_module_is_code_not_data(repo):
     add(repo, 'src/jockeybench/data/source.py', 'x = 1\n')
     assert found(repo) == {}
@@ -78,6 +108,25 @@ def test_history_finds_a_secret_removed_in_a_later_commit(repo):
     git(repo, 'commit', '-qm', 'two')
     assert found(repo) == {}
     assert any(label.startswith('notes.md@') for label in found(repo, history=True))
+
+
+@pytest.mark.parametrize('remote_tracking', [False, True], ids=['local-gh-pages', 'remote-gh-pages'])
+def test_history_excludes_website_refs_but_checks_website_files_on_code_branch(repo, remote_tracking):
+    add(repo, 'README.md', 'code\n')
+    git(repo, 'commit', '-qm', 'code')
+    code_branch = check_repository.git(repo, 'branch', '--show-current').decode().strip()
+    git(repo, 'switch', '--orphan', 'gh-pages')
+    for name in ['.nojekyll', 'index.html', 'app.js', 'style.css', 'assets/preview.png', 'favicon.svg']:
+        add(repo, name, 'website fixture\n')
+    git(repo, 'commit', '-qm', 'website')
+    if remote_tracking:
+        git(repo, 'update-ref', 'refs/remotes/origin/gh-pages', 'HEAD')
+    git(repo, 'switch', code_branch)
+    assert found(repo, history=True) == {}
+    add(repo, 'index.html', 'website fixture\n')
+    assert 'file type' in found(repo)['index.html']
+    git(repo, 'commit', '-qm', 'website file on code branch')
+    assert any(label.startswith('index.html@') for label in found(repo, history=True))
 
 
 def test_a_project_in_a_subdirectory_checks_only_its_own_files(repo):

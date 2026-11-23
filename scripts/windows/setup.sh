@@ -62,8 +62,8 @@ fi
 
 [[ -x .venv/bin/python ]] || fail 'No Linux .venv was found. Run setup first.'
 .venv/bin/python -I -c 'import ctypes, sys; assert sys.platform == "linux" and sys.version_info[:2] == (3, 13), "Python 3.13 on Linux is required"; ctypes.CDLL("libseccomp.so.2")'
-.venv/bin/jockeybench program --help
-.venv/bin/jockeybench research --help
+.venv/bin/jockeybench code-as-policy --help
+.venv/bin/jockeybench llm-as-policy --help
 # Existing tests exercise the actual file/network/process boundary, NumPy threads,
 # timeout cleanup, and both experiment lifecycles using fabricated in-memory data.
 # No provider credentials, source database, or .experiment-host marker are needed.

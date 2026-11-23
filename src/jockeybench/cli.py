@@ -1,4 +1,4 @@
-"""JockeyBench: run, audit and report forecasting-program trajectories, and import licensed JRDB archives.
+"""Run, audit and report code-as-policy trajectories, and import licensed JRDB archives.
 
 Exit codes: 0 success, 2 stopped (a protocol refusal), 3 pending (an
 interrupted provider request; resume with the same command).
@@ -39,9 +39,9 @@ def require_experiment_host():
         raise Rejected(f'Run from the designated experiment checkout containing {HOST_MARKER}')
 
 
-def build_parser():
+def build_parser(prog='jockeybench'):
     summary, exit_codes = __doc__.split('\n\n', 1)
-    parser = argparse.ArgumentParser(prog='jockeybench', description=summary, epilog=' '.join(exit_codes.split()) + ' ' + WINDOWS_GUIDANCE)
+    parser = argparse.ArgumentParser(prog=prog, description=summary, epilog=' '.join(exit_codes.split()) + ' ' + WINDOWS_GUIDANCE)
     parser.add_argument('--config', help='JSON configuration (defaults: the paper protocol)')
     parser.add_argument('--arm', choices=ARMS, help='override the configured arm')
     sub = parser.add_subparsers(dest='command', required=True)
@@ -137,23 +137,30 @@ def execute(args, config):
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if not argv or argv in (['--help'], ['-h']):
-        parser = argparse.ArgumentParser(prog='jockeybench', description='Two experimental settings in one JockeyBench installation.')
-        commands = parser.add_subparsers(dest='setting')
-        commands.add_parser('program', help='Write and revise forecasting programs (A/S)')
-        commands.add_parser('research', help='Write and revise acquisition programs (Adaptive/Frozen)')
+        parser = argparse.ArgumentParser(prog='jockeybench', description='Forecasting workflows in JockeyBench.')
+        commands = parser.add_subparsers(dest='setting', metavar='{code-as-policy,llm-as-policy}')
+        commands.add_parser('code-as-policy', aliases=['program'], help='Build and revise an executable predictor (A/S)')
+        commands.add_parser(
+            'llm-as-policy', aliases=['research'], help='Run an evidence plan and forecast each race with an LLM (Adaptive/Frozen)'
+        )
         parser.epilog = (
-            'Use jockeybench program --help or jockeybench research --help. Existing Program commands also work directly. '
-            + WINDOWS_GUIDANCE
+            'Use jockeybench code-as-policy --help or jockeybench llm-as-policy --help. '
+            'The aliases program and research remain available. Unprefixed commands select code-as-policy. ' + WINDOWS_GUIDANCE
         )
         parser.print_help()
         return 0
-    if argv and argv[0] == 'research':
+    workflow = argv[0]
+    if workflow.lower() in ('code-as-policy', 'llm-as-policy'):
+        workflow = workflow.lower()
+    if workflow in ('llm-as-policy', 'research'):
         from .research.cli import main as research_main
 
-        return research_main(argv[1:])
-    if argv and argv[0] == 'program':
+        return research_main(argv[1:], prog=f'jockeybench {workflow}')
+    prog = 'jockeybench'
+    if workflow in ('code-as-policy', 'program'):
+        prog = f'jockeybench {workflow}'
         argv = argv[1:]
-    args = build_parser().parse_args(argv)
+    args = build_parser(prog).parse_args(argv)
     if refuse_native_windows():
         return 2
     from .storage import valid_run_id

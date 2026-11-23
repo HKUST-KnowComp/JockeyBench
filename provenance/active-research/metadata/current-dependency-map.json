@@ -6052,6 +6052,10 @@
     ],
     [
       "jockeybench.research.public",
+      "jockeybench.research.common_scoring"
+    ],
+    [
+      "jockeybench.research.public",
       "jockeybench.research.experience.runner"
     ],
     [

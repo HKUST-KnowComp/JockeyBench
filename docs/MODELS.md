@@ -1,6 +1,8 @@
-# Evaluating a model in the Program setting
+<a name="evaluating-a-model-in-the-program-setting"></a>
 
-For Active Research, use the separate [Research provider configuration](RESEARCH.md). Its public
+# Evaluating a model in the code-as-policy workflow
+
+For LLM-as-policy, see the separate [provider configuration](RESEARCH.md). Its public
 profile validates a narrower set of provider fields and uses a different lifecycle.
 
 Any OpenAI-compatible chat-completions endpoint with tool calling can be evaluated. Model calls happen
@@ -56,7 +58,7 @@ Audit each run with the same `--config` and `--arm` it ran with. One runs root h
 trajectory, and `--initial-from` reads from the same root, so a model's warmup and arms run one after
 another; run other models or repetitions in their own roots.
 
-For comparison with the [current Program result snapshot](../results/README.md), use five independent
+For comparison with the [current code-as-policy result snapshot](../results/README.md), use five independent
 repetitions per model, each with a shared warmup for its matched A/S pair. The published main table
 selects round indices 1–5 for both arms; extra complete rounds are reported separately as robustness
 comparisons. These commands run one pair at a time and do not automatically repeat it five times.

@@ -18,7 +18,10 @@ from jockeybench.ledger import summary
 from jockeybench.sandbox.environment import probe
 from jockeybench.storage import read_checkpoint, valid_run_id
 
-from .aligned.scoring import checkpoint_components
+from .aligned.scoring import ELIGIBLE, checkpoint_components
+from .aligned.scoring import VERSION as ALIGNED_EVALUATOR
+from .common_scoring import VERSION as COMMON_EVALUATOR
+from .common_scoring import checkpoint_components as common_checkpoint_components
 from .experience.runner import validate_schedule
 from .finegrained_v3.frame import extract, make_frame
 from .finegrained_v3.native_replay import replay_economic
@@ -43,13 +46,73 @@ def _load(path):
     return json.loads(Path(path).read_text())
 
 
-def read_manifest(out):
+def _saved_manifest(out):
     manifest = _load(Path(out) / 'manifest.json')
     if manifest.get('digest') != digest({k: v for k, v in manifest.items() if k != 'digest'}):
         raise Rejected('Research manifest digest mismatch')
+    return manifest
+
+
+def read_manifest(out):
+    manifest = _saved_manifest(out)
     if manifest.get('profile') != VERSION or manifest.get('code') != code_hash():
         raise Rejected('Research source/profile changed; retain the exact installed version')
     return manifest
+
+
+def read_report(config, run_id):
+    """Read a published report, deriving the paper score for older reports in memory."""
+    out = run_path(config, run_id)
+    report = _load(out / 'report.json')
+    score = report.get('score', {})
+    if score.get('evaluator') != ALIGNED_EVALUATOR or 'common_net' in score or not report.get('completed'):
+        return report
+    if report.get('run_id') != run_id:
+        raise Rejected('Research report does not match its run')
+
+    score['common_evaluator'] = COMMON_EVALUATOR
+    score['aligned_evaluator'] = ALIGNED_EVALUATOR
+    score['aligned_net'] = score['net_after_warmup']
+    counts = report.get('delivery_totals')
+    races = report.get('races')
+    if (
+        type(races) is int
+        and races > 0
+        and isinstance(counts, dict)
+        and all(type(count) is int and count >= 0 for count in counts.values())
+        and sum(counts.values()) == races == sum(counts.get(delivery, 0) for delivery in ELIGIBLE)
+    ):
+        # Every race received the same centered hit term in both evaluators.
+        score['common_net'] = score['aligned_net']
+        return report
+    try:
+        manifest = _saved_manifest(out)
+        if report['manifest_digest'] != manifest['digest']:
+            raise Rejected('Research report does not match its manifest')
+        schedule = [(batch['day'], race) for batch in manifest['schedule'] for race in batch['races']]
+        if len(schedule) != report['races']:
+            raise Rejected('Research report race count differs from its schedule')
+        race_nets = []
+        for index, (day, race) in enumerate(schedule, start=1):
+            ident = f'PAR-{index:06d}'
+            state = read_checkpoint(out / 'runs' / ident / 'checkpoint.json.gz')
+            if (
+                state['research_manifest_digest'] != manifest['digest']
+                or state['run_id'] != ident
+                or state['schedule'] != [{'day': day, 'races': [race]}]
+                or state['phase'] != 'completed'
+                or set(state['scores']) - {race}
+                or set(state['submissions']) - {race}
+            ):
+                raise Rejected('Research score checkpoint does not match its completed scheduled race')
+            if not state['scores'] or not state['submissions'] or 'ledger' not in state:
+                raise KeyError('Missing sealed score, prediction or ledger')
+            race_nets.append(common_checkpoint_components(state)['common_Net'])
+        score['common_net'] = sum(race_nets) - score['warmup_weighted_cost']
+    except (FileNotFoundError, KeyError):
+        score['common_net'] = None
+        score['common_net_unavailable_reason'] = 'Missing saved manifest, checkpoint, or scoring receipt.'
+    return report
 
 
 def _verify_inputs(out, manifest, initial=None):
@@ -168,6 +231,8 @@ def execute(config, run_id, settings, *, arm='adaptive', initial_from=None, sour
     run_config = replace(config, managed_root=str(out / 'runs'))
     registry = Registry(out / 'policies')
     events, reports, completed, sessions, race_usage = [], [], [], [], []
+    updater_failed_days = []
+    common_race_nets = []
     initial = None
 
     def verify():
@@ -256,6 +321,7 @@ def execute(config, run_id, settings, *, arm='adaptive', initial_from=None, sour
                 core = replay_economic(run_config, state, source=run.source)
                 semantic = verify_semantics(state)
                 row = extract(state, policy, release(day))
+                common_race_nets.append(common_checkpoint_components(state)['common_Net'])
                 race_usage.append(summarize(state, 'complete_session', ident))
                 rows.append(row)
                 reports.append({'run_id': ident, 'row': row, 'core_audit': core, 'semantic_audit': semantic})
@@ -279,7 +345,10 @@ def execute(config, run_id, settings, *, arm='adaptive', initial_from=None, sour
         receipt = lifecycle_checkpoint(session)
         write(out / ('updater-checkpoint-' + frame['day'] + '.json'), receipt)
         if not receipt['passed']:
-            raise Rejected('Updater did not finish its required lifecycle; trajectory stopped')
+            if frame['day'] == schedule[0]['day']:
+                raise Rejected('Updater did not finish its required lifecycle; trajectory stopped')
+            updater_failed_days.append(frame['day'])
+            return policy
         return revised
 
     try:
@@ -307,6 +376,8 @@ def execute(config, run_id, settings, *, arm='adaptive', initial_from=None, sour
             'incurred_this_run': _api_totals(incurred),
             'warmup_reexecuted': arm == 'adaptive',
         }
+        aligned_race_net = sum(row['aligned_net'] for row in history)
+        warmup_cost = warmup['weighted_ledger_cost']
         result = {
             'profile': VERSION,
             'setting': 'active_research',
@@ -320,13 +391,18 @@ def execute(config, run_id, settings, *, arm='adaptive', initial_from=None, sour
             'final_policy_hash': final_policy['policy_hash'],
             'delivery_totals': dict(Counter(row['delivery'] for row in history)),
             'score': {
-                'evaluator': 'common-aligned-delivery-v1',
-                'race_net_total': sum(row['aligned_net'] for row in history),
-                'warmup_weighted_cost': warmup['weighted_ledger_cost'],
-                'net_after_warmup': sum(row['aligned_net'] for row in history) - warmup['weighted_ledger_cost'],
+                'evaluator': ALIGNED_EVALUATOR,
+                'common_evaluator': COMMON_EVALUATOR,
+                'aligned_evaluator': ALIGNED_EVALUATOR,
+                'race_net_total': aligned_race_net,
+                'warmup_weighted_cost': warmup_cost,
+                'net_after_warmup': aligned_race_net - warmup_cost,
+                'common_net': sum(common_race_nets) - warmup_cost,
+                'aligned_net': aligned_race_net - warmup_cost,
             },
             'warmup': {'reexecuted': arm == 'adaptive', 'matched_from': initial_from, 'accounting': warmup},
             'updater_sessions': len(sessions),
+            'updater_failed_days': updater_failed_days,
             'currency': 'benchmark_score_units_not_money',
             'api_cost_in_score': False,
             'api_usage': api_usage,
